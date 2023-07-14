@@ -49,7 +49,7 @@ class AuthController extends Controller
             'password' => $input['password'],
         ])) {
             return response()->json([
-                'message' => 'Unauthorized',
+                'message' => 'Unauthorizeda',
             ], 401);
         }
 
@@ -67,6 +67,14 @@ class AuthController extends Controller
 
         return response()->json([
             'message' => 'Successfully logged out',
+        ]);
+    }
+
+    public function getAuthUser()
+    {
+        return response()->json([
+            'auth' => Auth::user(),
+            'expires_in' => Auth::factory()->getTTL(),
         ]);
     }
 }

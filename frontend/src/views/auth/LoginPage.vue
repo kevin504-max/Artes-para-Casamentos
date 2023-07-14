@@ -101,6 +101,9 @@ export default {
                         showConfirmButton: false,
                         timer: 2000
                     });
+                    setTimeout(() => {
+                        location.reload();
+                    }, 2000);
                 }
             }).catch((error) => {
                 console.log('Error: ', error);

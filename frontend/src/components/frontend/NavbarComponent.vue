@@ -58,11 +58,15 @@
                             <div class="auth">
                                 Bem vindo(a) 
                                 <div class="">
-                                    <span>
+                                    <span v-show="!auth">
                                         <router-link :to="{ name: 'login' }">Entrar</router-link>
-                                    </span> ou 
-                                    <span>
+                                    </span> 
+                                    <span v-show="!auth">
+                                        ou
                                         <router-link :to="{ name: 'register' }">Cadastrar</router-link>
+                                    </span>
+                                    <span v-show="auth">
+                                        <a href="#" @click="logout">Sair</a>
                                     </span>
                                     <i class="fa fa-angle-down"></i>
                                 </div>
@@ -79,7 +83,7 @@
                                         <span><i class="fa fa-user"></i></span>
                                     </div>
                                     <div class="info">
-                                        <p class="name">Olá, <span class="guest">visitante</span></p>
+                                        <p class="name">Olá, <span class="guest">{{  (auth) ? auth.auth.name : "visitante" }}</span></p>
                                     </div>
                                 </div>
                                 <div class="col-lg-12 hr-line"></div>
@@ -120,17 +124,65 @@
 </template>
 
 <script>
+// import axios from 'axios'
+import { userServices } from '@/services/userServices';
+
 export default {
     name: "NavbarComponent",
 
     data () {
         return {
-
+            'auth': false,
         };
     },
-
-    mounted () {
-
+    
+    async mounted () {
+        this.auth = await userServices.getAuthUser();
+    },
+    
+    methods: {
+        // async logout () {
+        logout () {
+            localStorage.removeItem('access_token')
+            // this.$router.push({ name: 'login' })
+            this.$swal({
+                icon: 'success',
+                title: 'Saiu do sistema!',
+                showConfirmButton: false,
+                timer: 1500
+            })
+            setTimeout(() => {
+                window.location.reload()
+            }, 2000)
+            },
+            // await axios.post('logout', {
+            //     headers: {
+            //         'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+            //     }
+            // }).then(() => {
+            //     localStorage.removeItem('access_token');
+            
+            //     this.auth = false;
+            //     this.$router.push({ name: 'home' });
+            //     this.$swal({
+            //         title: 'Saiu do sistema!',
+            //         icon: 'success',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     });
+            //     setTimeout(() => {
+            //         location.reload();
+            //     }, 2000);
+            // }).catch((error) => {
+            //     console.log('Error: ', error);
+            //     this.$swal({
+            //         title: 'Algo deu errado! Tente novamente.',
+            //         icon: 'warning',
+            //         showConfirmButton: false,
+            //         timer: 1500
+            //     });
+            // })
+        // }
     }
 }
 </script>
