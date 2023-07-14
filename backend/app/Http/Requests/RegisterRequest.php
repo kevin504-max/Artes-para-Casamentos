@@ -23,10 +23,11 @@ class RegisterRequest extends FormRequest
     {
         return [
             'name' => 'required|string|max:255',
-            'email' => 'required|unique:users,email|email|max:255',
-            'cpf' => 'required|unique:users,cpf|cpf|max:255',
-            'phone' => 'required|unique:users,phone|phone|max:255',
+            'email' => 'email|required|unique:users',
+            'cpf' => 'required|string|unique:users',
+            'phone' => 'required|string|unique:users|max:255',
             'password' => 'required|string|min:6|max:255',
+            'password_confirmation' => 'required|string|min:6|max:255',
         ];
     }
 }

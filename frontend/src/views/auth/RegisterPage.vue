@@ -1,5 +1,5 @@
 <template>
-    <div class="container h-100 pt-lg-3">
+    <div class="container h-100 pt-lg-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
                 <div class="card text-black" style="border-radius: 25px;">
@@ -16,7 +16,9 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input 
                                             v-model="name"
-                                            type="text" id="form3Example1c" class="form-control" />
+                                            type="text" id="form3Example1c" class="form-control" 
+                                            placeholder="Digite seu nome..."
+                                            />
                                             <label class="form-label mt-3" for="form3Example1c">Nome</label>
                                         </div>
                                     </div>
@@ -26,7 +28,9 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input 
                                             v-model="email"
-                                            type="email" id="form3Example3c" class="form-control" />
+                                            type="email" id="form3Example3c" class="form-control"
+                                            placeholder="Digite seu e-mail..."
+                                            />
                                             <label class="form-label mt-3" for="form3Example3c">E-mail</label>
                                         </div>
                                     </div>
@@ -34,9 +38,12 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-id-card-alt fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input 
-                                            v-model="cpf"
-                                            type="text" id="form3Example3c" class="form-control" />
+                                            <the-mask 
+                                                :mask="['###.###.###-##']" 
+                                                v-model="cpf"
+                                                type="text" id="form3Example3c" class="form-control"
+                                                placeholder="999.999.999-99"
+                                            />    
                                             <label class="form-label mt-3" for="form3Example3c">CPF</label>
                                         </div>
                                     </div>
@@ -44,9 +51,12 @@
                                     <div class="d-flex flex-row align-items-center mb-4">
                                         <i class="fas fa-phone fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
-                                            <input 
-                                            v-model="cpf"
-                                            type="text" id="form3Example3c" class="form-control" />
+                                            <the-mask
+                                                :mask="['(##) #####-####', '(##) ####-####']" 
+                                                v-model="phone"
+                                                type="text" id="form3Example3c" class="form-control" 
+                                                placeholder="(99) 99999-9999"
+                                            />
                                             <label class="form-label mt-3" for="form3Example3c">Phone</label>
                                         </div>
                                     </div>
@@ -56,7 +66,9 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input 
                                             v-model="password"
-                                            type="password" id="form3Example4c" class="form-control" />
+                                            type="password" id="form3Example4c" class="form-control" 
+                                            placeholder="Digite sua senha..."
+                                            />
                                             <label class="form-label mt-3" for="form3Example4c">Senha</label>
                                         </div>
                                     </div>
@@ -65,8 +77,10 @@
                                         <i class="fas fa-lock fa-lg me-3 fa-fw"></i>
                                         <div class="form-outline flex-fill mb-0">
                                             <input 
-                                            v-model="confirmed_password"
-                                            type="password" id="form3Example4c" class="form-control" />
+                                            v-model="password_confirmation"
+                                            type="password" id="form3Example4c" class="form-control" 
+                                            placeholder="Confirme sua senha..."
+                                            />
                                             <label class="form-label mt-3" for="form3Example4c">Confimar Senha</label>
                                         </div>
                                     </div>
@@ -94,10 +108,15 @@
 
 <script>
 import axios from 'axios'
+import {TheMask} from 'vue-the-mask'
 
 export default {
     name: 'RegisterPage',
-    
+
+    components: {
+        TheMask
+    },
+
     data () {
         return {
             'name': '',
@@ -105,7 +124,7 @@ export default {
             'cpf': '',
             'phone': '',
             'password': '',
-            'confirmed_password': ''
+            'password_confirmation': ''
         };
     },
     
@@ -117,11 +136,12 @@ export default {
                 cpf: this.cpf,
                 phone: this.phone,
                 password: this.password,
-                confirmed_password: this.confirmed_password,
+                password_confirmation: this.password_confirmation,
             };
             
             axios.post('register', payload)
             .then((response) => {
+                console.log('Response: ', response)
                 if (response.data.auth) {
                     localStorage.setItem('access_token', response.data.access_token);
                     this.$router.push({ name: 'home' });
@@ -137,9 +157,9 @@ export default {
                     }, 2000);
                 }
             }).catch((error) => {
-                console.log('Error: ', error.response.data);
+                console.log('Error: ', error);
                 this.$swal({
-                    icon: 'error',
+                    icon: 'warning',
                     title: 'Oops...',
                     text: 'Algo deu errado! Tente novamente.',
                     showConfirmButton: false,

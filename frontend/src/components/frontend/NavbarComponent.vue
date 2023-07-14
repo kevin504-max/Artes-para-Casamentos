@@ -1,5 +1,5 @@
 <template>
-    <nav class="navbar navbar-expand-lg">
+    <nav class="navbar navbar-expand-lg navbar-scroll">
         <div class="container">
             <a class="navbar-brand logo" @click="$router.push({ name: 'home' })">Convites (Logo)</a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
@@ -136,6 +136,13 @@ export default {
 </script>
 
 <style scoped>
+.navbar-scroll {
+  position: fixed;
+  left: 0;
+  right: 0;
+  z-index: 100;
+}
+
 ul li {
     margin-right: 20px;
 }

@@ -13,19 +13,30 @@ class AuthController extends Controller
 {
     public function register(RegisterRequest $request)
     {
+        if ($request->password !== $request->password_confirmation) {
+            return response()->json([
+                'message' => 'The given data was invalid.',
+                'errors' => [
+                    'password' => [
+                        'The password confirmation does not match.',
+                    ],
+                ],
+            ], 422);
+        }
+
         $input = $request->validated();
 
         $input['password'] = bcrypt($input['password']);
 
         $user = User::create($input);
 
-        $token = Auth::login();
+        $token = Auth::login($user);
 
         return response()->json([
-            'auth' => Auth::user(),
+            'auth' => $user,
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60,
+            'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
 
@@ -43,10 +54,10 @@ class AuthController extends Controller
         }
 
         return response()->json([
-            // 'auth' => Auth::user(),
+            'auth' => Auth::user(),
             'access_token' => $token,
             'token_type' => 'Bearer',
-            'expires_in' => Auth::factory()->getTTL() * 60,
+            'expires_in' => Auth::factory()->getTTL() * 60
         ]);
     }
 

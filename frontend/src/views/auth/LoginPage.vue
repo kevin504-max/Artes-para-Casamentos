@@ -1,5 +1,5 @@
 <template>
-    <div class="container h-100 py-lg-3">
+    <div class="container h-100 py-lg-5">
         <div class="row d-flex justify-content-center align-items-center h-100">
             <div class="col-lg-12 col-xl-11">
                 <div class="card text-black" style="border-radius: 25px;">
@@ -16,7 +16,9 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input 
                                                 v-model="email"
-                                                type="email" id="form3Example3c" class="form-control" />
+                                                type="email" id="form3Example3c" class="form-control"
+                                                placeholder="Digite seu e-mail..."    
+                                            />
                                             <label class="form-label mt-3" for="form3Example3c">E-mail</label>
                                         </div>
                                     </div>
@@ -26,7 +28,9 @@
                                         <div class="form-outline flex-fill mb-0">
                                             <input 
                                                 v-model="password"
-                                                type="password" id="form3Example4c" class="form-control" />
+                                                type="password" id="form3Example4c" class="form-control"
+                                                placeholder="*********"    
+                                            />
                                             <label class="form-label mt-3" for="form3Example4c">Senha</label>
                                         </div>
                                     </div>
