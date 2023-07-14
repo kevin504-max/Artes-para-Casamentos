@@ -1,0 +1,67 @@
+*SITE DE VENDAS DE ARTES VISUAIS PARA CASAMENTOS*
+
+*ETAPAS DE DESENVOLVIMENTO*
+
+*1.* Autenticação de usuários (Login/Cadastro/Logout);
+
+*2.* Admin middleware e dashboard redirect;
+
+*3.* Painel do Admin;
+
+*4.* Crud de entidades (Produtos/Categoria);
+
+*5.* Mensagens para o usuário;
+
+*6.* Admin navbar (?);
+
+*7.* Exibição de entidades para o admin;
+
+*8.* Carousel para tela inicial;
+
+*9.* Owl carousel para tela inicial;
+
+*10.* Exibição de produtos destacados para tela inicial;
+
+*11.* Exibição de categorias em destaque na tela inicial;
+
+*12.* Exibição de produtos por categoria;
+
+*13.* Campo para orçamento na tela inicial;
+
+*14.* Exibir detalhes do produto;
+
+*15.* Quantidade de produtos;
+
+*16.* Adicionar ao carrinho;
+
+*17.* Exibição de itens no carrinho e removê-los;
+
+*18.* Cálculo total de produtos no carrinho;
+
+*19.* Página de pagamento inicial;
+
+*20.* Histórico de compras e detalhes de compras para o admin;
+
+*21.* Exibição de usuários cadastrados e visualizar detalhes de usuários;
+
+*22.* Contagem de itens no carrinho;
+
+*23.* Validação da página de pagamento;
+
+*24.* Integração de API de pagamentos (verificar);
+
+*25.* Avaliações por estrela de produtos;
+
+*26.* Comentários de produtos e exibição das avaliações nos detalhes do produto;
+
+*27.* Campo de busca por produtos na tela inicial;
+
+*28.* Elemento para contato no site;
+
+*29.* Footer informativo para o site
+
+*30.* Espaço para depoimentos (?);
+
+*31.* Revisões e testes para finalização;
+
+*32.* Alinhamento do frontend;
