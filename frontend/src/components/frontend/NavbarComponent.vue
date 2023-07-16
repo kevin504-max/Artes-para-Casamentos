@@ -366,14 +366,14 @@ li a {
 }
 
 .title a {
-    color: #222 !important;
+    color: #777777 !important;
     text-decoration: none !important;
     display: block;
     transition: all 0.3s ease;
 }
 
 .title a:hover {
-    color: #777777 !important;
+    color: #222 !important;
 }
 
 .title span i {

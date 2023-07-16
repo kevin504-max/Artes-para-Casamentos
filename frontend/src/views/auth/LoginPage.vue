@@ -96,7 +96,7 @@ export default {
                 } else if (auth.role_as == 0) {
                     this.$router.push({ name: 'home' });
                     this.$swal({
-                        icon: 'info',
+                        icon: 'success',
                         title: 'Login efetuado com sucesso!',
                         showConfirmButton: false,
                         timer: 2000
