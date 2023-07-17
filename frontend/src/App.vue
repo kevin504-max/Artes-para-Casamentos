@@ -7,12 +7,69 @@
 
 <script>
 import NavbarComponent from './components/frontend/NavbarComponent.vue';
+import { userServices } from '@/services/userServices';
 
 export default {
   name: 'App',
   components: {
     NavbarComponent,
   },
+  created () {
+    const protectedRoutes = [
+      'dashboard',
+      'categories'
+    ];
+
+    if (protectedRoutes.includes(this.$route.name)) {
+
+      if (! localStorage.getItem('access_token')) {
+        this.$router.push({ name: 'home' });
+        setTimeout(() => {
+          window.location.reload();
+        }, 1000);      
+      } else {
+        const response = userServices.getAuthUser();
+
+        if (response.auth.role_as == 0) {
+          this.$router.push({ name: 'home' });
+          
+          this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Você não tem permissão para acessar essa página!',
+            showConfirmButton: false,
+            timer: 2000
+          });
+        }
+      }
+    }
+  },
+  methods: {
+    // validate () {
+    //   const token = localStorage.getItem('access_token');
+
+    //   if (!token) {
+    //     this.$router.push({ name: 'home' });
+    //     setTimeout(() => {
+    //       window.location.reload();
+    //     }, 1000);      
+    //   } else {
+    //     const response = userServices.getAuthUser();
+
+    //     if (response.auth.role_as == 0) {
+    //       this.$router.push({ name: 'home' });
+          
+    //       this.$swal({
+    //         icon: 'error',
+    //         title: 'Oops...',
+    //         text: 'Você não tem permissão para acessar essa página!',
+    //         showConfirmButton: false,
+    //         timer: 2000
+    //       });
+    //     }
+    //   }
+    // },
+  }
 }
 </script>
 

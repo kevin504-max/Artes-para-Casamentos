@@ -1,5 +1,7 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import DashboardPage from '@/views/admin/DashboardPage.vue'
+import CategoriesManagement from '@/views/admin/CategoriesManagement.vue'
 
 Vue.use(VueRouter)
 
@@ -12,12 +14,12 @@ const routes = [
     {
         path: '/dashboard',
         name: 'dashboard',
-        component: () => import('@/views/admin/DashboardPage.vue'),
+        component: DashboardPage,
     },
     {
         path: '/categories',
         name: 'categories',
-        component: () => import('@/views/admin/CategoriesManagement.vue'),
+        component: CategoriesManagement,
     },
     {
         path: '/login',
