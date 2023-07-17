@@ -21,4 +21,6 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/get-auth', [AuthController::class, 'getAuthUser']);
+
+    // dashboard controller -> inicializar rotas
 });
