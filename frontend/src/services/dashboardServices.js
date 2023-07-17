@@ -14,11 +14,11 @@ export const dashboardServices = {
 
 async function getCategories() {
     try {
-        const response = (await axios.get('get-categories', {
+        const response = (await axios.get('dashboard/get-categories', {
             headers: {
                 Authorization: `Bearer ${localStorage.getItem('access_token')}`
             }
-        })).data.patients;
+        })).data.categories;
 
         return response;
     } catch (error) {

@@ -14,7 +14,7 @@ export default {
   components: {
     NavbarComponent,
   },
-  async created () {
+  async mounted () {
     const protectedRoutes = [
       'dashboard',
       'categories'

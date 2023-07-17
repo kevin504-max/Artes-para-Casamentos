@@ -25,7 +25,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('/get-auth', [AuthController::class, 'getAuthUser']);
 
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
-        Route::get('get-categories', [DashboardController::class, 'store'])->name('index');
+        Route::get('get-categories', [DashboardController::class, 'getCategories']);
     });
 
     Route::name('categories.')->prefix('categories')->group(function () {

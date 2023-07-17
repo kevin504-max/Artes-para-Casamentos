@@ -10,7 +10,7 @@ use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    protected $directory = 'assets/uploads/category/';
+    protected $directory = 'frontend/src/assets/images/categories/';
 
     public function store(Request $request)
     {
