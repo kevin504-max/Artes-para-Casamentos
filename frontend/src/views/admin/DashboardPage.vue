@@ -55,7 +55,7 @@
 import SidebarComponent from '../../components/admin/SidebarComponent.vue';
 import DashboardCards from '../../components/frontend/cards/DashboardCards.vue';
 
-import { dashboardServices } from '@/services/dashboardServices'
+// import { dashboardServices } from '@/services/dashboardServices'
 
 export default {
     name: "DashboardPage",
@@ -76,19 +76,19 @@ export default {
     },
 
     async mounted () {
-        [
-            this.categories,
-            this.products,
-            this.users,
-            this.orders,
-            this.carts,
-        ] = await Promise.all([
-            dashboardServices.getCategories(),
-            dashboardServices.getProducts(),
-            dashboardServices.getUsers(),
-            dashboardServices.getOrders(),
-            dashboardServices.getCarts(),
-        ]);
+        // [
+        //     this.categories,
+        //     this.products,
+        //     this.users,
+        //     this.orders,
+        //     this.carts,
+        // ] = await Promise.all([
+        //     dashboardServices.getCategories(),
+        //     dashboardServices.getProducts(),
+        //     dashboardServices.getUsers(),
+        //     dashboardServices.getOrders(),
+        //     dashboardServices.getCarts(),
+        // ]);
     },
 
     methods: {

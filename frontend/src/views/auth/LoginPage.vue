@@ -86,7 +86,7 @@ export default {
                 const auth = response.data.auth;
                 
                 if (auth.role_as == 1) {
-                    this.$router.push({ name: 'home' });
+                    this.$router.push({ name: 'dashboard' });
                     this.$swal({
                         icon: 'info',
                         title: 'Painel do Administrador',
@@ -101,10 +101,10 @@ export default {
                         showConfirmButton: false,
                         timer: 2000
                     });
-                    setTimeout(() => {
-                        location.reload();
-                    }, 2000);
                 }
+                setTimeout(() => {
+                    location.reload();
+                }, 2000);
             }).catch((error) => {
                 console.log('Error: ', error);
                 this.$swal({

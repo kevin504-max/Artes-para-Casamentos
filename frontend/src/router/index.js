@@ -15,6 +15,11 @@ const routes = [
         component: () => import('@/views/admin/DashboardPage.vue'),
     },
     {
+        path: '/categories',
+        name: 'categories',
+        component: () => import('@/views/admin/CategoriesManagement.vue'),
+    },
+    {
         path: '/login',
         name: 'login',
         component: () => import('@/views/auth/LoginPage.vue'),
