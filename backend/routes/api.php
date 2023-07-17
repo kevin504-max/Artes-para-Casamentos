@@ -1,6 +1,8 @@
 <?php
 
 use App\Http\Controllers\auth\AuthController;
+use App\Http\Controllers\admin\DashboardController;
+use App\Http\Controllers\admin\CategoryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,5 +24,13 @@ Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/get-auth', [AuthController::class, 'getAuthUser']);
 
-    // dashboard controller -> inicializar rotas
+    Route::name('dashboard.')->prefix('dashboard')->group(function () {
+        Route::get('get-categories', [DashboardController::class, 'store'])->name('index');
+    });
+
+    Route::name('categories.')->prefix('categories')->group(function () {
+        Route::get('store', [CategoryController::class, 'store'])->name('store');
+        Route::get('update', [CategoryController::class, 'update'])->name('update');
+        Route::get('destroy', [CategoryController::class, 'destroy'])->name('destroy');
+    });
 });

@@ -14,7 +14,7 @@ export default {
   components: {
     NavbarComponent,
   },
-  created () {
+  async created () {
     const protectedRoutes = [
       'dashboard',
       'categories'
@@ -28,15 +28,14 @@ export default {
           window.location.reload();
         }, 1000);      
       } else {
-        const response = userServices.getAuthUser();
+        const response = await userServices.getAuthUser();
 
         if (response.auth.role_as == 0) {
           this.$router.push({ name: 'home' });
           
           this.$swal({
             icon: 'error',
-            title: 'Oops...',
-            text: 'Você não tem permissão para acessar essa página!',
+            title: 'Você não tem permissão para acessar essa página!',
             showConfirmButton: false,
             timer: 2000
           });
@@ -45,30 +44,7 @@ export default {
     }
   },
   methods: {
-    // validate () {
-    //   const token = localStorage.getItem('access_token');
 
-    //   if (!token) {
-    //     this.$router.push({ name: 'home' });
-    //     setTimeout(() => {
-    //       window.location.reload();
-    //     }, 1000);      
-    //   } else {
-    //     const response = userServices.getAuthUser();
-
-    //     if (response.auth.role_as == 0) {
-    //       this.$router.push({ name: 'home' });
-          
-    //       this.$swal({
-    //         icon: 'error',
-    //         title: 'Oops...',
-    //         text: 'Você não tem permissão para acessar essa página!',
-    //         showConfirmButton: false,
-    //         timer: 2000
-    //       });
-    //     }
-    //   }
-    // },
   }
 }
 </script>
