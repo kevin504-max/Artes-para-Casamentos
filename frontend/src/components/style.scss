@@ -15,11 +15,50 @@
         mix-blend-mode: multiply;
     }
 
+    img {
+        mix-blend-mode: multiply;
+    }
+
     .content-right {
         width: calc(100% - 220px);
         height: 100vh;
         background-color: #ebebeb;
 
-        
+        .card {
+            width: 18rem;
+            margin-bottom: 1.5rem;
+            margin-right: 2.5rem;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            
+            .card-img-top {
+                object-fit: cover;
+                height: 200px;
+                margin-top: 1rem;
+            }
+
+            .card-body {
+                padding: 1.25rem;
+
+                .card-title {
+                    font-size: 1.25rem;
+                    margin-bottom: 0.5rem;
+                }
+
+                .card-text {
+                    font-size: 1rem;
+                    color: #666;
+                    margin-bottom: 0.25rem;;
+                }
+            }
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin-top: 20px;
+        }
     }
 }

@@ -53,7 +53,7 @@
 
 <script>
 import SidebarComponent from '../../components/admin/SidebarComponent.vue';
-import DashboardCards from '../../components/frontend/cards/DashboardCards.vue';
+import DashboardCards from '../../components/admin/DashboardCards.vue';
 
 // import { dashboardServices } from '@/services/dashboardServices'
 

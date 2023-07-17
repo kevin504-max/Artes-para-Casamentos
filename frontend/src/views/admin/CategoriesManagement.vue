@@ -10,6 +10,11 @@
                         <p>Gestão de Categorias</p>
                     </header>
                     <div>
+                        <DataFilter 
+                            placeholder="Buscar por categoria..."
+                            :data="categories"
+                            @onHandleSearch="handleSearch($event)"
+                        ></DataFilter>
                         <div class="row">
                             <CategoryCard 
                             v-for="(category, index) in categories.slice((currentPage - 1) * limit, currentPage * limit)"
@@ -18,7 +23,8 @@
                             />
                         </div>
                         <div class="text-center" v-show="categories.length === 0">
-                            <img src="" alt="Nenhum resultado encontrado..." width="650px">
+                            <img src="@/assets/not-found.jpg" alt="Nenhum resultado encontrado..." width="650px">
+                            <h2>Nenhum resultado encontrado...</h2>
                         </div>
                     </div>
                     <v-pagination
@@ -35,6 +41,7 @@
 </template>
 
 <script>
+import DataFilter from '@/components/frontend/DataFilter.vue';
 import SidebarComponent from '@/components/admin/SidebarComponent.vue';
 import CategoryCard from '@/components/frontend/cards/CategoryCard.vue';
 import { dashboardServices } from '@/services/dashboardServices';
@@ -43,6 +50,7 @@ import vPagination from 'vue-plain-pagination'
 export default {
     name: 'CategoriesManagement',
     components: {
+        DataFilter,
         SidebarComponent,
         CategoryCard,
         vPagination,
@@ -71,7 +79,35 @@ export default {
     },
     async mounted() {
         this.categories = await dashboardServices.getCategories();
+        this.totalPages = Math.ceil(this.categories.length / this.limit);
     },
+    methods: {
+        async handleSearch(event) {
+            const searchTerm = event.toLowerCase();
+
+            if (searchTerm === '') {
+                this.categories = await dashboardServices.getCategories();
+                this.totalPages = Math.ceil(this.categories.length / this.limit);
+                this.currentPage = 1;
+
+                return;
+            }
+
+            const filteredCategories = this.categories.filter((category) => {
+                const { name, slug, descripton } = category;
+
+                return (
+                    name.toLowerCase().includes(searchTerm) ||
+                    slug.toLowerCase().includes(searchTerm) ||
+                    descripton.toLowerCase().includes(searchTerm)
+                );
+            });
+
+            this.totalPages = Math.ceil(filteredCategories.length / this.limit) || 1;
+            this.currentPage = 1;
+            this.categories = (filteredCategories.length === 0) ? [] : filteredCategories;
+        }
+    }
 }
 </script>
 
