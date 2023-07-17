@@ -117,6 +117,16 @@
                             </div>
                         </div>
                     </li>
+                    <li v-show="auth && auth.auth.role_as == 1" class="nav-item">
+                        <router-link :to="{ name: 'dashboard' }">
+                            <div class="nav-link">
+                                <div class="icon mt-1">
+                                    <i class="fa fa-chart-bar"></i>
+                                    <span class="count-items badge badge-pill bg-primary cart-count"><i class="fa fa-shield-halved"></i></span>
+                                </div>
+                            </div>
+                        </router-link>
+                    </li>
                 </ul>
             </div>
         </div>
