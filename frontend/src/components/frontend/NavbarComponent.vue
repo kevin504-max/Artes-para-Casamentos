@@ -148,6 +148,17 @@ export default {
     
     async mounted () {
         this.auth = await userServices.getAuthUser();
+
+        if (! this.auth && localStorage.getItem('access_token')) {
+            localStorage.removeItem('access_token');
+            this.$router.push({ name: 'home' });
+            this.$swal({
+                icon: 'warning',
+                title: 'Sua sessão expirou! Faça login novamente.',
+                showConfirmButton: false,
+                timer: 2000
+            });
+        }
     },
     
     methods: {
