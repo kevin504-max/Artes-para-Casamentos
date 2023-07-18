@@ -6,6 +6,7 @@
             <p class="card-text text-truncate">{{ category.description }}</p>
             <p 
             :class="((category.status == 1) ? 'text-success' : 'text-danger')"
+            style="font-weight: bold;"
             >{{ (category.status == 1) ? "Ativada" : "Desativada" }}</p>
         </div>
     </div>
@@ -16,6 +17,7 @@ import axios from 'axios'
 
 export default {
     name: 'CategoryCard',
+    inject: ['makeSpin'],
     props: {
         category: Object,
     },
@@ -25,6 +27,8 @@ export default {
         }
     },
     async mounted () {
+        this.makeSpin.value = true;
+        
         const response = await axios.get(`categories/${this.category.id}/image`, {
             responseType: 'json',
             headers: {
@@ -37,6 +41,8 @@ export default {
         }
 
         this.category_image = response.data.image_url;
+
+        this.makeSpin.value = false;
     }
 }
 </script>

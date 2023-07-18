@@ -1,5 +1,6 @@
 <template>
   <div id="app">
+    <SpinnerComponent :start="spin.value" />
     <NavbarComponent />
     <router-view />
   </div>
@@ -8,11 +9,25 @@
 <script>
 import NavbarComponent from './components/frontend/NavbarComponent.vue';
 import { userServices } from '@/services/userServices';
+import SpinnerComponent from './components/frontend/SpinnerComponent.vue';
 
 export default {
   name: 'App',
   components: {
     NavbarComponent,
+    SpinnerComponent,
+  },
+  data () {
+    return {
+      spin: {
+        value: false,
+      }
+    };
+  },
+  provide () {
+    return {
+      makeSpin: this.spin,
+    }
   },
   async mounted () {
     const protectedRoutes = [

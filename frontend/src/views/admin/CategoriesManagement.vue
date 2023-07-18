@@ -110,6 +110,7 @@ import vPagination from 'vue-plain-pagination'
 
 export default {
     name: 'CategoriesManagement',
+    inject: ['makeSpin'],
     components: {
         DataFilter,
         SidebarComponent,
@@ -144,8 +145,12 @@ export default {
         }
     },
     async mounted() {
+        this.makeSpin.value = true;
+
         this.categories = await dashboardServices.getCategories();
         this.totalPages = Math.ceil(this.categories.length / this.limit);
+
+        this.makeSpin.value = false;
     },
     methods: {
         async storeCategory () {
@@ -184,7 +189,8 @@ export default {
         },
 
         async handleSearch(event) {
-            console.log(event);
+            this.makeSpin.value = true;
+
             const searchTerm = event.toLowerCase();
 
             if (searchTerm === '') {
@@ -208,6 +214,8 @@ export default {
             this.totalPages = Math.ceil(filteredCategories.length / this.limit) || 1;
             this.currentPage = 1;
             this.categories = (filteredCategories.length === 0) ? [] : filteredCategories;
+
+            this.makeSpin.value = false;
         },
 
         hide () {
