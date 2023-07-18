@@ -184,6 +184,7 @@ export default {
         },
 
         async handleSearch(event) {
+            console.log(event);
             const searchTerm = event.toLowerCase();
 
             if (searchTerm === '') {
@@ -195,12 +196,12 @@ export default {
             }
 
             const filteredCategories = this.categories.filter((category) => {
-                const { name, slug, descripton } = category;
+                const { name, slug, description } = category;
 
                 return (
                     name.toLowerCase().includes(searchTerm) ||
                     slug.toLowerCase().includes(searchTerm) ||
-                    descripton.toLowerCase().includes(searchTerm)
+                    description.toLowerCase().includes(searchTerm)
                 );
             });
 
