@@ -27,7 +27,7 @@
                                     <span>Estamos no Whatsapp</span>
                                 </div>
                                 <div class="content">
-                                    <a href="https://wa.me/+5531992414546?text=I'm%20interested%20in%20your%20car%20for%20sale" target="_blank">
+                                    <a href="https://wa.me/+5531992414546?text=Tenho%20interesse%20nos%20seus%20serviços%20de%20identidade%20visual." target="_blank">
                                         <i class="popover-icon fa-brands fa-whatsapp" style="color: #26c281 !important;"></i> (31) 99241-4546
                                     </a>
                                 </div>

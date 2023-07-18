@@ -15,6 +15,66 @@
                             :data="categories"
                             @onHandleSearch="handleSearch($event)"
                         ></DataFilter>
+                        <div class="col-md-2 mb-3">
+                            <b-button variant="outline-primary" v-b-modal.modalCreateCategory><i class="fa fa-plus"></i> Nova categoria</b-button>
+                            <b-modal id="modalCreateCategory" ref="modal" title="Cadastrar Categoria">
+                                <form enctype="multipart/form-data">
+                                    <b-form-group
+                                    label="Nome"
+                                    label-for="name"
+                                    invalid-feedback="O nome é obrigatório."
+                                    >
+                                        <b-form-input
+                                        id="name"
+                                        name="name"
+                                        class="form-control mt-3 mb-3"
+                                        v-model="category.name"
+                                        type="text"
+                                        placeholder="e.g. Clássicos"
+                                        required
+                                        ></b-form-input>
+                                        
+                                    </b-form-group>
+
+                                    <b-form-group
+                                    label="Descrição"
+                                    label-for="description"
+                                    invalid-feedback="A descrição é obrigatória."
+                                    >
+                                        <b-form-textarea
+                                        id="description"
+                                        name="description"
+                                        class="form-control mt-3 mb-3"
+                                        v-model="category.description"
+                                        type="text"
+                                        placeholder="e.g. Identidades clássicas do mundo."
+                                        required
+                                        ></b-form-textarea>
+
+                                    </b-form-group>
+
+                                    <b-form-group
+                                    label="Imagem"
+                                    label-for="image"
+                                    invalid-feedback="A imagem é obrigatória."
+                                    >
+                                        <b-form-file
+                                        id="image"
+                                        name="image"
+                                        class="mt-3 mb-3"
+                                        v-model="category.image"
+                                        placeholder="Escolha uma imagem..."
+                                        required
+                                        ></b-form-file>
+
+                                    </b-form-group>
+                                </form>
+                                <template #modal-footer>
+                                    <b-button class="mt-3" variant="outline-danger" @click="hide()">Cancelar</b-button>
+                                    <b-button class="mt-3" variant="primary" @click="storeCategory()">Cadastrar</b-button>
+                                </template>
+                            </b-modal>
+                        </div>
                         <div class="row">
                             <CategoryCard 
                             v-for="(category, index) in categories.slice((currentPage - 1) * limit, currentPage * limit)"
@@ -44,7 +104,8 @@
 import DataFilter from '@/components/frontend/DataFilter.vue';
 import SidebarComponent from '@/components/admin/SidebarComponent.vue';
 import CategoryCard from '@/components/frontend/cards/CategoryCard.vue';
-import { dashboardServices } from '@/services/dashboardServices';
+import { dashboardServices } from '@/services/admin/dashboardServices';
+import { categoryServices } from '@/services/admin/categoryServices';
 import vPagination from 'vue-plain-pagination'
 
 export default {
@@ -58,6 +119,11 @@ export default {
     data () {
         return {
             categories: [],
+            category: {
+                name: '',
+                description: '',
+                image: '',
+            },
             currentPage: 1,
             limit: 12,
             totalPages: 1,
@@ -82,6 +148,41 @@ export default {
         this.totalPages = Math.ceil(this.categories.length / this.limit);
     },
     methods: {
+        async storeCategory () {
+            try {
+                const response = await categoryServices.store(this.category);
+
+                if (response.status === 201) {
+                    this.$swal({
+                        icon: 'success',
+                        title: 'Categoria cadastrada com sucesso!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+
+                    this.categories = await dashboardServices.getCategories();
+                    this.totalPages = Math.ceil(this.categories.length / this.limit);
+                    this.currentPage = 1;
+                    this.category = {
+                        name: '',
+                        description: '',
+                        image: '',
+                    };
+
+                    this.hide();
+                }
+            } catch (error) {
+                console.log ("Erro ao cadastrar categoria: ", error);
+                this.$swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Erro ao cadastrar categoria!',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        },
+
         async handleSearch(event) {
             const searchTerm = event.toLowerCase();
 
@@ -106,7 +207,11 @@ export default {
             this.totalPages = Math.ceil(filteredCategories.length / this.limit) || 1;
             this.currentPage = 1;
             this.categories = (filteredCategories.length === 0) ? [] : filteredCategories;
-        }
+        },
+
+        hide () {
+            this.$refs.modal.hide();
+        },
     }
 }
 </script>

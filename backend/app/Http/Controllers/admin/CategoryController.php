@@ -6,11 +6,30 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
-    protected $directory = 'frontend/src/assets/images/categories/';
+    protected $directory = 'assets/uploads/category/';
+
+    public function getImage($id)
+    {
+        $category = Category::find($id);
+        $path = $this->directory . $category->image;
+
+        if (File::exists($path)) {
+            return response()->json([
+                'image_url' => asset($path),
+                'status' => 200,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Image not found!',
+            'status' => 404,
+        ]);
+    }
 
     public function store(Request $request)
     {
@@ -32,7 +51,8 @@ class CategoryController extends Controller
             return response()->json([
                 'message' => 'Category created successfully!',
                 'category' => $category,
-            ], 201);
+                'status' => 201,
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Something went wrong!',
@@ -67,7 +87,8 @@ class CategoryController extends Controller
             return response()->json([
                 'message' => 'Category updated successfully!',
                 'category' => $category,
-            ], 201);
+                'status' => 201,
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Something went wrong!',
@@ -93,7 +114,8 @@ class CategoryController extends Controller
 
             return response()->json([
                 'message' => 'Category deleted successfully!',
-            ], 200);
+                'status' => 200,
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Something went wrong!',
