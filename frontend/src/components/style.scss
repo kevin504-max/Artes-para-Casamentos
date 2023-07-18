@@ -82,6 +82,14 @@
                         background-color: #5ca46a;
                     }
 
+                    .btn-inactive {
+                        background-color: #cf8c8c;
+                    }
+
+                    .btn-inactive:hover {
+                        background-color: #a45c5c;
+                    }
+
                     .btn-destroy {
                         background-color: #dd727d;
                     }
@@ -91,7 +99,6 @@
                     }
                 }
             }
-
         }
 
         .pagination {

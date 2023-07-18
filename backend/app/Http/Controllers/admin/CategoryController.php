@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -91,8 +90,6 @@ class CategoryController extends Controller
                 'status' => 201,
             ]);
         } catch (\Throwable $th) {
-            report ($th);
-            Log::error($th->getMessage());
             return response()->json([
                 'message' => 'Something went wrong!',
                 'error' => $th->getMessage(),
@@ -100,10 +97,31 @@ class CategoryController extends Controller
         };
     }
 
+    public function updateStatus(Request $request)
+    {
+        try {
+            $category = Category::findOrFail($request->id);
+            $category->status = $request->status;
+            $category->popular = $request->popular;
+
+            $category->update();
+
+            return response()->json([
+                'message' => 'Category status updated successfully!',
+                'status' => 201,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Something went wrong!',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
     public function destroy(Request $request)
     {
         try {
-            $category = Category::find($request->id);
+            $category = Category::findOrFail($request->id);
 
             if ($category->image) {
                 $path = $this->directory . $category->image;
