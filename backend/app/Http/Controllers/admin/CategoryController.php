@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
@@ -64,7 +65,7 @@ class CategoryController extends Controller
     public function update(Request $request)
     {
         try {
-            $category = Category::find($request->id);
+            $category = Category::findOrFail($request->id);
 
             if ($request->hasFile('image')) {
                 $path = $this->directory . $category->image;
@@ -90,6 +91,8 @@ class CategoryController extends Controller
                 'status' => 201,
             ]);
         } catch (\Throwable $th) {
+            report ($th);
+            Log::error($th->getMessage());
             return response()->json([
                 'message' => 'Something went wrong!',
                 'error' => $th->getMessage(),

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const categoryServices = {
     store,
+    update,
 }
 
 const headersAuthorization = {
@@ -18,12 +19,17 @@ async function store (category) {
         return response;
     } catch (error) {
         console.log("Store Category Error: ", error)
-        this.$swal({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Algo deu errado! Tente novamente.',
-            showConfirmButton: false,
-            timer: 2000,
-        })
+    }
+}
+
+async function update (category) {
+    try {
+        const response = (await axios.post('categories/update', category, {
+            headers: headersAuthorization
+        })).data;
+
+        return response;
+    } catch (error) {
+        console.log("Update Category Error: ", error)
     }
 }

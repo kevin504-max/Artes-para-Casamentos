@@ -77,8 +77,8 @@
                         </div>
                         <div class="row">
                             <CategoryCard 
-                            v-for="(category, index) in categories.slice((currentPage - 1) * limit, currentPage * limit)"
-                            :key="index"
+                            v-for="category in categories.slice((currentPage - 1) * limit, currentPage * limit)"
+                            :key="category.id"
                             :category="category"
                             />
                         </div>
