@@ -6,7 +6,6 @@ use App\Http\Controllers\Controller;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Str;
 
 class CategoryController extends Controller
@@ -58,7 +57,7 @@ class CategoryController extends Controller
                 'message' => 'Something went wrong!',
                 'error' => $th->getMessage(),
             ], 500);
-        };
+        }
     }
 
     public function update(Request $request)
@@ -94,7 +93,7 @@ class CategoryController extends Controller
                 'message' => 'Something went wrong!',
                 'error' => $th->getMessage(),
             ], 500);
-        };
+        }
     }
 
     public function updateStatus(Request $request)
