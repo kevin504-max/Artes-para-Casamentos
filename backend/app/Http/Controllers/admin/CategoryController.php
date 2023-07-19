@@ -102,7 +102,6 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($request->id);
             $category->status = $request->status;
-            $category->popular = $request->popular;
 
             $category->update();
 

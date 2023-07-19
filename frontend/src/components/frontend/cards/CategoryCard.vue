@@ -96,26 +96,7 @@
                     <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
                 </template>
                 <form>
-                    <b-form-group>
-                        <b-form-checkbox-group
-                        class="mt-3 mb-3"
-                        v-model="categoryUpdated.status"
-                        :options="[
-                            { text: 'Ativada', value: 1 },
-                            { text: 'Desativada', value: 0 }
-                        ]"
-                        ></b-form-checkbox-group>
-                    </b-form-group>
-                    <b-form-group>
-                        <b-form-checkbox-group
-                            class="mt-3 mb-3"
-                            v-model="categoryUpdated.popular"
-                            :options="[
-                                { text: 'Popular', value: 1},
-                                { text: 'Comum', value: 0}
-                            ]"
-                        ></b-form-checkbox-group>
-                    </b-form-group>
+                    <p class="text-center">Tem certeza que deseja <strong>{{ (category.status == 1) ? 'desativar' : 'ativar' }}</strong> a categoria <strong class="text-danger">{{ category.name }}</strong>?</p>
                 </form>
                 <template #modal-footer>
                     <b-button class="mt-3" variant="outline-danger" @click="hide()">Cancelar</b-button>
@@ -226,6 +207,8 @@ export default {
 
         async updateStatus () {
             try {
+                this.categoryUpdated.status = (this.category.status == 1) ? 0 : 1;
+
                 await categoryServices.updateStatus(this.categoryUpdated);
 
                 this.$swal({
