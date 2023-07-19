@@ -39,9 +39,8 @@ export default {
 
       if (! localStorage.getItem('access_token')) {
         this.$router.push({ name: 'home' });
-        setTimeout(() => {
-          window.location.reload();
-        }, 1000);      
+        await new Promise(resolve => setTimeout(resolve, 1000));
+        window.location.reload();    
       } else {
         const response = await userServices.getAuthUser();
 

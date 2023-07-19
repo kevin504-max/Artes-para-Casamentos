@@ -175,6 +175,8 @@ export default {
             setTimeout(() => {
                 window.location.reload()
             }, 2000)
+            // await new Promise(resolve => setTimeout(resolve, 2000));
+            // window.location.reload();
             },
             // await axios.post('logout', {
             //     headers: {

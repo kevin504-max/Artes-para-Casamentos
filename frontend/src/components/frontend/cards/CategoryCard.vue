@@ -189,10 +189,8 @@ export default {
                     timer: 2000
                 });
                 
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
-                
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                window.location.reload();
             } catch (error) {
                 console.log('Erro ao atualizar categoria: ', error);
                 this.$swal({
@@ -219,9 +217,8 @@ export default {
                     timer: 2000
                 });
 
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                window.location.reload();
             } catch (error) {
                 console.log('Erro ao atualizar status: ', error);
                 this.$swal({
@@ -246,9 +243,8 @@ export default {
                     timer: 2000
                 });
 
-                setTimeout(() => {
-                    window.location.reload();
-                }, 2000);
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                window.location.reload();
             } catch (error) {
                 console.log('Erro ao deletar categoria: ', error);
                 this.$swal({
