@@ -2,6 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import DashboardPage from '@/views/admin/DashboardPage.vue'
 import CategoriesManagement from '@/views/admin/CategoriesManagement.vue'
+import ProductsManagement from '@/views/admin/ProductsManagement.vue'
 
 Vue.use(VueRouter)
 
@@ -20,6 +21,11 @@ const routes = [
         path: '/categories',
         name: 'categories',
         component: CategoriesManagement,
+    },
+    {
+        path: '/products',
+        name: 'products',
+        component: ProductsManagement,
     },
     {
         path: '/login',
