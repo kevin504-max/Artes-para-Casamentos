@@ -12,6 +12,13 @@ class CategoryController extends Controller
 {
     protected $directory = 'assets/uploads/category/';
 
+    public function getCategories()
+    {
+        return response()->json([
+            'categories' => Category::all(),
+        ], 200);
+    }
+
     public function getImage($id)
     {
         $category = Category::find($id);

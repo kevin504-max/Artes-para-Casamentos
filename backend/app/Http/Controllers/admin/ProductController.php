@@ -8,9 +8,16 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
 
-class PrtoductController extends Controller
+class ProoductController extends Controller
 {
     protected $directory = 'assets/uploads/product/';
+
+    public function getProducts()
+    {
+        return response()->json([
+            'products' => Product::all(),
+        ], 200);
+    }
 
     public function getThumbnail($id)
     {

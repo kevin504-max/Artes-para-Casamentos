@@ -34,7 +34,12 @@
                 </button>
             </div>
             <!-- MODAL UPDATE CATEGORY -->
-            <b-modal v-if="modalStates.updateModalActive" id="modalUpdateCategory" ref="modalUpdateCategory" @hidden="modalStates.updateModalActive = false">
+            <b-modal 
+                v-if="modalStates.updateModalActive" 
+                id="modalUpdateCategory"
+                ref="modalUpdateCategory" 
+                @hidden="modalStates.updateModalActive = false"
+            >
                 <template #modal-header="{ hide }">
                     <h5>Atualizar Categoria</h5>
                     <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
@@ -90,7 +95,11 @@
                 </template>
             </b-modal>
             <!-- MODAL CHANGE STATUS CATEGORY -->
-            <b-modal v-if="modalStates.updateStatusModalActive" id="modalStatusCategory" ref="modalStatusCategory" @hidden="modalStates.updateStatusModalActive = false">
+            <b-modal 
+                v-if="modalStates.updateStatusModalActive" 
+                id="modalStatusCategory" ref="modalStatusCategory" 
+                @hidden="modalStates.updateStatusModalActive = false"
+            >
                 <template #modal-header="{ hide }">
                     <h5>Atualizar Status</h5>
                     <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
@@ -104,7 +113,12 @@
                 </template>
             </b-modal>
             <!-- MODAL DELETE CATEGORY -->
-            <b-modal v-if="modalStates.deleteModalActive" id="modalDeleteCategory" ref="modalDeleteCategory" @hidden="modalStates.deleteModalActive = false">
+            <b-modal 
+                v-if="modalStates.deleteModalActive" 
+                id="modalDeleteCategory" 
+                ref="modalDeleteCategory" 
+                @hidden="modalStates.deleteModalActive = false"
+            >
                 <template #modal-header="{ hide }">
                     <h5>Excluir Categoria</h5>
                     <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>

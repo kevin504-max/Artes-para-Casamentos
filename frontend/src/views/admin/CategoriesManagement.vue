@@ -17,58 +17,70 @@
                         ></DataFilter>
                         <div class="col-md-2 mb-3">
                             <b-button variant="outline-primary" v-b-modal.modalCreateCategory><i class="fa fa-plus"></i> Nova categoria</b-button>
-                            <b-modal id="modalCreateCategory" ref="modal" title="Cadastrar Categoria">
+                            <b-modal id="modalCreateCategory" ref="modal">
+
+                                <template #modal-header="{ hide }">
+                                    <h5>Cadastrar Categoria</h5>
+                                    <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
+                                </template>
+
                                 <form enctype="multipart/form-data">
+
                                     <b-form-group
-                                    label="Nome"
-                                    label-for="name"
-                                    invalid-feedback="O nome é obrigatório."
+                                        label="Nome"
+                                        label-for="name"
+                                        invalid-feedback="O nome é obrigatório."
                                     >
+
                                         <b-form-input
-                                        id="name"
-                                        name="name"
-                                        class="form-control mt-3 mb-3"
-                                        v-model="category.name"
-                                        type="text"
-                                        placeholder="e.g. Clássicos"
-                                        required
+                                            id="name"
+                                            name="name"
+                                            class="form-control mt-3 mb-3"
+                                            v-model="category.name"
+                                            type="text"
+                                            placeholder="e.g. Clássicos"
+                                            required
                                         ></b-form-input>
                                         
                                     </b-form-group>
 
                                     <b-form-group
-                                    label="Descrição"
-                                    label-for="description"
-                                    invalid-feedback="A descrição é obrigatória."
+                                        label="Descrição"
+                                        label-for="description"
+                                        invalid-feedback="A descrição é obrigatória."
                                     >
+
                                         <b-form-textarea
-                                        id="description"
-                                        name="description"
-                                        class="form-control mt-3 mb-3"
-                                        v-model="category.description"
-                                        type="text"
-                                        placeholder="e.g. Identidades clássicas do mundo."
-                                        required
+                                            id="description"
+                                            name="description"
+                                            class="form-control mt-3 mb-3"
+                                            v-model="category.description"
+                                            type="text"
+                                            placeholder="e.g. Identidades clássicas do mundo."
+                                            required
                                         ></b-form-textarea>
 
                                     </b-form-group>
 
                                     <b-form-group
-                                    label="Imagem"
-                                    label-for="image"
-                                    invalid-feedback="A imagem é obrigatória."
+                                        label="Imagem"
+                                        label-for="image"
+                                        invalid-feedback="A imagem é obrigatória."
                                     >
+
                                         <b-form-file
-                                        id="image"
-                                        name="image"
-                                        class="mt-3 mb-3"
-                                        v-model="category.image"
-                                        placeholder="Escolha uma imagem..."
-                                        required
+                                            id="image"
+                                            name="image"
+                                            class="mt-3 mb-3"
+                                            v-model="category.image"
+                                            placeholder="Escolha uma imagem..."
+                                            required
                                         ></b-form-file>
 
                                     </b-form-group>
+
                                 </form>
+
                                 <template #modal-footer>
                                     <b-button class="mt-3" variant="outline-danger" @click="hide()">Cancelar</b-button>
                                     <b-button class="mt-3" variant="primary" @click="storeCategory()">Cadastrar</b-button>
@@ -104,7 +116,6 @@
 import DataFilter from '@/components/frontend/DataFilter.vue';
 import SidebarComponent from '@/components/admin/SidebarComponent.vue';
 import CategoryCard from '@/components/frontend/cards/CategoryCard.vue';
-import { dashboardServices } from '@/services/admin/dashboardServices';
 import { categoryServices } from '@/services/admin/categoryServices';
 import vPagination from 'vue-plain-pagination'
 
@@ -147,7 +158,7 @@ export default {
     async mounted() {
         this.makeSpin.value = true;
 
-        this.categories = await dashboardServices.getCategories();
+        this.categories = await categoryServices.getCategories();
         this.totalPages = Math.ceil(this.categories.length / this.limit);
 
         this.makeSpin.value = false;
@@ -155,27 +166,26 @@ export default {
     methods: {
         async storeCategory () {
             try {
-                const response = await categoryServices.store(this.category);
+                await categoryServices.store(this.category);
 
-                if (response.status === 201) {
-                    this.$swal({
-                        icon: 'success',
-                        title: 'Categoria cadastrada com sucesso!',
-                        showConfirmButton: false,
-                        timer: 2000
-                    });
+                this.$swal({
+                    icon: 'success',
+                    title: 'Categoria cadastrada com sucesso!',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
 
-                    this.categories = await dashboardServices.getCategories();
-                    this.totalPages = Math.ceil(this.categories.length / this.limit);
-                    this.currentPage = 1;
-                    this.category = {
-                        name: '',
-                        description: '',
-                        image: '',
-                    };
+                this.categories = await categoryServices.getCategories();
+                this.totalPages = Math.ceil(this.categories.length / this.limit);
+                this.currentPage = 1;
+                this.category = {
+                    name: '',
+                    description: '',
+                    image: '',
+                };  
 
-                    this.hide();
-                }
+                this.hide();
+                
             } catch (error) {
                 console.log ("Erro ao cadastrar categoria: ", error);
                 this.$swal({
@@ -194,7 +204,7 @@ export default {
             const searchTerm = event.toLowerCase();
 
             if (searchTerm === '') {
-                this.categories = await dashboardServices.getCategories();
+                this.categories = await categoryServices.getCategories();
                 this.totalPages = Math.ceil(this.categories.length / this.limit);
                 this.currentPage = 1;
 

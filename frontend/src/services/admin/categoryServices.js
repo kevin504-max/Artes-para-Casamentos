@@ -1,6 +1,7 @@
 import axios from 'axios'
 
 export const categoryServices = {
+    getCategories,
     store,
     update,
     updateStatus,
@@ -10,6 +11,24 @@ export const categoryServices = {
 const headersAuthorization = {
     'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
     'Content-Type': 'multipart/form-data'
+}
+
+async function getCategories() {
+    try {
+        const response = (await axios.get('categories/get-categories', {
+            headers: headersAuthorization,
+        })).data.categories;
+
+        return response;
+    } catch (error) {
+        console.log("Get Categories Error: ", error)
+        this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            showConfirmButton: false,
+            timer: 2000,
+        })
+    }
 }
 
 async function store (category) {
