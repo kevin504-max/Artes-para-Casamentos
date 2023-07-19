@@ -11,7 +11,7 @@
             <div class="card-actions">
                 <button 
                     class="btn btn-update" 
-                    @click="updateModalActive = true" 
+                    @click="modalStates.updateModalActive = true" 
                     v-b-modal.modalUpdateCategory
                 >
                     <i class="fa fa-pencil"></i>
@@ -19,7 +19,7 @@
                 <button 
                     class="btn"
                     :class="(category.status == 1) ? 'btn-status' : 'btn-inactive'"
-                    @click="updateStatusModalActive = true"
+                    @click="modalStates.updateStatusModalActive = true"
                     v-b-modal.modalStatusCategory
                 ><i 
                     :class="(category.status == 1) ? 'fa fa-eye' : 'fa fa-eye-slash'"
@@ -27,14 +27,14 @@
                 </button>
                 <button 
                     class="btn btn-destroy"
-                    @click="deleteModalActive = true"
+                    @click="modalStates.deleteModalActive = true"
                     v-b-modal.modalDeleteCategory
                 >
                     <i class="fa fa-trash"></i>
                 </button>
             </div>
             <!-- MODAL UPDATE CATEGORY -->
-            <b-modal v-if="updateModalActive" id="modalUpdateCategory" ref="modal">
+            <b-modal v-if="modalStates.updateModalActive" id="modalUpdateCategory" ref="modalUpdateCategory" @hidden="modalStates.updateModalActive = false">
                 <template #modal-header="{ hide }">
                     <h5>Atualizar Categoria</h5>
                     <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
@@ -90,7 +90,7 @@
                 </template>
             </b-modal>
             <!-- MODAL CHANGE STATUS CATEGORY -->
-            <b-modal v-if="updateStatusModalActive" id="modalStatusCategory" ref="modal">
+            <b-modal v-if="modalStates.updateStatusModalActive" id="modalStatusCategory" ref="modalStatusCategory" @hidden="modalStates.updateStatusModalActive = false">
                 <template #modal-header="{ hide }">
                     <h5>Atualizar Status</h5>
                     <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
@@ -123,7 +123,7 @@
                 </template>
             </b-modal>
             <!-- MODAL DELETE CATEGORY -->
-            <b-modal v-if="deleteModalActive" id="modalDeleteCategory" ref="modal">
+            <b-modal v-if="modalStates.deleteModalActive" id="modalDeleteCategory" ref="modalDeleteCategory" @hidden="modalStates.deleteModalActive = false">
                 <template #modal-header="{ hide }">
                     <h5>Excluir Categoria</h5>
                     <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
@@ -161,10 +161,12 @@ export default {
                 image: '',
             },
             categoryImage: '',
-            updateModalActive: false,
-            updateStatusModalActive: false,
-            deleteModalActive: false,
-        }
+            modalStates: {
+                updateModalActive: false,
+                updateStatusModalActive: false,
+                deleteModalActive: false,
+            },
+        };
     },
     async mounted () {
         this.makeSpin.value = true;
@@ -187,11 +189,9 @@ export default {
     watch: {
         '$refs.modal': {
             handler () {
-                [
-                    this.updateModalActive,
-                    this.updateStatusModalActive,
-                    this.deleteModalActive                
-                ] = false;
+                this.modalStates.updateModalActive = false;
+                this.modalStates.updateStatusModalActive = false;
+                this.modalStates.deleteModalActive = false;        
             }
         }
     },  
@@ -279,11 +279,9 @@ export default {
         },  
         
         hide () {
-            [
-                this.updateModalActive,
-                this.updateStatusModalActive,
-                this.deleteModalActive                
-            ] = false;  
+            this.modalStates.updateModalActive = false;
+            this.modalStates.updateStatusModalActive = false;
+            this.modalStates.deleteModalActive = false;  
             this.$refs.modal.hide();
         },
     }
