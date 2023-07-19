@@ -9,29 +9,39 @@
             style="font-weight: bold;"
             >{{ (category.status == 1) ? "Ativada" : "Desativada" }}</p>
             <div class="card-actions">
+
                 <button 
                     class="btn btn-update" 
                     @click="modalStates.updateModalActive = true" 
                     v-b-modal.modalUpdateCategory
                 >
+
                     <i class="fa fa-pencil"></i>
+
                 </button>
+
                 <button 
                     class="btn"
                     :class="(category.status == 1) ? 'btn-status' : 'btn-inactive'"
                     @click="modalStates.updateStatusModalActive = true"
                     v-b-modal.modalStatusCategory
-                ><i 
-                    :class="(category.status == 1) ? 'fa fa-eye' : 'fa fa-eye-slash'"
-                ></i>
+                >
+                    <i 
+                        :class="(category.status == 1) ? 'fa fa-eye' : 'fa fa-eye-slash'"
+                    ></i>
+
                 </button>
+
                 <button 
                     class="btn btn-destroy"
                     @click="modalStates.deleteModalActive = true"
                     v-b-modal.modalDeleteCategory
                 >
+
                     <i class="fa fa-trash"></i>
+
                 </button>
+
             </div>
             <!-- MODAL UPDATE CATEGORY -->
             <b-modal 
@@ -46,45 +56,45 @@
                 </template>
                 <form enctype="multipart/form-data">
                     <b-form-group
-                    label="Nome"
-                    label-for="name"
+                        label="Nome"
+                        label-for="name"
                     >
                     <b-form-input
-                    id="name"
-                    name="name"
-                    class="form-control mt-3 mb-3"
-                    v-model="categoryUpdated.name"
-                    type="text"
-                    placeholder="e.g. Clássicos"
+                        id="name"
+                        name="name"
+                        class="form-control mt-3 mb-3"
+                        v-model="categoryUpdated.name"
+                        type="text"
+                        placeholder="e.g. Clássicos"
                     ></b-form-input>
                     
                 </b-form-group>
                 
                 <b-form-group
-                label="Descrição"
-                label-for="description"
+                    label="Descrição"
+                    label-for="description"
                 >
                 <b-form-textarea
-                id="description"
-                name="description"
-                class="form-control mt-3 mb-3"
-                v-model="categoryUpdated.description"
-                type="text"
-                placeholder="e.g. Identidades clássicas do mundo."
+                    id="description"
+                    name="description"
+                    class="form-control mt-3 mb-3"
+                    v-model="categoryUpdated.description"
+                    type="text"
+                    placeholder="e.g. Identidades clássicas do mundo."
                 >{{ category.description }}</b-form-textarea>
                     
                 </b-form-group>
                 
                 <b-form-group
-                label="Imagem"
-                label-for="image"
+                    label="Imagem"
+                    label-for="image"
                 >
                 <b-form-file
-                id="image"
-                name="image"
-                class="mt-3 mb-3"
-                v-model="categoryUpdated.image"
-                placeholder="Escolha uma imagem..."
+                    id="image"
+                    name="image"
+                    class="mt-3 mb-3"
+                    v-model="categoryUpdated.image"
+                    placeholder="Escolha uma imagem..."
                 ></b-form-file>
                 
             </b-form-group>

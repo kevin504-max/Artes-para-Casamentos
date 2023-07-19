@@ -180,7 +180,11 @@
                         </div>
                     </div>
                     <div class="row">
-                        <!-- CARDS HERE -->
+                        <ProductCard
+                            v-for="product in products.slice((currentPage - 1) * limit, currentPage * limit)"
+                            :key="product.id"
+                            :product="product"
+                        />
                     </div>
                     <div class="text-center" v-show="products.length === 0">
                         <img src="@/assets/not-found.jpg" alt="Nenhum resultado encontrado..." width="650px">
@@ -202,10 +206,11 @@
 <script>
 import SidebarComponent from '../../components/admin/SidebarComponent.vue'
 import DataFilter from '../../components/frontend/DataFilter.vue'
-import { Money } from 'v-money'
 import vPagination from 'vue-plain-pagination'
+import { Money } from 'v-money'
 import { categoryServices } from '@/services/admin/categoryServices'
 import { productServices } from '@/services/admin/productServices'
+import ProductCard from '../../components/frontend/cards/ProductCard.vue'
 
 export default {
     name: 'ProductsManagement',
@@ -215,6 +220,7 @@ export default {
         DataFilter,
         Money,
         vPagination,
+        ProductCard
     },
     data () {
         return {
