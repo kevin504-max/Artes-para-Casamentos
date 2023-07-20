@@ -45,6 +45,6 @@ Route::middleware('auth:api')->group(function () {
         Route::post('store', [ProductController::class, 'store'])->name('store');
         Route::post('update', [ProductController::class, 'update'])->name('update');
         Route::post('status-update', [ProductController::class, 'updateStatus'])->name('updateStatus');
-
+        Route::post('destroy', [ProductController::class, 'destroy'])->name('destroy');
     });
 });

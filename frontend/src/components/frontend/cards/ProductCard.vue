@@ -234,9 +234,29 @@
 
                 <template #modal-footer>
                     <b-button class="mt-3" variant="outline-danger" @click="hide()">Cancelar</b-button>
-                    <b-button class="mt-3" variant="primary" @click="updateStatus()">Atualizar</b-button>
+                    <b-button class="mt-3 btn" variant="primary" @click="updateStatus()">Atualizar</b-button>
                 </template>
 
+            </b-modal>
+
+            <!-- MODAL DELETE PRODUCT -->
+            <b-modal 
+                v-if="modalStates.deleteModalActive" 
+                id="modalDeleteProduct" 
+                ref="modalDeleteProduct" 
+                @hidden="modalStates.deleteModalActive = false"
+            >
+                <template #modal-header="{ hide }">
+                    <h5>Excluir Produto</h5>
+                    <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
+                </template>
+                <form>
+                    <p class="text-center">Tem certeza que deseja excluir o produto <strong class="text-danger">{{ product.name }}</strong>?</p>
+                </form>
+                <template #modal-footer>
+                    <b-button class="mt-3" variant="outline-danger" @click="hide()">Cancelar</b-button>
+                    <b-button class="mt-3" variant="danger" @click="deleteProduct()">Sim, excluir</b-button>
+                </template>
             </b-modal>
         </div>
     </div>
@@ -346,8 +366,19 @@ export default {
 
         async updateStatus () {
             try {
+                if (this.productUpdated.category.status == 0) {
+                    this.$swal({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'A categoria deste produto está desativada!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+                    return;
+                }
+
                 this.productUpdated.status = (this.product.status == 1) ? 0 : 1;
-    
+
                 await productServices.updateStatus(this.productUpdated);
     
                 this.$swal({
@@ -371,6 +402,32 @@ export default {
                 });
             }
         },
+
+        async deleteProduct () {
+            try {
+                await productServices.destroy(this.product);
+
+                this.$swal({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Produto deletado com sucesso!',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                window.location.reload();
+            } catch (error) {
+                console.log('Erro ao deletar produto: ', error);
+                this.$swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Erro ao deletar produto!',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        },  
     
         hide () {
             const { modalStates } = this;

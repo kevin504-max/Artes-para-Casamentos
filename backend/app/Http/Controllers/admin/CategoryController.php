@@ -120,8 +120,6 @@ class CategoryController extends Controller
             $category = Category::findOrFail($request->id);
             $category->status = $request->status;
 
-            Product::where('category_id', $request->id)->update(['status' => $request->status]);
-
             $category->update();
 
             return response()->json([

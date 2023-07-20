@@ -146,6 +146,7 @@
 </template>
 
 <script>
+import { productServices } from '@/services/admin/productServices'
 import { categoryServices } from '@/services/admin/categoryServices'
 import axios from 'axios'
 
@@ -257,6 +258,30 @@ export default {
 
         async deleteCategory () {
             try {
+                
+                const response = await productServices.getProducts();
+                var validation = true;
+                
+                if (response.length > 0) {
+                    response.forEach(async product => {
+                        if (product.category_id == this.category.id) {
+                            this.$swal({
+                                icon: 'warning',
+                                title: 'Oops...',
+                                text: 'Erro ao deletar categoria! Existem produtos vinculados a ela!',
+                                showConfirmButton: false,
+                                timer: 2000
+                            });
+
+                            validation = false;
+                        }
+                    })
+                }
+                
+                if (!validation) {
+                    return;
+                }
+
                 await categoryServices.destroy(this.category);
 
                 this.$swal({

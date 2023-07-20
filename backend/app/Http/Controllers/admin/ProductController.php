@@ -168,4 +168,31 @@ class ProductController extends Controller
             ], 500);
         }
     }
+
+    public function destroy(Request $request)
+    {
+        try {
+            $product = Product::findOrFail($request->id);
+
+            if ($product->thumbnail) {
+                $path = $this->directory . $product->thumbnail;
+
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+            }
+
+            $product->delete();
+
+            return response()->json([
+                'message' => 'Product deleted successfully!',
+                'status' => 200,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Something went wrong!',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
 }

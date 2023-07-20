@@ -5,6 +5,7 @@ export const productServices = {
     store,
     update,
     updateStatus,
+    destroy,
 }
 
 const headersAuthorization = {
@@ -63,5 +64,17 @@ async function updateStatus (product) {
         return response;
     } catch (error) {
         console.log("Update Status Product Error: ", error)
+    }
+}
+
+async function destroy (product) {
+    try {
+        const response = (await axios.post('products/destroy', product, {
+            headers: headersAuthorization
+        })).data;
+
+        return response;
+    } catch (error) {
+        console.log("Destroy Product Error: ", error)
     }
 }
