@@ -190,14 +190,14 @@
                         <img src="@/assets/not-found.jpg" alt="Nenhum resultado encontrado..." width="650px">
                         <h2>Nenhum resultado encontrado...</h2>
                     </div>
+                    <v-pagination
+                        v-model="currentPage"
+                        :page-count="totalPages"
+                        :classes="bootstrapPaginationClasses"
+                        :labels="paginationAnchorTexts"
+                        :limit="limit"
+                    ></v-pagination>
                 </div>
-                <v-pagination
-                    v-model="currentPage"
-                    :page-count="totalPages"
-                    :classes="bootstrapPaginationClasses"
-                    :labels="paginationAnchorTexts"
-                    :limit="limit"
-                ></v-pagination>
             </div>
         </div>
     </div>

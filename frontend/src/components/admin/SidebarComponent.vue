@@ -87,7 +87,8 @@ export default {
             }
 
             .name {
-                
+                font-size: 18px;
+                font-weight: 600;
             }
 
             .status {
@@ -101,6 +102,7 @@ export default {
         padding: 10px;
         display: flex;
         justify-content: start;
+        align-items: center;
 
         ul, li {
             margin: 15px 5px;
