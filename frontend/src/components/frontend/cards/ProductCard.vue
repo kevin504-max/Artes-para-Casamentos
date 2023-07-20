@@ -4,7 +4,6 @@
 
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
-            <p class="card-text text-truncate">{{ product.description }}</p>
             <p 
                 :class="((product.status == 1) ? 'text-success' : 'text-danger')"
                 style="font-weight: bold;"
@@ -96,23 +95,6 @@
                             placeholder="e.g. Convite Clássico"
                             
                         ></b-form-input>
-
-                    </b-form-group>
-
-                    <b-form-group
-                        label="Descrição"
-                        label-for="description"
-                        invalid-feedback="A descrição é obrigatória."
-                    >
-                        <b-form-textarea
-                            id="description"
-                            name="description"
-                            class="form-control mt-3 mb-3"
-                            v-model="productUpdated.description"
-                            type="text"
-                            placeholder="e.g. Convite clássico com detalhes em dourado."
-                            
-                        ></b-form-textarea>
 
                     </b-form-group>
 
@@ -283,7 +265,6 @@ export default {
                 id: this.product.id,
                 category_id: this.product.category_id,
                 name: this.product.name,
-                description: this.product.description,
                 price: this.product.price,
                 discount: this.product.discount,
                 thumbnail: '',

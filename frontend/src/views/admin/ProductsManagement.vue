@@ -63,23 +63,6 @@
 
                                     </b-form-group>
 
-                                    <b-form-group
-                                        label="Descrição"
-                                        label-for="description"
-                                        invalid-feedback="A descrição é obrigatória."
-                                    >
-                                        <b-form-textarea
-                                            id="description"
-                                            name="description"
-                                            class="form-control mt-3 mb-3"
-                                            v-model="product.description"
-                                            type="text"
-                                            placeholder="e.g. Convite clássico com detalhes em dourado."
-                                            required
-                                        ></b-form-textarea>
-
-                                    </b-form-group>
-
                                     <div class="row">
 
                                         <div class="col-md-6">
@@ -229,7 +212,6 @@ export default {
             product: {
                 category_id: '',
                 name: '',
-                description: '',
                 price: '',
                 discount: '',
                 thumbnail: '',
@@ -295,7 +277,6 @@ export default {
                 this.product = {
                     category_id: '',
                     name: '',
-                    description: '',
                     price: '',
                     discount: '',
                     thumbnail: '',
@@ -330,12 +311,10 @@ export default {
             }
 
             const filteredProducts = this.categories.filter((product) => {
-                const { name, slug, description } = product;
+                const { name, slug } = product;
 
                 return (
-                    name.toLowerCase().includes(searchTerm) ||
-                    slug.toLowerCase().includes(searchTerm) ||
-                    description.toLowerCase().includes(searchTerm)
+                    name.toLowerCase().includes(searchTerm) ||slug.toLowerCase().includes(searchTerm) 
                 );
             });
 

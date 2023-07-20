@@ -18,7 +18,6 @@ return new class extends Migration
             $table->tinyInteger('status')->default(1);
             $table->bigInteger('category_id')->unsigned();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade')->onUpdate('cascade');
-            $table->string('description');
             $table->decimal('price', 10, 2);
             $table->decimal('discount', 10, 2)->nullable();
             $table->decimal('rating', 10, 2)->nullable();

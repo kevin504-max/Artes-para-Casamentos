@@ -16,7 +16,6 @@ class Product extends Model
         'status',
         'category_id',
         'category_id',
-        'description',
         'price',
         'discount',
         'rating',

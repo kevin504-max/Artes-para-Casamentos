@@ -74,7 +74,6 @@ class ProductController extends Controller
             $product->name = $request->name;
             $product->slug = Str::slug($request->name, '_');
             $product->category_id = $request->category_id;
-            $product->description = $request->description;
             $product->price = $request->price;
             $product->discount = $request->discount ?? 0.00;
             $product->rating = 0;
@@ -131,7 +130,6 @@ class ProductController extends Controller
             $product->name = $request->name;
             $product->slug = Str::slug($request->name, '_');
             $product->category_id = $request->category_id;
-            $product->description = $request->description;
             $product->price = $request->price;
             $product->discount = $request->discount ?? 0.00;
             $product->update();
