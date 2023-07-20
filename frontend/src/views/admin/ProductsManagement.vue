@@ -17,6 +17,7 @@
                         ></DataFilter>
                         <div class="col-md-2 mb-3">
                             <b-button variant="outline-primary" v-b-modal.modalCreateProduct><i class="fa fa-plus"></i> Novo produto</b-button>
+                            <!-- MODAL CREATE PRODUCT -->
                             <b-modal id="modalCreateProduct" ref="modal">
                                 
                                 <template #modal-header="{ hide }">

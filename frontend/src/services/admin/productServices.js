@@ -3,6 +3,7 @@ import axios from 'axios'
 export const productServices = {
     getProducts,
     store,
+    update,
 }
 
 const headersAuthorization = {
@@ -37,5 +38,17 @@ async function store (product) {
         return response;
     } catch (error) {
         console.log("Store Product Error: ", error)
+    }
+}
+
+async function update (product) {
+    try {
+        const response = (await axios.post('products/update', product, {
+            headers: headersAuthorization
+        })).data;
+
+        return response;
+    } catch (error) {
+        console.log("Update Product Error: ", error)
     }
 }

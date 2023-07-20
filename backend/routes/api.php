@@ -43,5 +43,6 @@ Route::middleware('auth:api')->group(function () {
         Route::get('get-products', [ProductController::class, 'getProducts']);
         Route::get('{id}/thumbnail', [ProductController::class, 'getThumbnail'])->name('getThumbnail');
         Route::post('store', [ProductController::class, 'store'])->name('store');
+        Route::post('update', [ProductController::class, 'update'])->name('update');
     });
 });

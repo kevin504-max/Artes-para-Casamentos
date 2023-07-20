@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function getProducts()
     {
         try {
-            $products = Product::where('status', 1)->orderBy('name', 'desc')->get();
+            $products = Product::where('status', 1)->with('category')->orderBy('name', 'desc')->get();
 
             return response()->json([
                 'products' => $products,
@@ -84,6 +84,63 @@ class ProductController extends Controller
                 'message' => 'Product created successfully!',
                 'product' => $product,
             ], 201);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Something went wrong!',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function update(Request $request)
+    {
+        try {
+            $product = Product::find($request->id);
+
+            if ($request->hasFile('thumbnail')) {
+                $path = $this->directory . $product->thumbnail;
+
+                if (File::exists($path)) {
+                    File::delete($path);
+                }
+
+                $file = $request->file('thumbnail');
+                $filename = time() . '.' . $file->getClientOriginalName();
+                $file->move($this->directory, $filename);
+                $product->thumbnail = $filename;
+            }
+
+            if ($request->hasFile('gallery')) {
+                $gallery = [];
+
+                foreach ($request->file('gallery') as $file) {
+                    $path = $this->directory . $file->getClientOriginalName();
+
+                    if (File::exists($path)) {
+                        File::delete($path);
+                    }
+
+                    $filename = time() . '.' . $file->getClientOriginalName();
+                    $file->move($this->directory, $filename);
+                    $gallery[] = $filename;
+                }
+
+                $product->gallery = json_encode($gallery);
+            }
+
+            $product->name = $request->name;
+            $product->slug = Str::slug($request->name, '_');
+            $product->category_id = $request->category_id;
+            $product->description = $request->description;
+            $product->price = $request->price;
+            $product->discount = $request->discount ?? 0.00;
+            $product->update();
+
+            return response()->json([
+                'message' => 'Product updated successfully!',
+                'product' => $product,
+                'status' => 201,
+            ]);
         } catch (\Throwable $th) {
             return response()->json([
                 'message' => 'Something went wrong!',
