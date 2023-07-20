@@ -14,9 +14,19 @@ class CategoryController extends Controller
 
     public function getCategories()
     {
-        return response()->json([
-            'categories' => Category::all(),
-        ], 200);
+        try {
+            $categories = Category::where('status', 1)->orderBy('name', 'desc')->get();
+
+            return response()->json([
+                'categories' => $categories,
+                'status' => 200,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Something went wrong!',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
     }
 
     public function getImage($id)

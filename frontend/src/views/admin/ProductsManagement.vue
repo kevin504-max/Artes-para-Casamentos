@@ -12,7 +12,7 @@
                     <div>
                         <DataFilter
                         placeholder="Buscar por produtos..."
-                        :data="categories"
+                        :data="products"
                         @onHandleSearch="onHandleSearch($event)"
                         ></DataFilter>
                         <div class="col-md-2 mb-3">
@@ -279,7 +279,7 @@ export default {
     methods: {
         async storeProduct() {
             try {
-                await productServices.storeProduct(this.product);
+                await productServices.store(this.product);
                 
                 this.$swal({
                     icon: 'success',

@@ -32,7 +32,8 @@ export default {
   async mounted () {
     const protectedRoutes = [
       'dashboard',
-      'categories'
+      'categories',
+      'products',
     ];
 
     if (protectedRoutes.includes(this.$route.name)) {
