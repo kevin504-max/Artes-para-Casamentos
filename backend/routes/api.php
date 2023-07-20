@@ -44,5 +44,7 @@ Route::middleware('auth:api')->group(function () {
         Route::get('{id}/thumbnail', [ProductController::class, 'getThumbnail'])->name('getThumbnail');
         Route::post('store', [ProductController::class, 'store'])->name('store');
         Route::post('update', [ProductController::class, 'update'])->name('update');
+        Route::post('status-update', [ProductController::class, 'updateStatus'])->name('updateStatus');
+
     });
 });

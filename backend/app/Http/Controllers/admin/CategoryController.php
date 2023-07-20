@@ -4,6 +4,7 @@ namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 use Illuminate\Support\Str;
@@ -15,7 +16,7 @@ class CategoryController extends Controller
     public function getCategories()
     {
         try {
-            $categories = Category::where('status', 1)->orderBy('name', 'desc')->get();
+            $categories = Category::orderBy('name', 'asc')->get();
 
             return response()->json([
                 'categories' => $categories,
@@ -118,6 +119,8 @@ class CategoryController extends Controller
         try {
             $category = Category::findOrFail($request->id);
             $category->status = $request->status;
+
+            Product::where('category_id', $request->id)->update(['status' => $request->status]);
 
             $category->update();
 

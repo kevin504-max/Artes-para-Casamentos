@@ -4,6 +4,7 @@ export const productServices = {
     getProducts,
     store,
     update,
+    updateStatus,
 }
 
 const headersAuthorization = {
@@ -50,5 +51,17 @@ async function update (product) {
         return response;
     } catch (error) {
         console.log("Update Product Error: ", error)
+    }
+}
+
+async function updateStatus (product) {
+    try {
+        const response = (await axios.post('products/status-update', product, {
+            headers: headersAuthorization
+        })).data;
+
+        return response;
+    } catch (error) {
+        console.log("Update Status Product Error: ", error)
     }
 }

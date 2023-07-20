@@ -209,12 +209,35 @@
                     </div>
 
                 </form>
+
                 <template #modal-footer>
                     <b-button class="mt-3" variant="outline-danger" @click="hide()">Cancelar</b-button>
                     <b-button class="mt-3" variant="primary" @click="updateProduct()">Atualizar</b-button>
                 </template>
+
             </b-modal>
 
+            <!-- MODAL UPDATE STATUS PRODUCT -->
+            <b-modal 
+                v-if="modalStates.updateStatusModalActive" 
+                id="modalStatusProduct" ref="modalStatusProduct" 
+                @hidden="modalStates.updateStatusModalActive = false"
+            >
+                <template #modal-header="{ hide }">
+                    <h5>Atualizar Status</h5>
+                    <b-button size="sm" variant="outline-dark" @click="hide()">&times;</b-button>
+                </template>
+
+                <form>
+                    <p class="text-center">Tem certeza que deseja <strong>{{ (product.status == 1) ? 'desativar' : 'ativar' }}</strong> a categoria <strong class="text-danger">{{ product.name }}</strong>?</p>
+                </form>
+
+                <template #modal-footer>
+                    <b-button class="mt-3" variant="outline-danger" @click="hide()">Cancelar</b-button>
+                    <b-button class="mt-3" variant="primary" @click="updateStatus()">Atualizar</b-button>
+                </template>
+
+            </b-modal>
         </div>
     </div>
 </template>
@@ -319,8 +342,49 @@ export default {
                     timer: 2000
                 });
             }
+        },
+
+        async updateStatus () {
+            try {
+                this.productUpdated.status = (this.product.status == 1) ? 0 : 1;
+    
+                await productServices.updateStatus(this.productUpdated);
+    
+                this.$swal({
+                    icon: 'success',
+                    title: 'Sucesso!',
+                    text: 'Status atualizado com sucesso!',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+    
+                await new Promise(resolve => setTimeout(resolve, 2000));
+                window.location.reload();
+            } catch (error) {
+                console.log('Erro ao atualizar status: ', error);
+                this.$swal({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Erro ao atualizar status!',
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+            }
+        },
+    
+        hide () {
+            const { modalStates } = this;
+
+            modalStates.updateModalActive = false;
+            modalStates.updateStatusModalActive = false;
+            modalStates.deleteModalActive = false;
+
+            this.$refs.modal.hide();
         }
-    }
+    },
+
+
+
 }
 </script>
 

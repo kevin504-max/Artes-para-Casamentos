@@ -15,7 +15,7 @@ class ProductController extends Controller
     public function getProducts()
     {
         try {
-            $products = Product::where('status', 1)->with('category')->orderBy('name', 'desc')->get();
+            $products = Product::with('category')->orderBy('name', 'asc')->get();
 
             return response()->json([
                 'products' => $products,
@@ -139,6 +139,26 @@ class ProductController extends Controller
             return response()->json([
                 'message' => 'Product updated successfully!',
                 'product' => $product,
+                'status' => 201,
+            ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'message' => 'Something went wrong!',
+                'error' => $th->getMessage(),
+            ], 500);
+        }
+    }
+
+    public function updateStatus(Request $request)
+    {
+        try {
+            $product = Product::findOrFail($request->id);
+            $product->status = $request->status;
+
+            $product->update();
+
+            return response()->json([
+                'message' => 'Product status updated successfully!',
                 'status' => 201,
             ]);
         } catch (\Throwable $th) {
