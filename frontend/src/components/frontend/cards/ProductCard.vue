@@ -290,11 +290,7 @@ export default {
             },
         });
 
-        if (response.status !== 200) {
-            this.productImage = '@/assets/default-place.jpeg'
-        }
-
-        this.productImage = response.data.thumbnail_url;
+        this.productImage = (response.status !== 200) ? '@/assets/default-place.jpeg' : response.data.thumbnail_url;
 
         this.categories = await categoryServices.getCategories();
 

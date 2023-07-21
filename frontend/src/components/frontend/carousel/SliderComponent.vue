@@ -13,20 +13,42 @@
             @sliding-start="onSlideStart"
             @sliding-end="onSlideEnd"
         >
-            <b-carousel-slide img-src="https://picsum.photos/1920/1080/?image=54"></b-carousel-slide>
-            <b-carousel-slide img-src="https://picsum.photos/1920/1080/?image=55"></b-carousel-slide>
-            <b-carousel-slide img-src="https://picsum.photos/1920/1080/?image=56"></b-carousel-slide>
+            <b-carousel-slide
+                v-for="image in featuredImages"
+                :key="image"
+                :img-src="image"
+                alt="image"
+            ></b-carousel-slide>
         </b-carousel>
     </div>
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
     name: "SliderComponent",
     data () {
         return {
             sliding: null,
+            featureds: [],
+            featuredImages: [],
         };
+    },
+    async mounted () {
+        await axios.get('/home').then((response) => {
+            this.featureds = response.data.featureds;
+        }).catch((error) => {
+            console.log('Error Home Page: ', error)
+        })
+        
+        this.featureds.forEach((featured) => {
+            axios.get(`/${featured.id}/featuredImage`).then((response) => {
+                (response.data.status !== 200) ? this.featuredImages.push('@/assets/default-place.jpeg') : this.featuredImages.push(response.data.image_url);
+            }).catch((error) => {
+                console.log('Error Slider Image: ', error)
+            })
+        });
     },
     methods: {
         onSlideStart () {

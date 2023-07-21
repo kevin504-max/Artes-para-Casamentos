@@ -4,6 +4,7 @@ use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
+use App\Http\Controllers\frontend\FrontendController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -18,12 +19,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
+Route::get('/home', [FrontendController::class, 'index']);
+Route::get('{id}/featuredImage', [FrontendController::class, 'getImage']);
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/get-auth', [AuthController::class, 'getAuthUser']);
+
 
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('get-categories', [DashboardController::class, 'getCategories']);

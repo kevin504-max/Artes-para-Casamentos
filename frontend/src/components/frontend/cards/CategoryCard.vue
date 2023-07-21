@@ -184,11 +184,7 @@ export default {
             }
         });
         
-        if (response.status !== 200) {
-            this.categoryImage = '@/assets/default-place.jpeg'
-        }
-        
-        this.categoryImage = response.data.image_url;
+        this.categoryImage = (response.status === 200) ? '@/assets/default-place.jpeg' : response.data.image_url;
         
         this.makeSpin.value = false;
     },

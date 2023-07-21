@@ -18,9 +18,11 @@ export default {
     },
     data () {
         return {
-
+            categories: [],
+            products: [],
         }
     },
+
     methods: {
         
     },
