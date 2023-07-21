@@ -75,6 +75,23 @@ export default {
   background-color: #e9e9e9;
 }
 
+body {
+  overflow-x: hidden;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background-color: #222;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: rgb(202, 230, 241);
+  border-radius: 10px;
+}
+
 nav {
   font-weight: bold;
   color: #2c3e50;
