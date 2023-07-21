@@ -1,15 +1,24 @@
 <template>
-    <div>
-        <h1>HomePage</h1>
+    <div class="main">
+        <div class="container">
+            <div class="carousel">
+                <SliderComponent></SliderComponent>
+            </div>
+        </div>
     </div>
 </template>
 
 <script>
+import SliderComponent from '@/components/frontend/carousel/SliderComponent.vue';
+
 export default {
     name: "HomePage",
+    components: {
+        SliderComponent,
+    },
     data () {
         return {
-            
+
         }
     },
     methods: {
@@ -18,6 +27,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-
-</style>
+<style lang="scss" src="../components/style.scss" scoped></style>
