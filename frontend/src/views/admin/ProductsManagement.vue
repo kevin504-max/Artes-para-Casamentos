@@ -107,53 +107,43 @@
                                         
                                     </div>
 
-                                    <div class="row">
+                                    <b-form-group
+                                        label="Thumbnail"
+                                        label-for="thumbnail"
+                                        invalid-feedback="A imagem é obrigatória."
+                                    >
 
-                                        <div class="col-md-6">
+                                        <b-form-file
+                                            id="thumbnail"
+                                            name="thumbnail"
+                                            class="mt-3 mb-3"
+                                            v-model="product.thumbnail"
+                                            placeholder="Selecione uma imagem..."
+                                            accept="image/*"
+                                            required
+                                        ></b-form-file>
 
-                                            <b-form-group
-                                                label="Thumbnail"
-                                                label-for="thumbnail"
-                                                invalid-feedback="A imagem é obrigatória."
-                                            >
+                                    </b-form-group>
 
-                                                <b-form-file
-                                                    id="thumbnail"
-                                                    name="thumbnail"
-                                                    class="mt-3 mb-3"
-                                                    v-model="product.thumbnail"
-                                                    placeholder="Selecione uma imagem..."
-                                                    accept="image/*"
-                                                    required
-                                                ></b-form-file>
 
-                                            </b-form-group>
+                                    <b-form-group
+                                        label="Galeria"
+                                        label-for="gallery"
+                                        invalid-feedback="A galeria é obrigatória."
+                                    >
+                                            
+                                        <b-form-file
+                                            id="gallery"
+                                            name="gallery"
+                                            class="mt-3 mb-3"
+                                            v-model="product.gallery"
+                                            placeholder="Selecione imagens..."
+                                            accept="image/*"
+                                            multiple
+                                            required
+                                        ></b-form-file>
 
-                                        </div>
-                                        <div class="col-md-6">
-
-                                            <b-form-group
-                                                label="Galeria"
-                                                label-for="gallery"
-                                                invalid-feedback="A galeria é obrigatória."
-                                            >
-                                                    
-                                                <b-form-file
-                                                    id="gallery"
-                                                    name="gallery"
-                                                    class="mt-3 mb-3"
-                                                    v-model="product.gallery"
-                                                    placeholder="Selecione imagens..."
-                                                    accept="image/*"
-                                                    multiple
-                                                    required
-                                                ></b-form-file>
-
-                                            </b-form-group>
-
-                                        </div>
-
-                                    </div>
+                                    </b-form-group>
 
                                 </form>
                                 <template #modal-footer>
@@ -262,6 +252,18 @@ export default {
     methods: {
         async storeProduct() {
             try {
+                if (this.product.price <= this.product.discount) {
+                    this.$swal({
+                        icon: 'warning',
+                        title: 'Oops...',
+                        text: 'O desconto não pode ser maior ou igual ao preço!',
+                        showConfirmButton: false,
+                        timer: 2000
+                    });
+
+                    return;
+                }
+
                 await productServices.store(this.product);
                 
                 this.$swal({
@@ -274,6 +276,7 @@ export default {
                 this.products = await productServices.getProducts();
                 this.totalPages = Math.ceil(this.products.length / this.limit);
                 this.currentPage = 1;
+
                 this.product = {
                     category_id: '',
                     name: '',

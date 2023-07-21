@@ -144,49 +144,42 @@
 
                     <div class="row">
 
-                        <div class="col-md-6">
+                        <b-form-group
+                            label="Thumbnail"
+                            label-for="thumbnail"
+                            invalid-feedback="A imagem é obrigatória."
+                        >
 
-                            <b-form-group
-                                label="Thumbnail"
-                                label-for="thumbnail"
-                                invalid-feedback="A imagem é obrigatória."
-                            >
+                            <b-form-file
+                                id="thumbnail"
+                                name="thumbnail"
+                                class="mt-3 mb-3"
+                                v-model="productUpdated.thumbnail"
+                                placeholder="Selecione uma imagem..."
+                                accept="image/*"
+                                
+                            ></b-form-file>
 
-                                <b-form-file
-                                    id="thumbnail"
-                                    name="thumbnail"
-                                    class="mt-3 mb-3"
-                                    v-model="productUpdated.thumbnail"
-                                    placeholder="Selecione uma imagem..."
-                                    accept="image/*"
-                                    
-                                ></b-form-file>
+                        </b-form-group>
 
-                            </b-form-group>
+                        <b-form-group
+                            label="Galeria"
+                            label-for="gallery"
+                            invalid-feedback="A galeria é obrigatória."
+                        >
+                                
+                            <b-form-file
+                                id="gallery"
+                                name="gallery"
+                                class="mt-3 mb-3"
+                                v-model="productUpdated.gallery"
+                                placeholder="Selecione imagens..."
+                                accept="image/*"
+                                multiple
+                                
+                            ></b-form-file>
 
-                        </div>
-                        <div class="col-md-6">
-
-                            <b-form-group
-                                label="Galeria"
-                                label-for="gallery"
-                                invalid-feedback="A galeria é obrigatória."
-                            >
-                                    
-                                <b-form-file
-                                    id="gallery"
-                                    name="gallery"
-                                    class="mt-3 mb-3"
-                                    v-model="productUpdated.gallery"
-                                    placeholder="Selecione imagens..."
-                                    accept="image/*"
-                                    multiple
-                                    
-                                ></b-form-file>
-
-                            </b-form-group>
-
-                        </div>
+                        </b-form-group>
 
                     </div>
 
