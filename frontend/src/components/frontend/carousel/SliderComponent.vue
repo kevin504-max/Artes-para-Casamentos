@@ -4,7 +4,6 @@
             id="carousel-1"
             :interval="4000"
             controls
-            indicators
             fade
             background="#ababab"
             img-width="1920"
@@ -28,6 +27,7 @@ import axios from 'axios'
 
 export default {
     name: "SliderComponent",
+    inject: ['makeSpin'],
     data () {
         return {
             sliding: null,
@@ -36,6 +36,8 @@ export default {
         };
     },
     async mounted () {
+        this.makeSpin.value = true;
+
         await axios.get('/home').then((response) => {
             this.featureds = response.data.featureds;
         }).catch((error) => {
@@ -49,6 +51,8 @@ export default {
                 console.log('Error Slider Image: ', error)
             })
         });
+
+        this.makeSpin.value = false;
     },
     methods: {
         onSlideStart () {
