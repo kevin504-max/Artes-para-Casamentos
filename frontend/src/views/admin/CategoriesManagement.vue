@@ -113,7 +113,7 @@
 </template>
 
 <script>
-import DataFilter from '@/components/frontend/DataFilter.vue';
+import DataFilter from '@/components/DataFilter.vue';
 import SidebarComponent from '@/components/admin/SidebarComponent.vue';
 import CategoryCard from '@/components/frontend/cards/CategoryCard.vue';
 import { categoryServices } from '@/services/admin/categoryServices';

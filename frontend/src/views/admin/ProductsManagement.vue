@@ -179,7 +179,7 @@
 
 <script>
 import SidebarComponent from '../../components/admin/SidebarComponent.vue'
-import DataFilter from '../../components/frontend/DataFilter.vue'
+import DataFilter from '../../components/DataFilter.vue'
 import vPagination from 'vue-plain-pagination'
 import { Money } from 'v-money'
 import { categoryServices } from '@/services/admin/categoryServices'

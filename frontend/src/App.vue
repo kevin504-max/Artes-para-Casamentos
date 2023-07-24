@@ -7,9 +7,9 @@
 </template>
 
 <script>
-import NavbarComponent from './components/frontend/NavbarComponent.vue';
+import NavbarComponent from './components/NavbarComponent.vue';
 import { userServices } from '@/services/userServices';
-import SpinnerComponent from './components/frontend/SpinnerComponent.vue';
+import SpinnerComponent from './components/SpinnerComponent.vue';
 
 export default {
   name: 'App',
