@@ -19,7 +19,7 @@ export default {
 <style lang="scss" scoped>
 .phrase {
     width: 100vw;
-    height: 100%;
+    height: 80%;
     margin-top: 10vh;
     padding: 0 20%;
     display: flex;

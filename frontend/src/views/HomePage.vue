@@ -8,11 +8,14 @@
                 <PhraseComponent></PhraseComponent>
             </div>
             <div
-                class="general-content mt-5"
+                class="general-content"
                 v-for="category in popular_categories"
                 :key="category.id"
             >
                 <StripComponent :category="category"></StripComponent>
+            </div>
+            <div class="general-content">
+                <CollectionComponent />
             </div>
         </div>
     </div>
@@ -22,6 +25,7 @@
 import SliderComponent from '@/components/frontend/carousel/SliderComponent.vue';
 import PhraseComponent from '@/components/frontend/PhraseComponent.vue';
 import StripComponent from '@/components/frontend/StripComponent.vue';
+import CollectionComponent from '@/components/frontend/CollectionComponent.vue';
 import { categoryServices } from '@/services/admin/categoryServices';
 import axios from 'axios'
 
@@ -31,6 +35,7 @@ export default {
         SliderComponent,
         PhraseComponent,
         StripComponent,
+        CollectionComponent,
     },
     data () {
         return {
