@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Http\Controllers\Controller;
+use App\Models\Category;
 use App\Models\Product;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
@@ -44,6 +45,17 @@ class ProductController extends Controller
         return response()->json([
             'message' => 'Thumbnail not found!',
             'status' => 404,
+        ]);
+    }
+
+    public function getProductsByCategory($category_slug)
+    {
+        $products = Product::where('category_id', Category::where('slug', $category_slug)->first())
+            ->where('status', 1)->orderBy('name', 'asc')->get();
+
+        return response()->json([
+            'products' => $products,
+            'status' => 200,
         ]);
     }
 

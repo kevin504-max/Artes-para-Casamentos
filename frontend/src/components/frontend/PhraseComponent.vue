@@ -13,16 +13,13 @@
 <script>
 export default {
     name: "PhraseComponent",
-    props: {
-        
-    }
 }
 </script>
 
 <style lang="scss" scoped>
 .phrase {
     width: 100vw;
-    height: 60%;
+    height: 100%;
     padding: 0 20%;
     display: flex;
     flex-direction: column;
@@ -31,6 +28,7 @@ export default {
     text-align: center;
     background-color: #e9e9e9;
     color: #666666;
+    font-size: 1.3rem;
 
     h2 {
         text-transform: uppercase;

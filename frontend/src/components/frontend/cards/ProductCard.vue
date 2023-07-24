@@ -283,11 +283,8 @@ export default {
     async mounted () {
         this.makeSpin.value = true;
         
-        const response = await axios.get(`products/${this.product.id}/thumbnail`, {
+        const response = await axios.get(`${this.product.id}/thumbnail`, {
             responseType: 'json',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-            },
         });
 
         this.productImage = (response.status !== 200) ? '@/assets/default-place.jpeg' : response.data.thumbnail_url;

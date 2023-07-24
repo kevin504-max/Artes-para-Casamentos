@@ -15,9 +15,7 @@ const headersAuthorization = {
 
 async function getCategories() {
     try {
-        const response = (await axios.get('categories/get-categories', {
-            headers: headersAuthorization,
-        })).data.categories;
+        const response = (await axios.get('get-categories')).data.categories;
 
         return response;
     } catch (error) {

@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const productServices = {
     getProducts,
+    getProductsByCategory,
     store,
     update,
     updateStatus,
@@ -28,6 +29,16 @@ async function getProducts() {
             showConfirmButton: false,
             timer: 2000,
         })
+    }
+}
+
+async function getProductsByCategory(category_slug) {
+    try {
+        const response = (await axios.get(`${category_slug}/products`)).data.products;
+
+        return response;
+    } catch (error) {
+        console.log("Get Products By Category Error: ", error)
     }
 }
 

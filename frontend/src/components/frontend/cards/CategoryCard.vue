@@ -177,14 +177,11 @@ export default {
     async mounted () {
         this.makeSpin.value = true;
         
-        const response = await axios.get(`categories/${this.category.id}/image`, {
+        const response = await axios.get(`${this.category.id}/image`, {
             responseType: 'json',
-            headers: {
-                'Authorization': `Bearer ${localStorage.getItem('access_token')}`,
-            }
         });
         
-        this.categoryImage = (response.status === 200) ? '@/assets/default-place.jpeg' : response.data.image_url;
+        this.categoryImage = (response.status !== 200) ? '@/assets/default-place.jpeg' : response.data.image_url;
         
         this.makeSpin.value = false;
     },

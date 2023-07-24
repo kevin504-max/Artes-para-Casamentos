@@ -22,6 +22,13 @@ use Illuminate\Support\Facades\Route;
 Route::get('/home', [FrontendController::class, 'index']);
 Route::get('{id}/featuredImage', [FrontendController::class, 'getImage']);
 
+Route::get('get-products', [ProductController::class, 'getProducts']);
+Route::get('{category_slug}/products', [ProductController::class, 'getProductsByCategory']);
+Route::get('{id}/thumbnail', [ProductController::class, 'getThumbnail'])->name('getThumbnail');
+
+Route::get('get-categories', [CategoryController::class, 'getCategories']);
+Route::get('{id}/image', [CategoryController::class, 'getImage'])->name('getImage');
+
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
@@ -36,8 +43,6 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::name('categories.')->prefix('categories')->group(function () {
-        Route::get('get-categories', [CategoryController::class, 'getCategories']);
-        Route::get('{id}/image', [CategoryController::class, 'getImage'])->name('getImage');
         Route::post('store', [CategoryController::class, 'store'])->name('store');
         Route::post('update', [CategoryController::class, 'update'])->name('update');
         Route::post('status-update', [CategoryController::class, 'updateStatus'])->name('updateStatus');
@@ -45,8 +50,6 @@ Route::middleware('auth:api')->group(function () {
     });
 
     Route::name('products.')->prefix('products')->group(function () {
-        Route::get('get-products', [ProductController::class, 'getProducts']);
-        Route::get('{id}/thumbnail', [ProductController::class, 'getThumbnail'])->name('getThumbnail');
         Route::post('store', [ProductController::class, 'store'])->name('store');
         Route::post('update', [ProductController::class, 'update'])->name('update');
         Route::post('status-update', [ProductController::class, 'updateStatus'])->name('updateStatus');

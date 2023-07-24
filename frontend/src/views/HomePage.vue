@@ -4,8 +4,15 @@
             <div class="carousel">
                 <SliderComponent></SliderComponent>
             </div>
-            <div class="phrase-container">
+            <div class="general-content">
                 <PhraseComponent></PhraseComponent>
+            </div>
+            <div
+                class="general-content"
+                v-for="category in categories"
+                :key="category.id"
+            >
+                <StripComponent :category="category"></StripComponent>
             </div>
         </div>
     </div>
@@ -14,20 +21,24 @@
 <script>
 import SliderComponent from '@/components/frontend/carousel/SliderComponent.vue';
 import PhraseComponent from '@/components/frontend/PhraseComponent.vue';
+import StripComponent from '@/components/frontend/StripComponent.vue';
+import { categoryServices } from '@/services/admin/categoryServices';
 
 export default {
     name: "HomePage",
     components: {
         SliderComponent,
         PhraseComponent,
+        StripComponent,
     },
     data () {
         return {
             categories: [],
-            products: [],
         }
     },
-
+    async mounted() {
+        this.categories = await categoryServices.getCategories();
+    },
     methods: {
         
     },
