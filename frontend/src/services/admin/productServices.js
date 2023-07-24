@@ -16,7 +16,7 @@ const headersAuthorization = {
 
 async function getProducts() {
     try {
-        const response = (await axios.get('products/get-products', {
+        const response = (await axios.get('get-products', {
             headers: headersAuthorization,
         })).data.products;
 

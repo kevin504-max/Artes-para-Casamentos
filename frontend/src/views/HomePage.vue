@@ -8,7 +8,7 @@
                 <PhraseComponent></PhraseComponent>
             </div>
             <div
-                class="general-content"
+                class="general-content mt-5"
                 v-for="category in categories"
                 :key="category.id"
             >

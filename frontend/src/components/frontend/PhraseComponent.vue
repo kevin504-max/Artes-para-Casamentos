@@ -20,6 +20,7 @@ export default {
 .phrase {
     width: 100vw;
     height: 100%;
+    margin-top: 10vh;
     padding: 0 20%;
     display: flex;
     flex-direction: column;

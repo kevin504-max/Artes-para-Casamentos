@@ -50,7 +50,7 @@ class ProductController extends Controller
 
     public function getProductsByCategory($category_slug)
     {
-        $products = Product::where('category_id', Category::where('slug', $category_slug)->first())
+        $products = Product::where('category_id', Category::where('slug', $category_slug)->first()->id)
             ->where('status', 1)->orderBy('name', 'asc')->get();
 
         return response()->json([
