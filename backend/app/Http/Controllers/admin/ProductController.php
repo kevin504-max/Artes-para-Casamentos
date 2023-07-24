@@ -144,6 +144,7 @@ class ProductController extends Controller
             $product->category_id = $request->category_id;
             $product->price = $request->price;
             $product->discount = $request->discount ?? 0.00;
+            $product->popular = $request->popular;
             $product->update();
 
             return response()->json([

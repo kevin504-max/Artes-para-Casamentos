@@ -99,6 +99,7 @@ class CategoryController extends Controller
             $category->name = $request->name;
             $category->slug = Str::slug($request->name, '_');
             $category->description = $request->description;
+            $category->popular = $request->popular;
             $category->update();
 
             return response()->json([

@@ -42,7 +42,7 @@
                 </button>
 
             </div>
-
+            <!-- MODAL UPDATE PRODUCT -->
             <b-modal 
                 v-if="modalStates.updateModalActive"
                 id="modalUpdateProduct" 
@@ -183,6 +183,30 @@
 
                     </div>
 
+                <b-form-group
+                    label="Tornar popular?"
+                    label-for="popular"
+                >
+                    <b-form-checkbox
+                        id="popular"
+                        name="popular"
+                        class="mt-3 mb-3"
+                        v-model="productUpdated.popular"
+                        type="checkbox"
+                        value="1"
+                    >Sim</b-form-checkbox>
+
+                    <b-form-checkbox
+                        id="popular"
+                        name="popular"
+                        class="mt-3 mb-3"
+                        v-model="productUpdated.popular"
+                        type="checkbox"
+                        value="0"
+                    >Não</b-form-checkbox>
+
+                </b-form-group>
+
                 </form>
 
                 <template #modal-footer>
@@ -263,6 +287,7 @@ export default {
                 thumbnail: '',
                 gallery: '',
                 category: this.product.category,
+                popular : this.product.popular,
             },
             productImage: '',
             categories: [],

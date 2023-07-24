@@ -96,6 +96,30 @@
                     v-model="categoryUpdated.image"
                     placeholder="Escolha uma imagem..."
                 ></b-form-file>
+
+                <b-form-group
+                    label="Tornar popular?"
+                    label-for="popular"
+                >
+                    <b-form-checkbox
+                        id="popular"
+                        name="popular"
+                        class="mt-3 mb-3"
+                        v-model="categoryUpdated.popular"
+                        type="checkbox"
+                        value="1"
+                    >Sim</b-form-checkbox>
+
+                    <b-form-checkbox
+                        id="popular"
+                        name="popular"
+                        class="mt-3 mb-3"
+                        v-model="categoryUpdated.popular"
+                        type="checkbox"
+                        value="0"
+                    >Não</b-form-checkbox>
+
+                </b-form-group>
                 
             </b-form-group>
                 </form>
