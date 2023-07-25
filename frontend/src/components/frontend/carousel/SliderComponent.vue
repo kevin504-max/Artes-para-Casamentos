@@ -1,11 +1,11 @@
 <template>
-    <div>
+    <div class="">
         <b-carousel
             id="carousel-1"
             :interval="4000"
             controls
             fade
-            background="#ababab"
+            background="#e9e9e9"
             img-width="1920"
             img-height="1080"
             style="text-shadow: 1px 1px 2px #333;"

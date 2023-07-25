@@ -13,7 +13,7 @@ class FrontendController extends Controller
     public function index()
     {
         try {
-            $featureds = Product::where('status', 1)->where('popular', 1)->orderBy('updated_at', 'desc')->take(3)->get();
+            $featureds = Product::where('status', 1)->where('popular', 1)->orderBy('updated_at', 'desc')->get();
             $popular_categories = Category::where('status', 1)->where('popular', 1)->get();
 
             return response()->json([

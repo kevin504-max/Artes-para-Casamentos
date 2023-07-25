@@ -21,6 +21,7 @@
     "vue": "^2.7.14",
     "vue-loader": "^17.2.2",
     "vue-mask": "^1.0.0",
+    "vue-owl-carousel": "^2.0.3",
     "vue-plain-pagination": "^0.3.0",
     "vue-router": "^3.5.1",
     "vue-sweetalert2": "^5.0.5",

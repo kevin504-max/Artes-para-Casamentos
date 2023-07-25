@@ -16,23 +16,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.phrase {
-    width: 100vw;
-    height: 80%;
-    margin-top: 10vh;
-    padding: 0 20%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    text-align: center;
-    background-color: #e9e9e9;
-    color: #666666;
-    font-size: 1.3rem;
-
-    h2 {
-        text-transform: uppercase;
-    }
-}
-</style>
+<style lang="scss" src="@/components/style.scss" scoped></style>

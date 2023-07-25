@@ -40,28 +40,4 @@ export default {
 }
 </script>
 
-<style>
-.category-container {
-    height: 100%;
-    text-align: center;
-    margin-bottom: 20px;
-    width: 100%;
-    padding: 5%;
-}
-
-h2 {
-    margin-top: 20px;
-    margin-bottom: 20px;
-    text-transform: uppercase;
-    font-size: 30px;
-}
-
-.cards-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    align-items: center;
-    width: 100%;
-    height: 100%;
-}
-</style>
+<style lang="scss" src="@/components/style.scss" scoped></style>
