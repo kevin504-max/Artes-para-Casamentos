@@ -5,6 +5,7 @@
     height: 100vh;
     padding: 10px;
 
+
     .container {
         width: 100%; 
         height: 90%;
@@ -155,6 +156,65 @@
                 }
             
                 .collection-container {
+                    width: 80%;
+                    height: 80%;
+                    display: flex;
+                    flex-direction: row;
+                    justify-content: center;
+                    align-items: center;
+                    text-align: center;
+                    color: #666666;
+            
+                    img {
+                        width: 10%;
+                        height: 90%;
+                        margin: 0 10px;
+                        border-radius: 50%;
+                        border: 1px solid #666666;
+                        transform: scale(0.8);
+                        transition: all 0.3s ease-in-out;
+                        cursor: pointer;
+
+                        @media (max-width: 768px) {
+                            width: 20%;
+                        }
+
+                        @media (max-width: 514px) {
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+            
+                    img:hover {
+                        transform: scale(1);
+                        border: 1px solid #000000;
+                    }
+                }
+            }
+        }
+
+        .owl-content {
+            width: 100vw;
+            
+            .owl-carousel {
+                width: 100%;
+                height: 100%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                flex-direction: column;
+                margin-top: 1em;
+
+                @media(max-width: 768px) {
+                    top: 0;
+                    margin-top: 20px;
+                }
+            
+                h2 {
+                    text-transform: uppercase;
+                }
+            
+                .owl-carousel-container {
                     width: 80%;
                     height: 80%;
                     display: flex;

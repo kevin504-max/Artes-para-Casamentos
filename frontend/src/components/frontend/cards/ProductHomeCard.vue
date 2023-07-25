@@ -5,6 +5,7 @@
             class="digital" 
             style="margin-top: 40px; background-color: #ea9999;"
         >Mais cores</span>
+        <span class="wishlist-heart fa-regular fa-heart"></span>
         <img :src="productImage" alt="image" class="card-img-top" style="height: 350px;">
 
         <div class="card-body">
@@ -41,7 +42,7 @@ export default {
 }
 </script>
 
-<style scoped>
+<style lang="scss" scoped>
 .card {
     width: 80%;
     height: 100%;
@@ -54,51 +55,72 @@ export default {
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     background: #e9e9e9;
+
+    .card-img-top {
+        width: 100%;
+        height: 15vw;
+        object-fit: cover;
+    }
+
+    .card-body {
+        padding: 0;
+
+        .card-title {
+            font-size: 1.2rem;
+            margin-top: 5vh;
+            margin-bottom: 3vh;
+            color: #666666;
+        }
+
+        .card-text {
+            font-size: 1rem;
+            margin-bottom: 0;
+
+            span {
+                font-weight: bold;
+                font-size: 1.5rem;
+                color: #666666;
+            }
+        }
+    }
+
+    .digital {
+        position: absolute;
+        margin-top: 5px;
+        margin-left: 5px;
+        z-index: 1;
+        padding: 5px;
+        background-color: #666666;
+        color: #fff;
+        font-size: 12px;
+        border-radius: 10px;
+        opacity: 0.7;
+    }
+
+    .wishlist-heart {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        z-index: 1;
+        padding: 5px;
+        background-color: #e5e5e5e5;
+        color: #222;
+        border-radius: 50%;
+        height: 6%;
+        opacity: 0.7;
+        transition: all 0.3s ease-in-out;
+        background-color: #fff;
+        transform: scale(0.7);
+
+        &:hover {
+            opacity: 1;
+            transform: scale(1.1);
+        }
+    }
 }
 
 .card:hover {
     box-shadow: 0 0 11px rgba(33,33,33,.2); 
     transform: scale(1.05);
-}
-
-.card-img-top {
-    width: 100%;
-    height: 15vw;
-    object-fit: cover;
-}
-
-.card-body {
-    padding: 0;
-}
-
-.card-title {
-    font-size: 1.2rem;
-    margin-top: 5vh;
-    margin-bottom: 3vh;
-    color: #666666;
-}
-
-.card-text {
-    font-size: 1rem;
-    margin-bottom: 0;
-}
-
-.card-text span {
-    font-weight: bold;
-    font-size: 1.5rem;
-    color: #666666;
-}
-
-.digital {
-    position: absolute;
-    margin-top: 5px;
-    margin-left: 5px;
-    z-index: 1;
-    padding: 5px;
-    background-color: #666666;
-    color: #fff;
-    font-size: 12px;
-    border-radius: 10px;
-    opacity: 0.7;
 }
 </style>

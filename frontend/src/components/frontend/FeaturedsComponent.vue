@@ -1,7 +1,8 @@
 <template>
-    <div class="owl-content">
+    <div class="owl-carousel">
         <h2 class="text-center mb-5">Destaques</h2>
         <carousel
+            class="owl-carousel-container"
             :autoplay="true"
             :autoplay-timeout="5000"
             :autoplay-hover-pause="true"
@@ -49,19 +50,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.owl-content {
-    margin: 0;
-    width: 100vw;
-    max-width: 1200px;
-    padding: 0 15px;
-
-    h2 {
-        color: #666666;
-        font-weight: bold;
-        text-transform: uppercase;
-    }
-
-
-}
-</style>
+<style lang="scss" src="@/components/style.scss" scoped></style>
