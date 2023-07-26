@@ -27,6 +27,7 @@ Route::get('{category_slug}/products', [ProductController::class, 'getProductsBy
 Route::get('{id}/thumbnail', [ProductController::class, 'getThumbnail'])->name('getThumbnail');
 
 Route::get('get-categories', [CategoryController::class, 'getCategories']);
+Route::get('get-category/{slug}', [CategoryController::class, 'getCategoryBySlug']);
 Route::get('{id}/image', [CategoryController::class, 'getImage'])->name('getImage');
 
 Route::post('/register', [AuthController::class, 'register']);

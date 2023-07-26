@@ -13,6 +13,16 @@ const routes = [
         component: () => import('@/views/HomePage.vue'),
     },
     {
+        path: '/category/:slug',
+        name: 'category',
+        component: () => import('@/views/frontend/CategoryPage.vue'),
+    },
+    {
+        path: '/product/:slug',
+        name: 'product',
+        component: () => import('@/views/frontend/ProductPage.vue'),
+    },
+    {
         path: '/dashboard',
         name: 'dashboard',
         component: DashboardPage,

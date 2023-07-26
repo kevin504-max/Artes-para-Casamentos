@@ -175,7 +175,7 @@
 
         .collection-content {
             width: 100vw;
-            height: 20vh;
+            height: 35vh;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -183,7 +183,7 @@
 
             .collection {
                 width: 100vw;
-                height: 100%;
+                height: 60%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -210,29 +210,60 @@
                     text-align: center;
                     color: #666666;
             
-                    img {
-                        width: 10%;
-                        height: 90%;
+                    .collection-item {
+                        width: 100%;
+                        height: 100%;
                         margin: 0 10px;
-                        border-radius: 50%;
-                        border: 1px solid #666666;
                         transform: scale(0.8);
                         transition: all 0.3s ease-in-out;
                         cursor: pointer;
 
                         @media (max-width: 768px) {
-                            width: 20%;
+                            width: 40%;
                         }
 
                         @media (max-width: 514px) {
                             width: 40px;
                             height: 40px;
                         }
-                    }
-            
-                    img:hover {
-                        transform: scale(1);
-                        border: 1px solid #000000;
+
+                        a {
+                            text-decoration: none;
+                            color: #666666;
+                            
+                            img {
+                                width: 100%;
+                                height: 100%;
+                                margin: 0 10px;
+                                border-radius: 50%;
+                                border: 1px solid #666666;
+                                transform: scale(0.8);
+                                transition: all 0.3s ease-in-out;
+                                cursor: pointer;
+        
+                                @media (max-width: 768px) {
+                                    width: 20%;
+                                }
+        
+                                @media (max-width: 514px) {
+                                    width: 40px;
+                                    height: 40px;
+                                }
+                            }
+                    
+                            img:hover {
+                                transform: scale(1);
+                                border: 1px solid #000000;
+                            }
+    
+                            h3 {
+                                font-size: 1.5rem;
+                                font-weight: bold;
+                                margin-top: 10px;
+                                margin-left: 20px;
+                            }
+                        }
+
                     }
                 }
             }

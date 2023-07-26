@@ -2,6 +2,7 @@ import axios from 'axios'
 
 export const categoryServices = {
     getCategories,
+    getCategoryBySlug,
     store,
     update,
     updateStatus,
@@ -26,6 +27,16 @@ async function getCategories() {
             showConfirmButton: false,
             timer: 2000,
         })
+    }
+}
+
+async function getCategoryBySlug (slug) {
+    try {
+        const response = (await axios.get(`get-category/${slug}`)).data.category;
+
+        return response;
+    } catch (error) {
+        console.log("Get Category By Slug Error: ", error)
     }
 }
 

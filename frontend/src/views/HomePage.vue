@@ -1,5 +1,5 @@
 <template>
-    <div class="main" style="background: green;">
+    <div class="main">
         <div class="container">
             
             <div class="carousel">

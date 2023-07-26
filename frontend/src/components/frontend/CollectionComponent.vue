@@ -2,12 +2,15 @@
     <div class="collection">
         <h2>Veja mais coleções</h2>
         <div class="collection-container">
-            <img  
-                alt="image" 
-                v-for="image in images"
-                :key="image.category_id"
-                :src="image.url"
-            >
+            <div class="collection-item" v-for="image in images" :key="image.category_id">
+                <router-link :to="`/category/${image.category_slug}`">
+                    <img  
+                        alt="image" 
+                        :src="image.url"
+                    >
+                    <h3>{{ image.category_name }}</h3>
+                </router-link>
+            </div>
         </div>
     </div>
 </template>
@@ -35,6 +38,8 @@ export default {
 
                 this.images.push({
                     category_id: category.id,
+                    category_name: category.name,
+                    category_slug: category.slug,
                     url: response.data.image_url,
                 });
             })

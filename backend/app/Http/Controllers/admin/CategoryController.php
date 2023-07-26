@@ -30,6 +30,16 @@ class CategoryController extends Controller
         }
     }
 
+    public function getCategoryBySlug($slug)
+    {
+        $category = Category::where('slug', $slug)->first();
+
+        return response()->json([
+            'category' => $category,
+            'status' => 200,
+        ]);
+    }
+
     public function getImage($id)
     {
         $category = Category::find($id);

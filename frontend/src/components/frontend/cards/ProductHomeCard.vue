@@ -1,10 +1,10 @@
 <template>
     <div class="card ml-5">
-        <span class="digital">Produto digital</span>
+        <span class="digital">Produto Digital</span>
         <span 
             class="digital" 
             style="margin-top: 40px; background-color: #ea9999;"
-        >Mais cores</span>
+        >Mais Cores</span>
         <span class="wishlist-heart fa-regular fa-heart"></span>
         <img :src="productImage" alt="image" class="card-img-top" style="height: 350px;">
 
