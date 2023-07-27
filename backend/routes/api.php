@@ -23,6 +23,7 @@ Route::get('/home', [FrontendController::class, 'index']);
 Route::get('{id}/featuredImage', [FrontendController::class, 'getImage']);
 
 Route::get('get-products', [ProductController::class, 'getProducts']);
+Route::get('get-product/{slug}', [ProductController::class, 'getProductBySlug']);
 Route::get('{category_slug}/products', [ProductController::class, 'getProductsByCategory']);
 Route::get('{id}/thumbnail', [ProductController::class, 'getThumbnail'])->name('getThumbnail');
 

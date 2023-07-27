@@ -30,6 +30,16 @@ class ProductController extends Controller
         }
     }
 
+    public function getProductBySlug($slug)
+    {
+        $product = Product::where('slug', $slug)->with('category')->first();
+
+        return response()->json([
+            'product' => $product,
+            'status' => 200,
+        ]);
+    }
+
     public function getThumbnail($id)
     {
         $product = Product::find($id);

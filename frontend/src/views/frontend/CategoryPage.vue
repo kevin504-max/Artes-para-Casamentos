@@ -48,7 +48,6 @@
 </template>
 
 <script>
-// import axios from 'axios'
 import { categoryServices } from '@/services/admin/categoryServices';
 import { productServices } from '@/services/admin/productServices';
 import ProductHomeCard from '../../components/frontend/cards/ProductHomeCard.vue';
@@ -149,6 +148,9 @@ export default {
         }
     }
 
+    a {
+        text-decoration: none;
+    }
     .cards-container {
         display: flex;
         justify-content: space-between;
@@ -197,5 +199,7 @@ export default {
             }
         }
     }
+
+    
 }
 </style>
