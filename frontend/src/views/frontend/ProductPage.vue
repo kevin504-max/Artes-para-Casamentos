@@ -100,10 +100,14 @@
                 </div>
             </div>
         </div>
+        <div class="description-container">
+            <DescriptionComponent />
+        </div>
     </div>
 </template>
 
 <script>
+import DescriptionComponent from '@/components/frontend/DescriptionComponent.vue';
 import carousel from 'vue-owl-carousel'
 import { productServices } from '@/services/admin/productServices';
 import axios from 'axios'
@@ -112,6 +116,7 @@ export default {
     name: "CategoryPage",
     inject: ['makeSpin'],
     components: {
+        DescriptionComponent,
         carousel,
     },
     data () {
@@ -421,6 +426,18 @@ export default {
             }
         }
 
+    }
+
+    .description-container {
+        width: 110vw;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 10%;
+        margin-left: -15%;
+        background-color: #f3f3f3;
+        padding: 0;
     }
 }
 </style>

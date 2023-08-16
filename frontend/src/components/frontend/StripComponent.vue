@@ -9,7 +9,7 @@
                 v-for="product in products"
                 :key="product.id"
             >
-                <ProductHomeCard :product="product"></ProductHomeCard>
+                <ProductHomeCard :product="product" />
             </div>
         </div>
     </div>
