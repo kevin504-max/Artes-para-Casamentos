@@ -110,6 +110,7 @@
 import DescriptionComponent from '@/components/frontend/DescriptionComponent.vue';
 import carousel from 'vue-owl-carousel'
 import { productServices } from '@/services/admin/productServices';
+import { userServices } from '@/services/userServices';
 import axios from 'axios'
 
 export default {
@@ -179,9 +180,48 @@ export default {
                 this.quantity--;
             }
         },
+
         changeMainImage(image) {
             this.productThumbnail = image;
         },
+
+        async addToCart() {
+            const auth = await userServices.getAuthUser();
+
+            if (auth === undefined || auth === null || auth === '') {
+                console.log("Usuário não logado!");
+                this.$swal({
+                    icon: 'warning',
+                    title: 'Oops...',
+                    text: 'Você precisa estar logado para adicionar ao carrinho!',
+                    showConfirmButton: false,
+                    timer: 2500,
+                });
+
+                return;
+            }
+
+            const request = {
+                product_id: this.product.id,
+                quantity: this.quantity,
+                auth_id: auth.id,
+            };
+
+            await axios.post('add-to-cart', request, {
+                responseType: 'json',
+            }).then((response) => {
+                console.log("Response addToCart: ", response);
+                this.$swal({
+                    icon: response.data.status,
+                    title: response.data.title,
+                    text: response.data.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                });
+            }).catch((error) => {
+                console.log("Error ao adicionar ao carrinho: ", error);
+            });
+        }
     }
 }
 </script>

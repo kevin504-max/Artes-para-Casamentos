@@ -12,7 +12,7 @@ async function getAuthUser() {
     try {
         const response = (await axios.get('get-auth', {
             headers: headersAuthorization
-        })).data;
+        })).data.auth;
 
         response.isAuthenticated = true;
 

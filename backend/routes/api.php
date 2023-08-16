@@ -5,6 +5,7 @@ use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\frontend\FrontendController;
+use App\Http\Controllers\frontend\CartController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -34,6 +35,9 @@ Route::get('{id}/image', [CategoryController::class, 'getImage'])->name('getImag
 
 Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
+
+Route::post('add-to-cart', [CartController::class, 'addProduct']);
+
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

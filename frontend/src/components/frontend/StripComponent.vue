@@ -9,7 +9,9 @@
                 v-for="product in products"
                 :key="product.id"
             >
-                <ProductHomeCard :product="product" />
+                <router-link :to="`/product/${product.slug}`" style="text-decoration: none;">
+                    <ProductHomeCard :product="product" />
+                </router-link>
             </div>
         </div>
     </div>
