@@ -3,11 +3,11 @@
         <div class="container">
             
             <div class="carousel">
-                <SliderComponent></SliderComponent>
+                <SliderComponent />
             </div>
             
             <div class="phrase-content">
-                <PhraseComponent></PhraseComponent>
+                <PhraseComponent />
             </div>
             
             <div class="col-lg-12 hr-line"></div>
@@ -17,7 +17,7 @@
                 v-for="category in popular_categories"
                 :key="category.id"
             >
-                <StripComponent :category="category"></StripComponent>
+                <StripComponent :category="category" />
             </div>
             
             <div class="collection-content">
@@ -76,6 +76,8 @@ export default {
         });
 
         this.categories = await categoryServices.getCategories();
+
+        this.dataLoaded = true;
     },
     methods: {
         

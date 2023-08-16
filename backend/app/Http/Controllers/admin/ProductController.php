@@ -58,6 +58,33 @@ class ProductController extends Controller
         ]);
     }
 
+    public function getGallery($id)
+    {
+        $product = Product::find($id);
+        $gallery = [];
+
+        foreach (json_decode($product->gallery) as $image) {
+            $path = $this->directory . $image;
+
+            if (File::exists($path)) {
+                $gallery[] = asset($path);
+            }
+        }
+
+        if (count($gallery) > 0) {
+            return response()->json([
+                'gallery' => $gallery,
+                'status' => 200,
+            ]);
+        }
+
+        return response()->json([
+            'message' => 'Gallery not found!',
+            'status' => 404,
+        ]);
+
+    }
+
     public function getProductsByCategory($category_slug)
     {
         $products = Product::where('category_id', Category::where('slug', $category_slug)->first()->id)

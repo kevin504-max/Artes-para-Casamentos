@@ -14,7 +14,35 @@
         </div>
         <div class="card-container">
             <div class="side">
+                <div v-if="dataLoaded" class="owl-carousel">
+                    <carousel
+                        class="owl-carousel-container"
+                        :loop="true"
+                        :nav="true"
+                        :dots="false"
+                        :margin="10"
+                        :responsive="{
+                            0: { items: 1 }, 
+                            600: { items: 3 }, 
+                            1000: { items: 4 } 
+                        }"
+                        :nav-text="[
+                            '<i class=\'fa fa-angle-left\'></i>',
+                            '<i class=\'fa fa-angle-right\'></i>'
+                        ]"
+                    >
+                        <img 
+                            v-for="image in gallery" 
+                            :key="image.id" 
+                            :src="image" 
+                            alt="image" 
+                            class="card-img"
+                            @click="changeMainImage(image)"
+                        >
+                    </carousel>
+                </div>
                 <div class="card col-md-6">
+                    
                     <img :src="productThumbnail" alt="image" class="card-img">
                 </div>
                 <div class="description col-md-6">
@@ -25,7 +53,7 @@
                         <div class="col-lg-12 hr-line"></div>
                     </div>
                     <div class="budget">
-                        <span>R$ {{ product.price }}</span>
+                        <span>R$ {{ (product.price).toString().replace('.', ',') }}</span>
                         <p>
                             até <span>3x</span> de <span>{{ (product.price / 3).toFixed(2).toString().replace('.', ',') }}</span> sem juros
                         </p>
@@ -76,12 +104,16 @@
 </template>
 
 <script>
+import carousel from 'vue-owl-carousel'
 import { productServices } from '@/services/admin/productServices';
 import axios from 'axios'
 
 export default {
     name: "CategoryPage",
     inject: ['makeSpin'],
+    components: {
+        carousel,
+    },
     data () {
         return {
             product: {},
@@ -89,6 +121,7 @@ export default {
             productThumbnail: '',
             productGallery: [],
             quantity: 1,
+            dataLoaded: true,
         };
     },
     async mounted() {
@@ -108,9 +141,26 @@ export default {
 
         this.productThumbnail = (thumbnail.status !== 200) ? '@/assets/default-place.jpeg' : thumbnail.data.thumbnail_url;
 
+        const gallery = await axios.get(`${this.product.id}/gallery`, {
+            responseType: 'json',
+        });
         
+        this.gallery = (gallery.status !== 200) ? [] : gallery.data.gallery;
+        this.gallery.unshift(this.productThumbnail);
 
         this.makeSpin.value = false;
+    },
+    watch: {
+        dataLoaded: {
+            handler(newVal) {
+                if (newVal) {
+                    this.$nextTick(() => {
+                        this.$refs.owlCarousel.refresh();
+                        this.$refs.owlCarousel.to(0);
+                    });
+                }
+            }
+        }
     },
     methods: {
         increment() {
@@ -118,204 +168,259 @@ export default {
                 this.quantity++;
             }
         },
+
         decrement() {
             if (this.quantity > 1) {
                 this.quantity--;
             }
+        },
+        changeMainImage(image) {
+            this.productThumbnail = image;
         },
     }
 }
 </script>
 
 <style lang="scss" scoped>
-.links {
-    text-align: left;
+.container {
+    min-height: 100vh;
+    min-width: 100vw;
+    margin-right: 15%;
+    padding: 10%;
 
-    h6 {
-        font-size: 0.75rem;
-        font-weight: bold;
-        color: #666666;
-        text-transform: uppercase;
+    .links {
+        text-align: left;
 
-        a {
+        h6 {
+            font-size: 0.75rem;
+            font-weight: bold;
             color: #666666;
-            text-decoration: none;
-            transition: all 0.3s ease-in-out;
-        
-            &:hover {
-                color: #222;
-                text-decoration: underline;
+            text-transform: uppercase;
+
+            a {
+                color: #666666;
+                text-decoration: none;
+                transition: all 0.3s ease-in-out;
+            
+                &:hover {
+                    color: #222;
+                    text-decoration: underline;
+                }
             }
         }
     }
-}
 
-.card-container {
-    display: flex;
-    justify-content: start;
-    align-items: start;
-    margin-top: 20px;
-    margin-bottom: 20px;
-
-    .side {
+    .card-container {
         display: flex;
         justify-content: start;
         align-items: start;
-        flex-direction: row;
-        width: 100%;
-        height: 100%;
-        margin: 0;
-        padding: 0;
+        margin-top: 20px;
+        margin-bottom: 20px;
 
-
-        .card {
-            width: 50%;
-            height: 75vh;
-            margin-bottom: 20px;
-            margin-left: 5.5%;
+        .side {
+            display: flex;
+            justify-content: start;
+            align-items: start;
+            flex-direction: row;
+            width: 100%;
+            height: 100%;
+            margin: 0;
             padding: 0;
-            border: none;
-            border-radius: 0;
-            box-shadow: 0 0 0 0;
-            transition: all 0.3s ease-in-out;
-            cursor: pointer;
-            background: #e9e9e9;
     
-            .card-img {
+            .owl-carousel {
                 width: 100%;
                 height: 100%;
-                object-fit: cover;
-            }
-        }
-    
-        .description {
-            width: 100%;
-            margin-bottom: 20px;
-            padding: 0;
-    
-            .product-description {
-                width: 55%;
-                padding: 20px;
-                text-align: left;
-                margin-left: 1.5%;
-    
-                h2 {
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    color: #666666;
-                }
+                display: flex;
+                justify-content: flex-start;
+                float: left;
 
-                p {
-                    font-size: 0.8rem;
-                    color: #888888;
-                }
-
-                span {
-                    font-size: 0.8rem;
-                    color: #888888;
-                    background-color: #e9e9e9;
-                    border: none;
-                    border-radius: 7px;
-                    padding: 5px 10px;
-                }
-                .hr-line {
-                    width: 90%;
-                    height: 1.5px;
+                @media(max-width: 768px) {
+                    top: 0;
                     margin-top: 20px;
-                    margin-bottom: 20px;
-                    background-color: #e9e9e9;
+                }
+            
+                .owl-carousel-container {    
+                    width: 100%;
+                    height: 100%;
+                    
+                    img {
+                        width: 10vw;
+                        height: 20vh;
+                        margin: 0 10px;
+                        border: 2px solid #666666;
+                        transform: scale(0.8);
+                        transition: all 0.3s ease-in-out;
+                        cursor: pointer;
+
+                        @media (max-width: 768px) {
+                            width: 20%;
+                        }
+
+                        @media (max-width: 514px) {
+                            width: 40px;
+                            height: 40px;
+                        }
+                    }
+            
+                    img:hover {
+                        transform: scale(1);
+                        border: 1px solid #000000;
+                    }
                 }
             }
+            
 
-            .budget {
+            .card {
                 width: 40%;
-                padding: 10px;
-                text-align: left;
-                margin-left: 1.5%;
-
-                span {
-                    font-size: 1.5rem;
-                    font-weight: bold;
-                    color: #666666;
-                }
-
-                p {
-                    font-size: 1rem;
-                    color: #666666;
-
-                    span {
-                        font-size: 1rem;
-                        font-weight: bold;
-                        color: #222;
-                    }
-                }
-
-                .payments {
-                    font-size: 0.8rem;
-                    color: #888888;
-                    text-decoration: underline;
-                    cursor: pointer;
-
-                    i {
-                        font-size: 0.8rem;
-                        margin-right: 5px;
-                        text-decoration: none;
-                    }
-                }
-
-                .buttons {
+                height: 75vh;
+                margin-bottom: 20px;
+                margin-left: 5.5%;
+                padding: 0;
+                border: none;
+                border-radius: 0;
+                box-shadow: 0 0 0 0;
+                transition: all 0.3s ease-in-out;
+                cursor: pointer;
+                background: #e9e9e9;
+        
+                .card-img {
                     width: 100%;
-                    padding: 0;
-                    margin: 0;
+                    height: 100%;
+                    object-fit: cover;
+                }
+            }
+        
+            .description {
+                width: 100%;
+                margin-bottom: 20px;
+                padding: 0;
+        
+                .product-description {
+                    width: 100%;
+                    max-width: 40vw;
+                    padding: 20px;
+                    text-align: left;
+                    margin-left: 1.5%;
+                    
+                    h2 {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: #666666;
+                    }
+
+                    p {
+                        font-size: 0.8rem;
+                        color: #888888;
+                    }
 
                     span {
-                        width: 13.33%;
+                        font-size: 0.8rem;
+                        color: #888888;
+                        background-color: #e9e9e9;
+                        border: none;
+                        border-radius: 7px;
+                        padding: 5px 10px;
+                    }
+                    .hr-line {
+                        width: 90%;
+                        height: 1.5px;
+                        margin-top: 20px;
+                        margin-bottom: 20px;
+                        background-color: #e9e9e9;
+                    }
+                }
+
+                .budget {
+                    width: 40%;
+                    padding: 10px;
+                    text-align: left;
+                    margin-left: 1.5%;
+
+                    span {
+                        font-size: 1.5rem;
+                        font-weight: bold;
+                        color: #666666;
+                    }
+
+                    p {
+                        font-size: 1rem;
+                        color: #666666;
+
+                        span {
+                            font-size: 1rem;
+                            font-weight: bold;
+                            color: #222;
+                        }
+                    }
+
+                    .payments {
+                        font-size: 0.8rem;
+                        color: #888888;
+                        text-decoration: underline;
+                        cursor: pointer;
+
+                        i {
+                            font-size: 0.8rem;
+                            margin-right: 5px;
+                            text-decoration: none;
+                        }
+                    }
+
+                    .buttons {
+                        width: 100%;
                         padding: 0;
                         margin: 0;
 
-                        input {
-                            width: 100%;
+                        span {
+                            width: 13.33%;
+                            padding: 0;
                             margin: 0;
-                            text-align: center;
+
+                            input {
+                                width: 100%;
+                                margin: 0;
+                                text-align: center;
+                                font-size: 1rem;
+                                font-weight: bold;
+                                color: #666666;
+                                background-color: #e5e5e5;
+                                border: none;
+                                border-radius: 7px;
+                                padding: 5px 10px;
+
+                                &:focus {
+                                    outline: none;
+                                    box-shadow: none;
+                                }
+                            }
+                        }
+
+                        .cart-button {
+                            width: 100%;
+                            height: 5vh;
+                            padding: 0;
+                            margin: 15px;
                             font-size: 1rem;
                             font-weight: bold;
-                            color: #666666;
-                            background-color: #e5e5e5;
+                            color: #fff;
+                            background-color: #666666;
                             border: none;
                             border-radius: 7px;
                             padding: 5px 10px;
+                            transition: all 0.3s ease-in-out;
 
-                            &:focus {
-                                outline: none;
-                                box-shadow: none;
+                            &:hover {
+                                background-color: #888888;
                             }
                         }
                     }
 
-                    .cart-button {
-                        width: 100%;
-                        padding: 0;
-                        margin: 5px;
-                        font-size: 0.8rem;
-                        font-weight: bold;
-                        color: #fff;
-                        background-color: #666666;
-                        border: none;
-                        border-radius: 7px;
-                        padding: 5px 10px;
-                        transition: all 0.3s ease-in-out;
 
-                        &:hover {
-                            background-color: #888888;
-                        }
-                    }
-                }
+                }  
 
-
-            }  
-
+            }
         }
-    }
 
+    }
 }
 </style>

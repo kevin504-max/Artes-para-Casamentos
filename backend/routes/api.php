@@ -26,6 +26,7 @@ Route::get('get-products', [ProductController::class, 'getProducts']);
 Route::get('get-product/{slug}', [ProductController::class, 'getProductBySlug']);
 Route::get('{category_slug}/products', [ProductController::class, 'getProductsByCategory']);
 Route::get('{id}/thumbnail', [ProductController::class, 'getThumbnail'])->name('getThumbnail');
+Route::get('{id}/gallery', [ProductController::class, 'getGallery'])->name('getGallery');
 
 Route::get('get-categories', [CategoryController::class, 'getCategories']);
 Route::get('get-category/{slug}', [CategoryController::class, 'getCategoryBySlug']);

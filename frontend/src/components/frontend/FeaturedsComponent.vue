@@ -1,5 +1,5 @@
 <template>
-    <div class="owl-carousel">
+    <div v-if="dataLoaded" class="owl-carousel">
         <h2 class="text-center mb-5">Destaques</h2>
         <carousel
             class="owl-carousel-container"
@@ -46,6 +46,21 @@ export default {
             type: Array,
             required: true,
         }
+    },
+    data() {
+        return {
+            dataLoaded: false,
+        };
+    },
+    watch: {
+        featureds: {
+            handler(newVal) {
+                if (newVal.length > 0) {
+                    this.dataLoaded = true; 
+                }
+            },
+            immediate: true,
+        },
     },
 }
 </script>

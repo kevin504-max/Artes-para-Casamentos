@@ -93,6 +93,11 @@ export default {
     flex-direction: column;
 
     .links {
+        text-align: left;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
         h6 {
             font-size: 0.75rem;
             font-weight: bold;
