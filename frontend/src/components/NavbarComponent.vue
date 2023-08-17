@@ -108,14 +108,14 @@
                         </b-popover>
                     </li>
                     <li class="nav-item">
-                        <div class="nav-link">
-                            <div class="icon mt-1">
-                                <i class="fas fa-cart-shopping">
-                                    <router-link :to="{ name: 'login' }"></router-link>
-                                </i>
-                                <span class="count-items badge badge-pill bg-primary cart-count">0</span>
+                        <router-link :to="{ name: 'cart' }">
+                            <div class="nav-link">
+                                <div class="icon mt-1">
+                                    <i class="fas fa-cart-shopping"></i>
+                                    <span class="count-items badge badge-pill bg-primary cart-count">0</span>
+                                </div>
                             </div>
-                        </div>
+                        </router-link>
                     </li>
                     <li v-show="auth && auth.auth.role_as == 1" class="nav-item">
                         <router-link :to="{ name: 'dashboard' }">

@@ -1,5 +1,5 @@
 <template>
-    <div class="container py-5">
+    <div class="content py-5">
         <div class="links">
             <div class="py-3 mb-2">
                 <div class="mr-5">
@@ -186,10 +186,10 @@ export default {
         },
 
         async addToCart() {
-            const auth = await userServices.getAuthUser();
-
+            const response = await userServices.getAuthUser();
+            const auth = response.auth; 
+            
             if (auth === undefined || auth === null || auth === '') {
-                console.log("Usuário não logado!");
                 this.$swal({
                     icon: 'warning',
                     title: 'Oops...',
@@ -210,7 +210,6 @@ export default {
             await axios.post('add-to-cart', request, {
                 responseType: 'json',
             }).then((response) => {
-                console.log("Response addToCart: ", response);
                 this.$swal({
                     icon: response.data.status,
                     title: response.data.title,
@@ -226,258 +225,4 @@ export default {
 }
 </script>
 
-<style lang="scss" scoped>
-.container {
-    min-height: 100vh;
-    min-width: 100vw;
-    margin-right: 15%;
-    padding: 10%;
-
-    .links {
-        text-align: left;
-
-        h6 {
-            font-size: 0.75rem;
-            font-weight: bold;
-            color: #666666;
-            text-transform: uppercase;
-
-            a {
-                color: #666666;
-                text-decoration: none;
-                transition: all 0.3s ease-in-out;
-            
-                &:hover {
-                    color: #222;
-                    text-decoration: underline;
-                }
-            }
-        }
-    }
-
-    .card-container {
-        display: flex;
-        justify-content: start;
-        align-items: start;
-        margin-top: 20px;
-        margin-bottom: 20px;
-
-        .side {
-            display: flex;
-            justify-content: start;
-            align-items: start;
-            flex-direction: row;
-            width: 100%;
-            height: 100%;
-            margin: 0;
-            padding: 0;
-    
-            .owl-carousel {
-                width: 100%;
-                height: 100%;
-                display: flex;
-                justify-content: flex-start;
-                float: left;
-
-                @media(max-width: 768px) {
-                    top: 0;
-                    margin-top: 20px;
-                }
-            
-                .owl-carousel-container {    
-                    width: 100%;
-                    height: 100%;
-                    
-                    img {
-                        width: 10vw;
-                        height: 20vh;
-                        margin: 0 10px;
-                        border: 2px solid #666666;
-                        transform: scale(0.8);
-                        transition: all 0.3s ease-in-out;
-                        cursor: pointer;
-
-                        @media (max-width: 768px) {
-                            width: 20%;
-                        }
-
-                        @media (max-width: 514px) {
-                            width: 40px;
-                            height: 40px;
-                        }
-                    }
-            
-                    img:hover {
-                        transform: scale(1);
-                        border: 1px solid #000000;
-                    }
-                }
-            }
-            
-
-            .card {
-                width: 40%;
-                height: 75vh;
-                margin-bottom: 20px;
-                margin-left: 5.5%;
-                padding: 0;
-                border: none;
-                border-radius: 0;
-                box-shadow: 0 0 0 0;
-                transition: all 0.3s ease-in-out;
-                cursor: pointer;
-                background: #e9e9e9;
-        
-                .card-img {
-                    width: 100%;
-                    height: 100%;
-                    object-fit: cover;
-                }
-            }
-        
-            .description {
-                width: 100%;
-                margin-bottom: 20px;
-                padding: 0;
-        
-                .product-description {
-                    width: 100%;
-                    max-width: 40vw;
-                    padding: 20px;
-                    text-align: left;
-                    margin-left: 1.5%;
-                    
-                    h2 {
-                        font-size: 1.5rem;
-                        font-weight: bold;
-                        color: #666666;
-                    }
-
-                    p {
-                        font-size: 0.8rem;
-                        color: #888888;
-                    }
-
-                    span {
-                        font-size: 0.8rem;
-                        color: #888888;
-                        background-color: #e9e9e9;
-                        border: none;
-                        border-radius: 7px;
-                        padding: 5px 10px;
-                    }
-                    .hr-line {
-                        width: 90%;
-                        height: 1.5px;
-                        margin-top: 20px;
-                        margin-bottom: 20px;
-                        background-color: #e9e9e9;
-                    }
-                }
-
-                .budget {
-                    width: 40%;
-                    padding: 10px;
-                    text-align: left;
-                    margin-left: 1.5%;
-
-                    span {
-                        font-size: 1.5rem;
-                        font-weight: bold;
-                        color: #666666;
-                    }
-
-                    p {
-                        font-size: 1rem;
-                        color: #666666;
-
-                        span {
-                            font-size: 1rem;
-                            font-weight: bold;
-                            color: #222;
-                        }
-                    }
-
-                    .payments {
-                        font-size: 0.8rem;
-                        color: #888888;
-                        text-decoration: underline;
-                        cursor: pointer;
-
-                        i {
-                            font-size: 0.8rem;
-                            margin-right: 5px;
-                            text-decoration: none;
-                        }
-                    }
-
-                    .buttons {
-                        width: 100%;
-                        padding: 0;
-                        margin: 0;
-
-                        span {
-                            width: 13.33%;
-                            padding: 0;
-                            margin: 0;
-
-                            input {
-                                width: 100%;
-                                margin: 0;
-                                text-align: center;
-                                font-size: 1rem;
-                                font-weight: bold;
-                                color: #666666;
-                                background-color: #e5e5e5;
-                                border: none;
-                                border-radius: 7px;
-                                padding: 5px 10px;
-
-                                &:focus {
-                                    outline: none;
-                                    box-shadow: none;
-                                }
-                            }
-                        }
-
-                        .cart-button {
-                            width: 100%;
-                            height: 5vh;
-                            padding: 0;
-                            margin: 15px;
-                            font-size: 1rem;
-                            font-weight: bold;
-                            color: #fff;
-                            background-color: #666666;
-                            border: none;
-                            border-radius: 7px;
-                            padding: 5px 10px;
-                            transition: all 0.3s ease-in-out;
-
-                            &:hover {
-                                background-color: #888888;
-                            }
-                        }
-                    }
-
-
-                }  
-
-            }
-        }
-
-    }
-
-    .description-container {
-        width: 110vw;
-        height: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        margin-top: 10%;
-        margin-left: -15%;
-        background-color: #f3f3f3;
-        padding: 0;
-    }
-}
-</style>
+<style lang="scss" src="@/components/style.scss" scoped></style>

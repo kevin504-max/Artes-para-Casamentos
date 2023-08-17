@@ -44,4 +44,49 @@ class CartController extends Controller
             'message' => $product->name . ' adicionado ao carrinho!'
         ]);
     }
+
+    public function viewCart()
+    {
+        $cartItems = Cart::where('user_id', Auth::id())->with('product')->get();
+
+        foreach ($cartItems as $item) {
+            $item->thumb_url = asset(
+                'assets/uploads/product/' . $item->product->thumbnail
+            );
+        }
+
+        return response()->json([
+            'cartItems' => $cartItems
+        ]);
+    }
+
+    public function updateCart(Request $request)
+    {
+        if(Cart::where('product_id', $request->input('request.product_id'))->where('user_id', Auth::id())->exists()) {
+            $cart = Cart::where('product_id', $request->input('request.product_id'))->where('user_id', Auth::id())->first();
+            $cart->items = $request->input('request.quantity');
+            $cart->update();
+
+            return response()->json([
+                'status' => 'success',
+                'title' => 'Sucesso!',
+                'message' => 'Carrinho atualizado!'
+            ]);
+        }
+
+        return response()->json([
+            'status' => 'error',
+            'title' => 'Oops...',
+            'message' => 'Produto não encontrado!'
+        ]);
+    }
+
+    public function cartCount()
+    {
+        $cartCount = Cart::where('user_id', Auth::id())->count();
+
+        return response()->json([
+            'count' => $cartCount
+        ]);
+    }
 }

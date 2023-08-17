@@ -13,6 +13,11 @@ const routes = [
         component: () => import('@/views/HomePage.vue'),
     },
     {
+        path: '/cart',
+        name: 'cart',
+        component: () => import('@/views/frontend/CartPage.vue'),
+    },
+    {
         path: '/category/:slug',
         name: 'category',
         component: () => import('@/views/frontend/CategoryPage.vue'),

@@ -37,12 +37,15 @@ Route::post('/register', [AuthController::class, 'register']);
 Route::post('/login', [AuthController::class, 'login']);
 
 Route::post('add-to-cart', [CartController::class, 'addProduct']);
+Route::get('load-cart-data', [CartController::class, 'cartCount']);
+Route::post('update-cart', [CartController::class, 'updateCart']);
 
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::get('/get-auth', [AuthController::class, 'getAuthUser']);
 
+    Route::get('cart', [CartController::class, 'viewCart']);
 
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('get-categories', [DashboardController::class, 'getCategories']);
