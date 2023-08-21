@@ -81,6 +81,26 @@ class CartController extends Controller
         ]);
     }
 
+    public function removeProduct(Request $request)
+    {
+        $existingCartItem = Cart::where('product_id', $request->input('request.product_id'))->where('user_id', Auth::id())->first();
+
+        if (!$existingCartItem) {
+            return response()->json([
+                'status' => 'error',
+                'title' => 'Oops...',
+                'message' => 'Produto não encontrado!'
+            ]);
+        }
+
+        $existingCartItem->delete();
+        return response()->json([
+            'status' => 'success',
+            'title' => 'Sucesso!',
+            'message' => 'Produto removido do carrinho!'
+        ]);
+    }
+
     public function cartCount()
     {
         $cartCount = Cart::where('user_id', Auth::id())->count();

@@ -14,22 +14,6 @@
         </div>
         <div class="card shadow">
             <div class="card-body">
-                <!-- <div  class="row mb-3" v-for="item in cartItems" :key="item.id">
-                    <div class="col-md-2">
-                        <img :src="item.thumb_url" :alt="item.product.name" class="w-100 border-radius-xl p-2">
-                    </div>
-                    <div class="col-md-5 mt-5">
-                        <h4>
-                            {{ item.product.name }}
-                        </h4>
-                        <h4 v-if="item.product.discount">
-                            R${{ (item.product.price - item.product.discount).toString().replace('.', ',') }}
-                        </h4>
-                        <h4 v-else>
-                            R${{ item.price.toString().replace('.', ',') }}
-                        </h4>
-                    </div>
-                </div> -->
                 <table class="table">
                     <thead>
                         <tr>
@@ -40,57 +24,7 @@
                             <th>Remover</th>
                         </tr>
                     </thead>
-                    <tbody>
-                        <!-- <tr v-for="item in cartItems" :key="item.id">
-                            <td>
-                                <div class="row">
-                                    <div class="col-md-2">
-                                        <img :src="item.thumb_url" :alt="item.product.name" class="w-100 border-radius-xl p-2">
-                                    </div>
-                                    <div class="col-md-5 mt-5">
-                                        <h4>
-                                            {{ item.product.name }}
-                                        </h4>
-                                        <h4 v-if="item.product.discount">
-                                            R${{ (item.product.price - item.product.discount).toString().replace('.', ',') }}
-                                        </h4>
-                                        <h4 v-else>
-                                            R${{ item.price.toString().replace('.', ',') }}
-                                        </h4>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h4 v-if="item.product.discount">
-                                    R${{ (item.product.price - item.product.discount).toString().replace('.', ',') }}
-                                </h4>
-                                <h4 v-else>
-                                    R${{ item.price.toString().replace('.', ',') }}
-                                </h4>
-                            </td>
-                            <td>
-                                <div class="input-group">
-                                    <div class="input-group-prepend">
-                                        <button class="btn btn-outline-primary" type="button" id="button-addon1" @click="item.quantity--">-</button>
-                                    </div>
-                                    <input type="text" class="form-control text-center" :value="item.quantity" disabled>
-                                    <div class="input-group-append">
-                                        <button class="btn btn-outline-primary" type="button" id="button-addon1" @click="item.quantity++">+</button>
-                                    </div>
-                                </div>
-                            </td>
-                            <td>
-                                <h4 v-if="item.product.discount">
-                                    R${{ ((item.product.price - item.product.discount) * item.quantity).toString().replace('.', ',') }}
-                                </h4>
-                                <h4 v-else>
-                                    R${{ (item.price * item.quantity).toString().replace('.', ',') }}
-                                </h4>
-                            </td>
-                            <td>
-                                <button class="btn btn-outline-danger" type="button" id="button-addon1" @click="removeFromCart(item.id)"><i class="fa fa-trash"></i></button>
-                            </td -->
-                        
+                    <tbody>                        
                         <tr v-for="item in cartItems" :key="item.id">
                             <td class="text-start" scope="col" width="40%">
                                 <div class="row">
@@ -156,6 +90,17 @@
 
                                 </div>
                             </td>
+                            <td class="text-center" scope="col">
+                                <h5 v-if="item.product.discount" style="font-weight: bold; color: #666666;">
+                                    R${{ ((item.product.price - item.product.discount) * item.items).toFixed(2).toString().replace('.', ',') }}
+                                </h5>
+                                <h5 v-else style="font-weight: bold; color: #666666;">
+                                    R${{ (item.price * item.items).toFixed(2).toString().replace('.', ',') }}
+                                </h5>
+                            </td>
+                            <td class="text-center" scope="col">
+                                <button class="btn btn-outline-secondary" type="button" @click="removeFromCart(item)"><i class="fa fa-trash"></i></button>
+                            </td>
                         </tr>
                     </tbody>
                 </table>
@@ -167,6 +112,19 @@
                     <button class="btn btn-outline-primary btn-block"><i class="fa fa-shopping-cart"></i> Continuar Comprando</button>
                 </router-link>
                 <p class="mt-4 text-center">Identidade visual para casamento, kit de artes digitais para casamento, convite de casamento, artes digitais para imprimir.</p>
+            </div>
+            <div class="card-footer">
+                <div class="">
+                    <div class="col-md-6 float-end">
+                        <h5 class="text-end" style="font-weight: bold; color: #666666;">
+                            <span style="font-weight: normal; color: #222;">Total:</span> 
+                            R$ {{ (cartItems.reduce((total, item) => total + (item.product.discount ? (item.product.price - item.product.discount) * item.items : item.price * item.items), 0)).toFixed(2).toString().replace('.', ',') }} 
+                        </h5>
+                        <h6 class="text-end">
+                            ou até <span style="font-weight: bold;">3x</span> de <span style="font-weight: bold;">{{ ((cartItems.reduce((total, item) => total + (item.product.discount ? (item.product.price - item.product.discount) * item.items : item.price * item.items), 0)) / 3).toFixed(2).toString().replace('.', ',') }}</span> sem juros
+                        </h6>
+                    </div>
+                </div>
             </div>
         </div>
     </div>
@@ -180,6 +138,7 @@ export default {
     inject: ['makeSpin'],
     data() {
         return {
+            token: localStorage.getItem('access_token'),
             cartItems: [],
         }
     },
@@ -192,15 +151,13 @@ export default {
     },
     methods: {
         async viewCart() {
-            const token = localStorage.getItem('access_token');
-
-            if (!token) {
+            if (!this.token) {
                 return;
             }
 
             const response = await axios.get("cart", {
                 headers: {
-                    'Authorization': 'Bearer ' + token,
+                    'Authorization': 'Bearer ' + this.token,
                 }
             });
 
@@ -208,9 +165,7 @@ export default {
         },
 
         async changeQuantity(item, operation) {
-            const token = localStorage.getItem('access_token');
-
-            if (!token) {
+            if (!this.token) {
                 return;
             }
 
@@ -229,11 +184,10 @@ export default {
 
             await axios.post('update-cart', { request }, {
                 headers: {
-                    'Authorization': 'Bearer ' + token,
+                    'Authorization': 'Bearer ' + this.token,
                 }, 
             }).then((response) => {
                 if (response.data.status === 'success') {
-                    console.log("deu certo: ", this.cartItems.find((cartItem) => cartItem.id === item.id));
                     this.cartItems.find((cartItem) => cartItem.id === item.id).items = quantity;
                 } else {
                     this.$swal({
@@ -246,6 +200,38 @@ export default {
                 }
             }).catch((error) => {
                 console.log("Change quantity Error: ", error);
+            });
+        },
+
+        async removeFromCart(item) {
+            if (!this.token) {
+                return;
+            }
+
+            const request = {
+                product_id: item.product_id,
+            };
+
+            await axios.post('delete-cart-item', { request }, {
+                headers: {
+                    'Authorization': 'Bearer ' + this.token,
+                }, 
+            }).then((response) => {
+                this.$swal({
+                    title: response.data.title,
+                    text: response.data.message,
+                    icon: response.data.status,
+                    showConfirmButton: false,
+                    timer: 2500,
+                });
+
+                if (response.data.status === 'success') {
+                    setTimeout(() => {
+                        this.viewCart();
+                    }, 2500);   
+                }
+            }).catch((error) => {
+                console.log("Remove from cart Error: ", error);
             });
         }
     }

@@ -187,9 +187,8 @@ export default {
 
         async addToCart() {
             const response = await userServices.getAuthUser();
-            const auth = response.auth; 
-            
-            if (auth === undefined || auth === null || auth === '') {
+
+            if (response === undefined || response === null || response === '') {
                 this.$swal({
                     icon: 'warning',
                     title: 'Oops...',
@@ -204,7 +203,7 @@ export default {
             const request = {
                 product_id: this.product.id,
                 quantity: this.quantity,
-                auth_id: auth.id,
+                auth_id: response.auth.id,
             };
 
             await axios.post('add-to-cart', request, {
