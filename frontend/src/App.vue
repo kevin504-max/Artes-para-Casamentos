@@ -34,6 +34,7 @@ export default {
       'dashboard',
       'categories',
       'products',
+      'checkout',
     ];
 
     if (protectedRoutes.includes(this.$route.name)) {
