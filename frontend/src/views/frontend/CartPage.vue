@@ -113,7 +113,7 @@
                 </router-link>
                 <p class="mt-4 text-center">Identidade visual para casamento, kit de artes digitais para casamento, convite de casamento, artes digitais para imprimir.</p>
             </div>
-            <div class="card-footer">
+            <div class="card-footer" v-show="this.cartItems.length !== 0">
                 <div class="">
                     <div class="col-md-6 float-end">
                         <h5 class="text-end" style="font-weight: bold; color: #666666;">
@@ -124,6 +124,18 @@
                             ou até <span style="font-weight: bold;">3x</span> de <span style="font-weight: bold;">{{ ((cartItems.reduce((total, item) => total + (item.product.discount ? (item.product.price - item.product.discount) * item.items : item.price * item.items), 0)) / 3).toFixed(2).toString().replace('.', ',') }}</span> sem juros
                         </h6>
                     </div>
+                </div>
+            </div>
+        </div>
+        <div class="card-footer mt-3" v-show="this.cartItems.length !== 0">
+            <div class="float-end">
+                <div class="">
+                    <router-link to="/">
+                        <button class="btn btn-outline-secondary btn-block"><i class="fa fa-shopping-cart"></i> Continuar Comprando</button>
+                    </router-link>
+                    <router-link to="/checkout" style="margin-left: 15px;">
+                        <button class="btn btn-secondary btn-block"><i class="fa fa-check mr-2"></i> Finalizar Compra</button>
+                    </router-link>
                 </div>
             </div>
         </div>

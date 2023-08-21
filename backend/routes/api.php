@@ -6,6 +6,7 @@ use App\Http\Controllers\admin\CategoryController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\CartController;
+use App\Http\Controllers\frontend\CheckoutController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -39,6 +40,8 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('add-to-cart', [CartController::class, 'addProduct']);
 Route::post('update-cart', [CartController::class, 'updateCart']);
 Route::post('delete-cart-item', [CartController::class, 'removeProduct']);
+
+Route::get('get-session', [CheckoutController::class, 'getSessionData']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
