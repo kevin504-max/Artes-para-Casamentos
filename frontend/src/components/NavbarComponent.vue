@@ -112,7 +112,7 @@
                             <div class="nav-link">
                                 <div class="icon mt-1">
                                     <i class="fas fa-cart-shopping"></i>
-                                    <span class="count-items badge badge-pill bg-primary cart-count">0</span>
+                                    <span class="count-items badge badge-pill bg-primary">{{ cartCount || '0' }}</span>
                                 </div>
                             </div>
                         </router-link>
@@ -134,7 +134,7 @@
 </template>
 
 <script>
-// import axios from 'axios'
+import axios from 'axios'
 import { userServices } from '@/services/userServices';
 
 export default {
@@ -142,14 +142,15 @@ export default {
 
     data () {
         return {
-            'auth': false,
+            auth: false,
+            cartCount: 0,
         };
     },
     
     async mounted () {
         this.auth = await userServices.getAuthUser();
 
-        if (! this.auth && localStorage.getItem('access_token')) {
+        if (!this.auth && localStorage.getItem('access_token')) {
             localStorage.removeItem('access_token');
             this.$router.push({ name: 'home' });
             this.$swal({
@@ -159,6 +160,19 @@ export default {
                 timer: 2000
             });
         }
+
+        if (this.auth !== null && this.auth !== undefined && this.auth !== '') {
+            await axios.get('load-cart-data', {
+                headers: {
+                    'Authorization': 'Bearer ' + localStorage.getItem('access_token'),
+                }
+            }).then((response) => {
+                this.cartCount = response.data.count;
+            }).catch((error) => {
+                console.log('Count Cart Items Error: ', error);
+            })
+        }
+
     },
     
     methods: {

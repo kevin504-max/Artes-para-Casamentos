@@ -28,7 +28,7 @@
                         <tr v-for="item in cartItems" :key="item.id">
                             <td class="text-start" scope="col" width="40%">
                                 <div class="row">
-                                    <div class="col-md-3">
+                                    <div class="col-md-3 mt-2">
                                         <img :src="item.thumb_url" :alt="item.product.name" class="w-100 border-radius-xl p-2">
                                     </div>
                                     <div class="col-md-9 mt-3">
@@ -227,7 +227,7 @@ export default {
 
                 if (response.data.status === 'success') {
                     setTimeout(() => {
-                        this.viewCart();
+                        window.location.reload();
                     }, 2500);   
                 }
             }).catch((error) => {

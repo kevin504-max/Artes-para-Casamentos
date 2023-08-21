@@ -216,6 +216,10 @@ export default {
                     showConfirmButton: false,
                     timer: 2500,
                 });
+
+                setTimeout(() => {
+                    window.location.reload();
+                }, 2500);
             }).catch((error) => {
                 console.log("Error ao adicionar ao carrinho: ", error);
             });
