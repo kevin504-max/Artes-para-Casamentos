@@ -10,7 +10,7 @@
                 <PhraseComponent />
             </div>
             
-            <!-- <div class="col-lg-12 hr-line"></div>
+            <div class="col-lg-12 hr-line"></div>
             
             <div
                 class="strip-content"
@@ -20,7 +20,7 @@
                 <StripComponent :category="category" />
             </div>
             
-            <div class="collection-content">
+            <!-- <div class="collection-content">
                 <CollectionComponent />
             </div>
 

@@ -6,6 +6,7 @@
             style="margin-top: 40px; background-color: #ea9999;"
         >Mais Cores</span>
         <span class="wishlist-heart fa-regular fa-heart"></span>
+
         <img :src="productImage" alt="image" class="card-img-top" style="height: 350px;">
 
         <div class="card-body">
@@ -46,15 +47,41 @@ export default {
 .card {
     width: 80%;
     height: 100%;
-    margin-bottom: 20px;
-    margin-left: 12.5%;
+    margin-left: 10.5%;
     padding: 1.8%;
     border: none;
-    border-radius: 0;
+    border-radius: 7px;
     box-shadow: 0 0 0 0;
     transition: all 0.3s ease-in-out;
     cursor: pointer;
     background: #e9e9e9;
+
+    @media(max-width: 1400px) {
+        width: 90%;
+        margin-left: 5%;
+    }
+
+    @media(max-width: 1200px) {
+        width: 90%;
+        margin-left: 0;
+    }
+
+    @media(max-width: 992px) {
+        width: 95%;
+        margin-left: 2.5%;
+    }
+
+    @media(max-width: 768px) {
+        width: 50vw;
+        margin-left: -6em;
+        margin-bottom: 5vh;
+        
+    }
+
+    @media(max-width: 576px) {
+        width: 80vw;
+        margin-left: -9.5em;
+    }
 
     .card-img-top {
         width: 100%;

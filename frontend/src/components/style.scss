@@ -141,25 +141,18 @@
             justify-content: center;
             align-items: center;
             flex-direction: column;
+            // verify bg-color
             // background-color: #e6e6e6;   
 
             .category-container {
                 height: 100%;
                 text-align: center;
                 width: 100%;
-
-                @media (max-width: 768px) {
-                    height: auto;
-                }
-
-                @media (max-width: 514px) {
-                    padding: 0 10px;
-                }
                 
                 h2 {
                     text-transform: uppercase;
-                    font-size: 30px;
-                    margin-top: 1em;
+                    font-size: 2em;
+                    padding: 0.5em;
                 }
                 
                 .cards-container {
@@ -168,16 +161,12 @@
                     justify-content: center;
                     align-items: center;
                     width: 100%;
-                    height: 85%;
-                    margin-bottom: 2em;
+                    height: 100%;
+                    padding: 1em;
 
                     @media (max-width: 768px) {
                         height: auto;
                         flex-direction: column;
-                    }
-
-                    @media (max-width: 514px) {
-                        margin: 10px;
                     }
                 }
             }
