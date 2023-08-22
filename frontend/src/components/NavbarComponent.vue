@@ -89,12 +89,12 @@
                                 <div class="col-lg-12 hr-line"></div>
                                 <div class="links">
                                     <div class="title">
-                                        <router-link :to="{ name: 'home' }">
+                                        <router-link :to="{ name: 'login' }">
                                             <i class="fa fa-user"></i><span> Minha conta</span>
                                         </router-link>
                                     </div>
                                     <div class="title">
-                                        <router-link :to="{ name: 'home' }">
+                                        <router-link :to="{ name: 'my-orders' }">
                                             <i class="fa fa-box"></i><span> Meus pedidos</span>
                                         </router-link>
                                     </div>

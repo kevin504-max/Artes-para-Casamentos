@@ -475,11 +475,12 @@
     padding: 10%;
     
     .categories {
+        position: relative;
         display: flex;
         justify-content: flex-start;
         align-items: flex-start;
         flex-direction: column;
-    
+        
         .links {
             text-align: left;
             white-space: nowrap;
@@ -511,6 +512,14 @@
             color: #666666
         }
         ul {
+            @media (max-width: 768px) {
+                display: flex;
+                flex-direction: row;
+                justify-content: space-between;
+                align-items: center;
+                flex-wrap: wrap;
+            }
+
             li {
                 margin-bottom: 0.5rem;
                 text-align: left;
@@ -530,8 +539,12 @@
     }
     
     .products {
+        @media (max-width: 768px) {
+            margin-left: 3em;
+        }
+
         .category-title {
-            margin-top: 3em;
+            margin-top: 2em;
             text-align: left;
     
             h2 {
@@ -544,22 +557,46 @@
         a {
             text-decoration: none;
         }
+
         .cards-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;    
-            flex-direction: row;
             gap: 2em;        
             margin-top: 2em;
+            width: 100%;
     
+            @media(max-width: 768px) {
+                flex-direction: column;    
+            }
+
             .card {
-                border: none;
+                padding: 2%;
+                border: 7px;
                 border-radius: 0;
                 box-shadow: none;
                 transition: all 0.3s ease-in-out;
-                width: 15vw;
+                width: 17.5vw;
                 
+                @media(max-width: 1200px) {
+                    width: 20vw;
+                }
+
+                @media(max-width: 768px) {
+                    width: 50vw;
+                    margin-left: -8em;
+                }
+
+                @media(max-width: 568px) {
+                    width: 60vw;
+                    margin-left: -7.5em;
+                }
+
+                @media(max-width: 461px) {
+                    width: 70vw;
+                    margin-left: -7em;
+                }
     
                 &:hover {
                     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
@@ -667,6 +704,7 @@
                         @media (max-width: 514px) {
                             width: 40px;
                             height: 40px;
+                            gap: 2em;
                         }
                     }
             
