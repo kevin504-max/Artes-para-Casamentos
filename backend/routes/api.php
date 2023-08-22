@@ -41,7 +41,8 @@ Route::post('add-to-cart', [CartController::class, 'addProduct']);
 Route::post('update-cart', [CartController::class, 'updateCart']);
 Route::post('delete-cart-item', [CartController::class, 'removeProduct']);
 
-Route::get('get-session', [CheckoutController::class, 'getSessionData']);
+Route::get('get-session/{user_id}', [CheckoutController::class, 'getSessionData']);
+Route::post('webhook', [CheckoutController::class, 'webhook']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);

@@ -22,6 +22,12 @@ const routes = [
         name: 'checkout',
         component: () => import('@/views/frontend/CheckOutPage.vue'),
     },
+    
+    {
+        path: '/my-orders',
+        name: 'my-orders',
+        component: () => import('@/views/frontend/MyOrdersPage.vue'),
+    },
     {
         path: '/category/:slug',
         name: 'category',

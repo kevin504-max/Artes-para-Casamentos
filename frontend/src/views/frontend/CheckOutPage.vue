@@ -122,6 +122,7 @@
 </template>
 
 <script>
+import { userServices } from '@/services/userServices';
 import { StripeCheckout } from '@vue-stripe/vue-stripe';
 import axios from 'axios';
 export default {
@@ -159,7 +160,10 @@ export default {
     },
     methods: {
         async getSession() {
-            await axios.get('get-session').then((response) => {
+            const response = await userServices.getAuthUser();
+            const auth_id = response.auth.id;
+
+            await axios.get(`get-session/${auth_id }`).then((response) => {
                 this.sessionId = response.data.id;
             }).catch((error) => {
                 console.log("Checkout Page Error: ", error);
