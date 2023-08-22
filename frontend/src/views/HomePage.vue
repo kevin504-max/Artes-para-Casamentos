@@ -20,11 +20,11 @@
                 <StripComponent :category="category" />
             </div>
             
-            <!-- <div class="collection-content">
+            <div class="collection-content">
                 <CollectionComponent />
             </div>
 
-            <div class="col-lg-12 hr-line"></div>
+            <!-- <div class="col-lg-12 hr-line"></div>
             
             <div class="owl-content">
                 <FeaturedsComponent 
