@@ -6,7 +6,7 @@
                 <SliderComponent />
             </div>
             
-            <div class="phrase-content">
+            <!-- <div class="phrase-content">
                 <PhraseComponent />
             </div>
             
@@ -34,7 +34,7 @@
 
             <a class="contact-content" href="https://wa.me/+5531992414546?text=Tenho%20interesse%20nos%20seus%20serviços%20de%20identidade%20visual." target="_blank">
                 <ContactComponent />
-            </a>
+            </a> -->
 
         </div>
     </div>
