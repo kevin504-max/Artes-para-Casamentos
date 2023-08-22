@@ -24,7 +24,7 @@
                 <CollectionComponent />
             </div>
 
-            <!-- <div class="col-lg-12 hr-line"></div>
+            <div class="col-lg-12 hr-line"></div>
             
             <div class="owl-content">
                 <FeaturedsComponent 
@@ -32,7 +32,7 @@
                 />
             </div>
 
-            <a class="contact-content" href="https://wa.me/+5531992414546?text=Tenho%20interesse%20nos%20seus%20serviços%20de%20identidade%20visual." target="_blank">
+            <!-- <a class="contact-content" href="https://wa.me/+5531992414546?text=Tenho%20interesse%20nos%20seus%20serviços%20de%20identidade%20visual." target="_blank">
                 <ContactComponent />
             </a> -->
 
