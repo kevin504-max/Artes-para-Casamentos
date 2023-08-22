@@ -83,6 +83,10 @@ export default {
         margin-left: -9.5em;
     }
 
+    @media (max-width: 491px) {
+        margin-left: -7.5em;
+    }
+
     .card-img-top {
         width: 100%;
         height: 15vw;
