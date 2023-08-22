@@ -54,26 +54,18 @@
 
         .phrase-content {
             width: 100vw;
-            height: 40vh;
+            height: 25vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 10%;
+            margin-top: 0;
             background-color: #e9e9e9;
-
-            @media(max-width: 768px) {
-                height: 60vh;
-            }
-
-            @media (max-width: 514px) {
-                padding: 0 10px;
-                height: auto;
-            }
 
             .phrase {
                 width: 100vw;
                 height: 80%;
-                margin-top: 10vh;
+                margin-top: 8vh;
+                margin-bottom: 5vh;
                 padding: 0 20%;
                 display: flex;
                 flex-direction: column;
@@ -83,6 +75,13 @@
                 background-color: #e9e9e9;
                 color: #666666;
                 font-size: 1.3rem;
+
+                @media(max-width: 991px) {
+                    height: 100%;
+                    margin-top: 0;
+                    margin-bottom: 0;
+                    padding: 0;
+                }
             
                 h2 {
                     text-transform: uppercase;

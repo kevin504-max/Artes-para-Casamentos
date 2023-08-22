@@ -6,11 +6,11 @@
                 <SliderComponent />
             </div>
             
-            <!-- <div class="phrase-content">
+            <div class="phrase-content">
                 <PhraseComponent />
             </div>
             
-            <div class="col-lg-12 hr-line"></div>
+            <!-- <div class="col-lg-12 hr-line"></div>
             
             <div
                 class="strip-content"
