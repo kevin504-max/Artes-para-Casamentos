@@ -102,21 +102,32 @@
 
         .contact-content {
             width: 100vw;
-            height: 60vh;
+            height: 30vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            margin-top: 5%;
-            background-color: #e9e9e9;
+            margin-top: 10%;
             cursor: pointer;
             transition: all 0.3s ease-in-out;
             text-decoration: none;
+            background-color: #e9e9e9;
+
+            @media (max-width: 991px) {
+                height: 40vh;
+            }
+
+            @media (max-width: 568px) {
+                height: 50vh;
+            }
+
+            @media (max-width: 491px) {
+                height: 75vh;
+            }
 
             .contact {
                 width: 100vw;
                 height: 100%;
-                margin-top: 6vh;
-                padding: 0 20%;
+                padding: 15% 5%;
                 display: flex;
                 flex-direction: column;
                 justify-content: center;
@@ -125,6 +136,11 @@
                 background-color: #e9e9e9;
                 color: #666666;
                 font-size: 1.3rem;
+
+                @media (max-width: 991px) {
+                    padding: 5% 0;
+                    margin: 1em 0;
+                }
             
                 h2 {
                     text-transform: uppercase;
