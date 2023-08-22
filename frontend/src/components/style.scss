@@ -669,25 +669,20 @@
             flex-direction: row;
             width: 100%;
             height: 100%;
-            margin: 0;
-            padding: 0;
+            
+            @media (max-width: 991px) {
+                flex-direction: column;
+            }
     
             .owl-carousel {
-                width: 100%;
-                height: 100%;
                 display: flex;
                 justify-content: flex-start;
                 float: left;
-
-                @media(max-width: 768px) {
-                    top: 0;
-                    margin-top: 20px;
-                }
             
                 .owl-carousel-container {    
                     width: 100%;
                     height: 100%;
-                    
+
                     img {
                         width: 10vw;
                         height: 20vh;
@@ -695,16 +690,15 @@
                         border: 2px solid #666666;
                         transform: scale(0.8);
                         transition: all 0.3s ease-in-out;
+                        object-fit: cover;
                         cursor: pointer;
 
-                        @media (max-width: 768px) {
-                            width: 20%;
+                        @media (max-width: 991px) {
+                            width: 20vw;
                         }
 
-                        @media (max-width: 514px) {
-                            width: 40px;
-                            height: 40px;
-                            gap: 2em;
+                        @media (max-width: 561px) {
+                            height: 12vh;
                         }
                     }
             
@@ -721,13 +715,16 @@
                 height: 75vh;
                 margin-bottom: 20px;
                 margin-left: 5.5%;
-                padding: 0;
                 border: none;
                 border-radius: 0;
-                box-shadow: 0 0 0 0;
+                box-shadow: #000;
                 transition: all 0.3s ease-in-out;
                 cursor: pointer;
-                background: #e9e9e9;
+
+                @media (max-width: 991px) {
+                    width: 100%;
+                    margin-left: 0;
+                }
         
                 .card-img {
                     width: 100%;
@@ -738,8 +735,7 @@
         
             .description {
                 width: 100%;
-                margin-bottom: 20px;
-                padding: 0;
+                margin-bottom: 2rem;
         
                 .product-description {
                     width: 100%;
@@ -747,6 +743,11 @@
                     padding: 20px;
                     text-align: left;
                     margin-left: 1.5%;
+                    
+                    @media (max-width: 991px) {
+                        max-width: 100%;
+                        margin-left: 0;
+                    }
                     
                     h2 {
                         font-size: 1.5rem;
@@ -781,6 +782,11 @@
                     padding: 10px;
                     text-align: left;
                     margin-left: 1.5%;
+                    
+                    @media (max-width: 991px) {
+                        width: 100%;
+                        margin-left: 0;
+                    }
 
                     span {
                         font-size: 1.5rem;
