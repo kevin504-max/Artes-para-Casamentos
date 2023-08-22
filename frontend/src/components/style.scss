@@ -866,8 +866,6 @@
                             }
                         }
                     }
-
-
                 }  
 
             }
@@ -899,15 +897,50 @@
         opacity: 0.7;
     }
 
+    .card {
+        @media (max-width: 561px) {
+            width: 100vw;
+            margin-left: 0;
+        }
+    }
+
     .buttons {
         width: 100%;
         padding: 0;
         margin: 0;
 
+        @media (max-width: 911px) {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        // @media (max-width: 768px) {
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        // }
+
+        // @media (max-width: 561px) {
+        //     display: flex;
+        //     justify-content: center;
+        //     align-items: center;
+        // }
+
         span {
             width: 13.33%;
             padding: 0;
             margin: 2rem;
+
+            @media (max-width: 991px) {
+                width: 20%;
+                margin: 0.5em;
+            } 
+
+            @media (max-width: 561px) {
+                width: 20%;
+                margin: 0.5em;
+            }
 
             input {
                 width: 100%;
@@ -920,6 +953,11 @@
                 border: none;
                 border-radius: 7px;
                 padding: 8% 4%;
+
+                @media (max-width: 561px) {
+                    padding: 0;
+                    margin-left: 0.5em;
+                }
 
                 &:focus {
                     outline: none;

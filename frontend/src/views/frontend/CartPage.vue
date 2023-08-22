@@ -129,7 +129,7 @@
         </div>
         <div class="card-footer mt-3" v-show="this.cartItems.length !== 0">
             <div class="float-end">
-                <div class="">
+                <div class="buttons-actions">
                     <router-link to="/">
                         <button class="btn btn-outline-secondary btn-block"><i class="fa fa-shopping-cart"></i> Continuar Comprando</button>
                     </router-link>
