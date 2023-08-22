@@ -9,6 +9,7 @@ import VueTheMask from 'vue-the-mask'
 
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
+import 'bootstrap/dist/js/bootstrap.js'
 import 'sweetalert2/dist/sweetalert2.min.css'
 import '@fortawesome/fontawesome-free/css/all.css'
 import '@fortawesome/fontawesome-free/js/all.js'

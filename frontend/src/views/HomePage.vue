@@ -41,6 +41,7 @@
 </template>
 
 <script>
+/* eslint-disable */
 import SliderComponent from '@/components/frontend/carousel/SliderComponent.vue';
 import PhraseComponent from '@/components/frontend/PhraseComponent.vue';
 import StripComponent from '@/components/frontend/StripComponent.vue';

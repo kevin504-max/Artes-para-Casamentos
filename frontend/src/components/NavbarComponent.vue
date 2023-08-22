@@ -2,11 +2,11 @@
     <nav class="navbar navbar-expand-lg navbar-scroll">
         <div class="container">
             <a class="navbar-brand logo" @click="$router.push({ name: 'home' })">Convites (Logo)</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
             <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
-                <ul class="navbar-nav">
+                <ul class="navbar-nav list-content">
                     <li class="nav-item" id="contacts">
                         <div class="nav-link">
                             <div class="icon">
@@ -416,5 +416,89 @@ li a {
 .title span i {
     font-size: 1.2em;
     margin-right: 0.5em;
+}
+
+@media (max-width: 991px) {
+    .container {
+        max-width: 70%;
+    }
+
+    .logo {
+        margin-left: 5%;
+    }
+
+    .list-content {
+        margin-top: 1em;
+        margin-right: 15%;
+        padding: 2%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-direction: row;
+    }
+
+    .faq {
+        display: none;
+        font-size: 1.2em;
+    }
+
+    .auth {
+        display: none;
+    }
+}
+
+@media (max-width: 768px) {
+    .container {
+        max-width: 60%;
+    }
+
+    .logo {
+        margin-left: -15%;
+    }
+
+    .list-content {
+        margin-top: 1em;
+        margin-right: 15%;
+        padding: 2%;
+        display: flex;
+        justify-content: flex-end;
+        align-items: flex-end;
+        flex-direction: row;
+    }
+
+    .faq {
+        display: none;
+        font-size: 1.2em;
+    }
+
+    .icon {
+        margin-right: 0.5em;
+    }
+
+    .auth {
+        display: none;
+    }
+
+    .count-items {
+        margin-top: -0.5em;
+    }
+}
+
+@media (max-width: 677px) {
+    .logo {
+        margin-left: -25%;
+    }
+    
+    .icon {
+        margin-right: 0.5em;
+    }
+
+    .auth {
+        display: none;
+    }
+
+    .count-items {
+        display: none;
+    }
 }
 </style>
