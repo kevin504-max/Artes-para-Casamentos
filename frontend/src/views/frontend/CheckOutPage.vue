@@ -1,6 +1,6 @@
 <template>
   <div class="content py-5">
-    <div class="links">
+    <div class="links px-4">
         <div class="py-3 mb-2">
             <div class="mr-5">
                 <h6 class="mb-0">
@@ -204,14 +204,16 @@ export default {
             const response = await userServices.getAuthUser();
             const auth_id = response.auth.id;
 
-            await axios.get(`get-session/${auth_id }`).then((response) => {
+            const message = this.message;
+
+            await axios.get(`get-session/${auth_id}`, { message }).then((response) => {
+                console.log(response.data);
                 this.sessionId = response.data.id;
             }).catch((error) => {
                 console.log("Checkout Page Error: ", error);
             });
         },
         submit () {
-            // You will be redirected to Stripe's secure checkout page
             this.$refs.checkoutRef.redirectToCheckout();
         },
     },
