@@ -104,6 +104,103 @@
                         </tr>
                     </tbody>
                 </table>
+                <div class="row mb-3 card-info" v-for="item in cartItems" :key="item.id">
+
+                    <div class="col-md-2 height-img">
+                        <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                            Produto
+                        </h5>
+                        <img :src="item.thumb_url" :alt="item.product.name" class="w-100 border-radius-xl p-2">
+                    </div>
+
+                    <div class="col-md-5 mt-5">
+                        <h6>
+                            {{ item.product.name }}
+                        </h6>
+                        <h6>
+                            Cód.: <span style="font-weight: bold;">LY85C-INT-MARSALA</span>
+                        </h6>
+                        <h6>
+                            Estoque: <span style="font-weight: bold;">5 dias úteis</span>
+                        </h6>
+                        <h6 class="mb-5">
+                            <span class="digital p-2">Produto Digital</span>
+                            <span class="digital p-2" style="margin-left: 6.5rem; background-color: #ea9999;">Mais cores</span>
+                        </h6>                   
+                    </div>
+
+                    <div class="col-md-2 mt-5">
+                        <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                            Preço unitário
+                        </h5>
+                        <h5 v-if="item.product.discount" style="font-weight: bold; color: #666666;">
+                            R${{ (item.product.price - item.product.discount).toFixed(2).toString().replace('.', ',') }}
+                        </h5>
+                        <h5 v-else style="font-weight: bold; color: #666666;">
+                            R${{ item.price.toFixed(2).toString().replace('.', ',') }}
+                        </h5>
+                    </div>
+
+                    <div class="col-md-3">
+                        <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                            Quantidade
+                        </h5>
+                        <div class="buttons input-group text-center justify-content-center mb-3">
+                            <span class="input-group-prepend border-0 mt-3">
+                            <b-button
+                                    variant="outline-secondary"
+                                    class="btn-sm"
+                                    @click="changeQuantity(item, 'decrement')"
+                                >
+                                    <i class="fas fa-minus"></i>
+                                </b-button>
+                            </span>
+                            
+                            <span class="input-group-append border-0 mt-3">
+                                <b-input
+                                    type="number"
+                                    class="text-center"
+                                    v-model="item.items"
+                                    min="1"
+                                    max="99"
+                                    @change="changeQuantity(item, 'change')"
+                                ></b-input>
+                            </span>
+                            <span class="input-group-prepend border-0 mt-3">
+                                <b-button
+                                    variant="outline-secondary"
+                                    class="btn-sm"
+                                    @click="changeQuantity(item, 'increment')"
+                                >
+                                    <i class="fas fa-plus"></i>
+                                </b-button>
+                            </span>
+
+                        </div>
+                    </div>
+
+                    <div class="col-md-2 mt-5">
+                        <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                            Subtotal
+                        </h5>
+                        <h5 v-if="item.product.discount" style="font-weight: bold; color: #666666;">
+                            R${{ ((item.product.price - item.product.discount) * item.items).toFixed(2).toString().replace('.', ',') }}
+                        </h5>
+                        <h5 v-else style="font-weight: bold; color: #666666;">
+                            R${{ (item.price * item.items).toFixed(2).toString().replace('.', ',') }}
+                        </h5>
+                    </div>
+
+                    <div class="col-md-2 mt-5">
+                        <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                            Remover
+                        </h5>
+                        <button class="btn btn-outline-secondary" type="button" @click="removeFromCart(item)"><i class="fa fa-trash"></i></button>
+                    </div>
+                    
+                    <hr class="mt-5">
+                    
+                </div>
             </div>
             <div class="text-center" v-show="this.cartItems.length === 0">
                 <img src="@/assets/not-found.jpg" alt="Seu carrinho está vazio..." width="650px">

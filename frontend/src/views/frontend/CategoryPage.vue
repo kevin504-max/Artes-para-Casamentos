@@ -18,7 +18,7 @@
                         v-for="category in categories"
                         :key="category.id"
                     >
-                        <router-link :to="`/category/${category.slug}`">{{ category.name }}</router-link>
+                        <router-link :to="`/category/${category.slug}`"> {{ category.name }} </router-link>
                     </li>
                 </ul>
             </div>

@@ -53,6 +53,47 @@
                     </tr>
                 </tbody>
             </table>
+
+            <div class="row mb-3 card-info" v-for="item in cartItems" :key="item.id">
+
+                <div class="col-md-5 mt-5">
+                    <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                        Produto
+                    </h5>
+                    <h6>
+                        {{ item.product.name }}
+                    </h6>
+                    <h6>
+                        Cód.: <span style="font-weight: bold;">LY85C-INT-MARSALA</span>
+                    </h6>                 
+                </div>
+
+                <div class="col-md-3">
+                    <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                        Quantidade
+                    </h5>
+                    <div class="buttons input-group text-center justify-content-center mb-3">
+                        <h5 style="font-weight: bold; color: #666666;">
+                            {{ item.items }}
+                        </h5>
+                    </div>
+                </div>
+
+                <div class="col-md-2 mt-5">
+                    <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
+                        Preço
+                    </h5>
+                    <h5 v-if="item.product.discount" style="font-weight: bold; color: #666666;">
+                        R${{ ((item.product.price - item.product.discount) * item.items).toFixed(2).toString().replace('.', ',') }}
+                    </h5>
+                    <h5 v-else style="font-weight: bold; color: #666666;">
+                        R${{ (item.price * item.items).toFixed(2).toString().replace('.', ',') }}
+                    </h5>
+                </div>
+
+                <hr class="mt-5">
+
+            </div>
         </div>
         <div class="text-center" v-show="this.cartItems.length === 0">
             <img src="@/assets/not-found.jpg" alt="Seu carrinho está vazio..." width="650px">
@@ -82,7 +123,7 @@
         </div>
     </div>
     <div class="row mt-4 px-2">
-        <div class="col-md-6 card shadow">
+        <div class="col-md-6 card shadow mb-3">
             <div class="card-title mt-2">
                 <h5 class="text-center">
                     <i class="fa fa-comment pr-2"></i> Mensagem
@@ -93,7 +134,7 @@
                 <textarea class="form-control" rows="3" placeholder="Escreva aqui..." v-model="message"></textarea>
             </div>
         </div>
-        <div class="col-md-6 card shadow">
+        <div class="col-md-6 card shadow mb-3">
             <div class="card-title mt-2">
                 <h5 class="text-center">
                     <i class="fa fa-money-check pr-2"></i> Pagamento
