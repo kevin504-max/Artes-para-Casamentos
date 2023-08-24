@@ -11,18 +11,18 @@
                     </header>
                     <div>
                         <DataFilter
-                        placeholder="Buscar por vendas..."
-                        :data="orders"
-                        @onHandleSearch="handleSearch($event)"
+                            placeholder="Buscar por vendas..."
+                            :data="orders"
+                            @onHandleSearch="handleSearch($event)"
                         ></DataFilter>
 
                         <div class="col-md-12">
                             <div class="card">
                                 <div class="card-body">
                                     <div class="card-header" style="background-color: rgba(94, 194, 233, 0.7) !important;">
-                                        <h4 class="text-center text-white">Novos Pedidos
-                                            <router-link to="/orders-history" class="btn float-end" style="background-color: rgba(192, 109, 240, 0.445) !important;">
-                                                Histórico de Vendas
+                                        <h4 class="text-center text-white"> Histórico de Vendas
+                                            <router-link to="/orders" class="btn float-end" style="background-color: rgba(192, 109, 240, 0.445) !important;">
+                                                Novos Pedidos
                                             </router-link>
                                         </h4>
                                     </div>
@@ -93,7 +93,7 @@
                                                 <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
                                                     Status
                                                 </h5>
-                                                <h6>Aguardando Aprovação</h6>
+                                                <h6>Aprovado</h6>
                                             </div>
 
                                             <div class="col-md-5 mt-5">
@@ -169,7 +169,7 @@ export default {
     async mounted() {
         this.makeSpin.value = true;
 
-        await axios.get('get-orders', {
+        await axios.get('orders-history', {
             headers: {
                 'Authorization': `Bearer ${localStorage.getItem('access_token')}`
             },
@@ -189,7 +189,7 @@ export default {
             const searchTerm = event.toLowerCase();
 
             if (searchTerm === '') {
-                await axios.get('get-orders', {
+                await axios.get('orders-history', {
                     headers: {
                         'Authorization': `Bearer ${localStorage.getItem('access_token')}`
                     },

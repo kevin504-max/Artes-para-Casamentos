@@ -61,6 +61,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('get-orders', [OrderController::class, 'getOrders']);
     Route::get('order-details/{orderId}', [OrderController::class, 'viewOrder']);
+    Route::get('orders-history', [OrderController::class, 'history']);
 
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('get-categories', [DashboardController::class, 'getCategories']);

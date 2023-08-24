@@ -5,6 +5,7 @@ import CategoriesManagement from '@/views/admin/CategoriesManagement.vue'
 import ProductsManagement from '@/views/admin/ProductsManagement.vue'
 import OrdersManagement from '@/views/admin/OrdersManagement.vue'
 import ViewOrder from '@/views/admin/ViewOrder.vue'
+import OrderHistory from '@/views/admin/OrderHistory.vue'
 
 Vue.use(VueRouter)
 
@@ -63,6 +64,11 @@ const routes = [
         path: '/orders',
         name: 'orders',
         component: OrdersManagement,
+    },
+    {
+        path: '/orders-history',
+        name: 'orders-history',
+        component: OrderHistory,
     },
     {
         path: '/view-order/:id',

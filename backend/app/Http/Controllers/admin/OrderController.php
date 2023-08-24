@@ -29,4 +29,13 @@ class OrderController extends Controller
             'order' => $order
         ], 200);
     }
+
+    public function history()
+    {
+        $orders = Order::where('status', 1)->orderBy('created_at', 'DESC')->get();
+
+        return response()->json([
+            'orders' => $orders
+        ], 200);
+    }
 }
