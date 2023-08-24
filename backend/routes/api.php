@@ -9,6 +9,7 @@ use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CheckoutController;
 use App\Http\Controllers\frontend\UserController;
+use App\Http\Controllers\frontend\WishlistController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,6 +43,10 @@ Route::post('/login', [AuthController::class, 'login']);
 Route::post('add-to-cart', [CartController::class, 'addProduct']);
 Route::post('update-cart', [CartController::class, 'updateCart']);
 Route::post('delete-cart-item', [CartController::class, 'removeProduct']);
+
+Route::post('get-wishlist', [WishlistController::class, 'getWishlist']);
+Route::post('add-to-wishlist', [WishlistController::class, 'addProduct']);
+Route::post('delete-wishlist-item', [WishlistController::class, 'removeProduct']);
 
 Route::get('get-session/{user_id}', [CheckoutController::class, 'getSessionData']);
 Route::get('success', [CheckoutController::class, 'success'])->name('checkoutSuccess');
