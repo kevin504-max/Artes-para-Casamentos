@@ -7,6 +7,7 @@ use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\CartController;
 use App\Http\Controllers\frontend\CheckoutController;
+use App\Http\Controllers\frontend\UserController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -52,6 +53,9 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('cart', [CartController::class, 'viewCart']);
     Route::get('load-cart-data', [CartController::class, 'cartCount']);
+
+    Route::get('my-orders', [UserController::class, 'getOrders']);
+    Route::get('view-order/{id}', [UserController::class, 'viewOrder']);
 
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('get-categories', [DashboardController::class, 'getCategories']);
