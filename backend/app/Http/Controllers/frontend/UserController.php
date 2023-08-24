@@ -4,11 +4,21 @@ namespace App\Http\Controllers\frontend;
 
 use App\Http\Controllers\Controller;
 use App\Models\Order;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
+    public function getUsers()
+    {
+        $users = User::all();
+
+        return response()->json([
+            'users' => $users
+        ]);
+    }
+
     public function getOrders()
     {
         $orders = Order::where('user_id', Auth::id())->get();

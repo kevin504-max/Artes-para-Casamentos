@@ -6,6 +6,7 @@ import ProductsManagement from '@/views/admin/ProductsManagement.vue'
 import OrdersManagement from '@/views/admin/OrdersManagement.vue'
 import ViewOrder from '@/views/admin/ViewOrder.vue'
 import OrderHistory from '@/views/admin/OrderHistory.vue'
+import UsersPage from '@/views/admin/UsersPage.vue'
 
 Vue.use(VueRouter)
 
@@ -74,6 +75,11 @@ const routes = [
         path: '/view-order/:id',
         name: 'view-order',
         component: ViewOrder,
+    },
+    {
+        path: '/users',
+        name: 'users',
+        component: UsersPage,
     },
     {
         path: '/login',

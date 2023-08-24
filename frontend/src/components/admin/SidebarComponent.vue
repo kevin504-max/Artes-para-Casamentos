@@ -14,7 +14,7 @@
                 <li><router-link :to="{name: 'dashboard'}"><i class="fa fa-chart-bar icon"></i> Dashboard</router-link></li>
                 <li><router-link :to="{name: 'categories'}"><i class="fa fa-icons icon"></i> Categorias</router-link></li>
                 <li><router-link :to="{name: 'products'}"><i class="fa fa-champagne-glasses"></i> Produtos</router-link></li>
-                <li><router-link :to="{name: 'home'}"><i class="fa fa-users icon"></i> Clientes</router-link></li>
+                <li><router-link :to="{name: 'users'}"><i class="fa fa-users icon"></i> Clientes</router-link></li>
                 <li><router-link :to="{name: 'orders'}"><i class="fa fa-cart-shopping icon"></i> Vendas</router-link></li>
             </ul>
         </div>

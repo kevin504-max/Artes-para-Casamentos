@@ -58,6 +58,7 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('my-orders', [UserController::class, 'getOrders']);
     Route::get('view-order/{tracking_number}', [UserController::class, 'viewOrder']);
+    Route::get('get-users', [UserController::class, 'getUsers']);
 
     Route::get('get-orders', [OrderController::class, 'getOrders']);
     Route::get('order-details/{orderId}', [OrderController::class, 'viewOrder']);
