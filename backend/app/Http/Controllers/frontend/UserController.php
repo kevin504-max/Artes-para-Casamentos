@@ -18,9 +18,14 @@ class UserController extends Controller
         ]);
     }
 
-    public function viewOrder($id)
+    public function viewOrder($tracking_number)
     {
-        $order = Order::where('id', $id)->where('user_id', Auth::id())->first();
+        $order = Order::where('tracking_number', $tracking_number)
+            ->where('user_id', Auth::id())->with('orderItems')->with('user')->first();
+
+        foreach ($order->orderItems as $orderItem) {
+            $orderItem->thumb = asset('assets/uploads/product/' . $orderItem->product->thumbnail);
+        }
 
         return response()->json([
             'order' => $order

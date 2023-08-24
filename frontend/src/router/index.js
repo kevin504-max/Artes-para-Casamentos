@@ -7,10 +7,10 @@ import ProductsManagement from '@/views/admin/ProductsManagement.vue'
 Vue.use(VueRouter)
 
 const routes = [
-    {
-        path: '/',
-        name: 'home',
-        component: () => import('@/views/HomePage.vue'),
+    { 
+        path: '/', 
+        name: 'home', 
+        component: () => import('@/views/HomePage.vue'), 
     },
     {
         path: '/cart',
@@ -22,11 +22,15 @@ const routes = [
         name: 'checkout',
         component: () => import('@/views/frontend/CheckOutPage.vue'),
     },
-    
     {
         path: '/my-orders',
         name: 'my-orders',
         component: () => import('@/views/frontend/MyOrdersPage.vue'),
+    },
+    {
+        path: '/order/:tracking_number',
+        name: 'order',
+        component: () => import('@/views/frontend/OrderPage.vue'),
     },
     {
         path: '/category/:slug',

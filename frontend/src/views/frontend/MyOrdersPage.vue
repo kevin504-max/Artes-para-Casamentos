@@ -45,7 +45,7 @@
                                 {{ (order.status == 0) ? "Aguardando aprovação" : "Aprovado" }}
                             </td>
                             <td class="text-center align-middle">
-                                <router-link class="btn btn-outline-secondary" :to="{ name: 'order', params: { id: order.id } }">
+                                <router-link :to="`/order/${order.tracking_number}`" class="btn btn-outline-secondary">
                                     <i class="fa fa-eye"></i>
                                 </router-link>
                             </td>
@@ -103,7 +103,7 @@
                         <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
                             Ações
                         </h5>
-                        <router-link class="btn btn-outline-secondary" :to="{ name: 'order', params: { id: order.id } }">
+                        <router-link :to="`/order/${order.tracking_number}`" class="btn btn-outline-secondary">
                             <i class="fa fa-eye"></i>
                         </router-link>
                     </div>

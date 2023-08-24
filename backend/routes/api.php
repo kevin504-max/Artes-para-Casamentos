@@ -55,7 +55,7 @@ Route::middleware('auth:api')->group(function () {
     Route::get('load-cart-data', [CartController::class, 'cartCount']);
 
     Route::get('my-orders', [UserController::class, 'getOrders']);
-    Route::get('view-order/{id}', [UserController::class, 'viewOrder']);
+    Route::get('view-order/{tracking_number}', [UserController::class, 'viewOrder']);
 
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('get-categories', [DashboardController::class, 'getCategories']);

@@ -38,13 +38,22 @@ class CheckoutController extends Controller
             'mode' => 'payment',
         ]);
 
-        Order::create([
-            'user_id' => $user_id,
-            'total_price' => $checkout->amount_total / 100,
-            'payment_mode' => 'stripe',
-            'session_id' => $checkout->id,
-            'tracking_number' => 'PAPA' . rand(10000, 99999),
-        ]);
+        // $existingOrder = Order::where('user_id', $user_id)->where('status', 0)->first();
+
+        // if (!$existingOrder) {
+            Order::create([
+                'user_id' => $user_id,
+                'total_price' => $checkout->amount_total / 100,
+                'payment_mode' => 'stripe',
+                'session_id' => $checkout->id,
+                'tracking_number' => 'PAPA' . rand(10000, 99999),
+            ]);
+        // } else {
+        //     $existingOrder->total_price = $checkout->amount_total / 100;
+        //     $existingOrder->session_id = $checkout->id;
+        //     $existingOrder->save();
+        // }
+
 
 
         return $checkout;

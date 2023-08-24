@@ -36,6 +36,7 @@ export default {
       'products',
       'checkout',
       'my-orders',
+      'order',
     ];
 
     if (protectedRoutes.includes(this.$route.name)) {
