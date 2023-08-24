@@ -12,7 +12,10 @@
         <div class="card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <div class="card-text">
-                <span class="text-center">R$ {{ product.price.toString().replace('.', ',') }}</span>
+                <span class="text-center">R$ {{ (product.discount ? (product.price - product.discount) : product.price).toFixed(2).toString().replace('.', ',') }}</span>
+                <span class="px-5" style="font-size: 0.8rem;" v-if="product.discount > 0.00">
+                    <s>R$ {{ product.price.toString().replace('.', ',') }}</s>
+                </span>
             </div>
         </div>
     </div>

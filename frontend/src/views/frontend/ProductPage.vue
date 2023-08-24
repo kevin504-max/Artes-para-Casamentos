@@ -53,7 +53,10 @@
                         <div class="col-lg-12 hr-line"></div>
                     </div>
                     <div class="budget">
-                        <span>R$ {{ (product.price).toString().replace('.', ',') }}</span>
+                        <span>R$ {{ (product.discount ? (product.price - product.discount) : product.price).toFixed(2).toString().replace('.', ',') }}</span>
+                        <span class="discount" v-if="product.discount > 0.00">
+                            <s>R$ {{ product.price.toString().replace('.', ',') }}</s>
+                        </span>
                         <p>
                             até <span>3x</span> de <span>{{ (product.price / 3).toFixed(2).toString().replace('.', ',') }}</span> sem juros
                         </p>
