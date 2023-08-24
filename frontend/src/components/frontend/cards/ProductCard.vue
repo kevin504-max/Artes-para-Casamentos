@@ -1,8 +1,8 @@
 <template>
-    <div class="card ml-5">
+    <div class="custom-card ml-5">
         <img :src="productImage" alt="image" class="card-img-top">
 
-        <div class="card-body">
+        <div class="custom-card-body">
             <h5 class="card-title">{{ product.name }}</h5>
             <p 
                 :class="((product.status == 1) ? 'text-success' : 'text-danger')"

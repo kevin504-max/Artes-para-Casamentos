@@ -13,7 +13,7 @@
                         <DataFilter
                         placeholder="Buscar por produtos..."
                         :data="products"
-                        @onHandleSearch="onHandleSearch($event)"
+                        @onHandleSearch="handleSearch($event)"
                         ></DataFilter>
                         <div class="col-md-2 mb-3">
                             <b-button variant="outline-primary" v-b-modal.modalCreateProduct><i class="fa fa-plus"></i> Novo produto</b-button>
@@ -235,7 +235,7 @@ export default {
         };
     },
     async mounted() {
-        this.makeSpin = true;
+        this.makeSpin.value = true;
         
         [
             this.products,
@@ -247,7 +247,7 @@ export default {
 
         this.totalPages = Math.ceil(this.products.length / this.limit);
         
-        this.makeSpin = false;
+        this.makeSpin.value = false;
     },
     methods: {
         async storeProduct() {
@@ -310,12 +310,14 @@ export default {
                 this.totalPages = Math.ceil(this.products.length / this.limit);
                 this.currentPage = 1;
 
+                this.makeSpin.value = false;
+
                 return;
             }
 
-            const filteredProducts = this.categories.filter((product) => {
+            const filteredProducts = this.products.filter((product) => {
                 const { name, slug } = product;
-
+                
                 return (
                     name.toLowerCase().includes(searchTerm) ||slug.toLowerCase().includes(searchTerm) 
                 );

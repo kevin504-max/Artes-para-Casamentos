@@ -132,6 +132,9 @@
             <div class="card-body">
                 <p>Gostaria de alguma observação?</p>
                 <textarea class="form-control" rows="3" placeholder="Escreva aqui..." v-model="message"></textarea>
+                <div class="text-end mt-3">
+                    <button class="btn btn-outline-secondary btn-block" @click="registerMessage">Registrar</button>
+                </div>
             </div>
         </div>
         <div class="col-md-6 card shadow mb-3">
@@ -207,8 +210,25 @@ export default {
             const message = this.message;
 
             await axios.get(`get-session/${auth_id}`, { message }).then((response) => {
-                console.log(response.data);
                 this.sessionId = response.data.id;
+            }).catch((error) => {
+                console.log("Checkout Page Error: ", error);
+            });
+        },
+        async registerMessage() {
+            const request = {
+                message: this.message,
+                sessionId: this.sessionId,
+            };
+
+            await axios.post('registerMessage', { request }).then((response) => {
+                this.$swal({
+                    title: response.data.title,
+                    icon: response.data.status,
+                    text: response.data.message,
+                    showConfirmButton: false,
+                    timer: 2500,
+                });
             }).catch((error) => {
                 console.log("Checkout Page Error: ", error);
             });

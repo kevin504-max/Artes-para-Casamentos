@@ -59,6 +59,13 @@
                                 </strong>
                             </h6>
                             <br>
+                            <h6 class="mb-2">
+                                <strong>Observação:</strong>
+                                <strong style="color: #666666;">
+                                    {{ (order.message !== '') ? order.message : 'Sem observação' }}
+                                </strong>
+                            </h6>
+                            <br>
                         </div>
                         <div class="col-md-8">
                             <h4>Detalhes do Pedido</h4>

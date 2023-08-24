@@ -208,6 +208,8 @@ export default {
                 this.totalPages = Math.ceil(this.categories.length / this.limit);
                 this.currentPage = 1;
 
+                this.makeSpin.value = false;
+
                 return;
             }
 

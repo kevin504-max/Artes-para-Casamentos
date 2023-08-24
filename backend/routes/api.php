@@ -3,6 +3,7 @@
 use App\Http\Controllers\auth\AuthController;
 use App\Http\Controllers\admin\DashboardController;
 use App\Http\Controllers\admin\CategoryController;
+use App\Http\Controllers\admin\OrderController;
 use App\Http\Controllers\admin\ProductController;
 use App\Http\Controllers\frontend\FrontendController;
 use App\Http\Controllers\frontend\CartController;
@@ -46,6 +47,7 @@ Route::get('get-session/{user_id}', [CheckoutController::class, 'getSessionData'
 Route::get('success', [CheckoutController::class, 'success'])->name('checkoutSuccess');
 Route::get('cancel', [CheckoutController::class, 'cancel'])->name('checkoutCancel');
 Route::post('/webhook', [CheckoutController::class, 'webhook']);
+Route::post('/registerMessage', [CheckoutController::class, 'registerMessage']);
 
 Route::middleware('auth:api')->group(function () {
     Route::post('/logout', [AuthController::class, 'logout']);
@@ -56,6 +58,9 @@ Route::middleware('auth:api')->group(function () {
 
     Route::get('my-orders', [UserController::class, 'getOrders']);
     Route::get('view-order/{tracking_number}', [UserController::class, 'viewOrder']);
+
+    Route::get('get-orders', [OrderController::class, 'getOrders']);
+    Route::get('view-order/{orderId}', [OrderController::class, 'viewOrder']);
 
     Route::name('dashboard.')->prefix('dashboard')->group(function () {
         Route::get('get-categories', [DashboardController::class, 'getCategories']);

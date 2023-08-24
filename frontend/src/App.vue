@@ -34,6 +34,7 @@ export default {
       'dashboard',
       'categories',
       'products',
+      'orders',
       'checkout',
       'my-orders',
       'order',
@@ -44,7 +45,15 @@ export default {
       if (! localStorage.getItem('access_token')) {
         this.$router.push({ name: 'home' });
         await new Promise(resolve => setTimeout(resolve, 1000));
-        window.location.reload();    
+        this.$swal({
+          icon: 'error',
+          title: 'Você não tem permissão para acessar essa página!',
+          showConfirmButton: false,
+          timer: 2000
+        });
+        setTimeout(() => {
+          window.location.reload();
+        }, 2000);
       } else {
         const response = await userServices.getAuthUser();
 

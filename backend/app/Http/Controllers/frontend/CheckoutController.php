@@ -38,9 +38,9 @@ class CheckoutController extends Controller
             'mode' => 'payment',
         ]);
 
-        // $existingOrder = Order::where('user_id', $user_id)->where('status', 0)->first();
+        $existingOrder = Order::where('user_id', $user_id)->where('status', 0)->first();
 
-        // if (!$existingOrder) {
+        if (!$existingOrder) {
             Order::create([
                 'user_id' => $user_id,
                 'total_price' => $checkout->amount_total / 100,
@@ -48,13 +48,11 @@ class CheckoutController extends Controller
                 'session_id' => $checkout->id,
                 'tracking_number' => 'PAPA' . rand(10000, 99999),
             ]);
-        // } else {
-        //     $existingOrder->total_price = $checkout->amount_total / 100;
-        //     $existingOrder->session_id = $checkout->id;
-        //     $existingOrder->save();
-        // }
-
-
+        } else {
+            $existingOrder->total_price = $checkout->amount_total / 100;
+            $existingOrder->session_id = $checkout->id;
+            $existingOrder->save();
+        }
 
         return $checkout;
     }
@@ -80,12 +78,6 @@ class CheckoutController extends Controller
             $order->status = 1;
             $order->save();
 
-            $duplicatedOrders = Order::where(
-                'user_id', User::where('email', $session->customer_details->email)->first()->id
-            )->where('status', 0)->get();
-
-            Order::destroy($duplicatedOrders);
-
             $cartItems = Cart::where(
                 'user_id', User::where('email', $session->customer_details->email)->first()->id
             )->with('product')->get();
@@ -98,6 +90,7 @@ class CheckoutController extends Controller
                     'price' => $item->product->discount
                     ? $item->product->price - $item->product->discount
                     : $item->product->price,
+                    'message' => '',
                 ]);
             }
 
@@ -141,5 +134,35 @@ class CheckoutController extends Controller
         }
 
         return response( content: '', status: 200 );
+    }
+
+    public function registerMessage(Request $request)
+    {
+        $order = Order::where('session_id', $request->input('request.sessionId'))->first();
+
+        if (!$order) {
+            return response()->json([
+                'title' => 'Oops...',
+                'message' => 'Pedido não encontrado!',
+                'status' => 'error',
+            ]);
+        }
+
+        if (strlen($request->input('request.message')) > 255) {
+            return response()->json([
+                'title' => 'Oops...',
+                'message' => 'Por favor, escreva uma observação menor!',
+                'status' => 'warning',
+            ]);
+        }
+
+        $order->message = $request->input('request.message');
+        $order->save();
+
+        return response()->json([
+            'title' => 'Sucesso!',
+            'message' => 'Observação registrada com sucesso!',
+            'status' => 'success',
+        ]);
     }
 }
