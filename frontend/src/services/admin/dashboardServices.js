@@ -4,8 +4,8 @@ export const dashboardServices = {
     // getDashboardData,
     getCategories,
     getProducts,
-    // getOrders,
-    // getUsers,
+    getOrders,
+    getUsers,
 }
 
 const headersAuthorization = {
@@ -39,6 +39,42 @@ async function getProducts() {
         return response;
     } catch (error) {
         console.log("Get Products Error: ", error)
+        this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            showConfirmButton: false,
+            timer: 2000,
+        })
+    }
+}
+
+async function getOrders() {
+    try {
+        const response = (await axios.get('dashboard/get-orders', {
+            headers: headersAuthorization,
+        })).data.orders;
+
+        return response;
+    } catch (error) {
+        console.log("Get Orders Error: ", error)
+        this.$swal({
+            icon: 'error',
+            title: 'Oops...',
+            showConfirmButton: false,
+            timer: 2000,
+        })
+    }
+}
+
+async function getUsers() {
+    try {
+        const response = (await axios.get('dashboard/get-users', {
+            headers: headersAuthorization,
+        })).data.users;
+
+        return response;
+    } catch (error) {
+        console.log("Get Users Error: ", error)
         this.$swal({
             icon: 'error',
             title: 'Oops...',

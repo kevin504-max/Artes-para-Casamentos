@@ -13,34 +13,34 @@
                         <div class="row">
                             <div class="col-12 col-md-3">
                                 <DashboardCards 
-                                    :type="'Produtos'"
+                                    :type="'Categorias'"
                                     :percentage="'10%'"
-                                    :icon="'fa-shopping-cart'"
-                                    :quantity="'100'"
+                                    :icon="'fa fa-icons'"
+                                    :quantity="categories.length"
                                 />
                             </div>
                             <div class="col-12 col-md-3">
                                 <DashboardCards 
                                     :type="'Produtos'"
                                     :percentage="'10%'"
-                                    :icon="'fa-shopping-cart'"
-                                    :quantity="'100'"
+                                    :icon="'fa-champagne-glasses'"
+                                    :quantity="products.length"
                                 />
                             </div>
                             <div class="col-12 col-md-3">
                                 <DashboardCards 
-                                    :type="'Produtos'"
+                                    :type="'Clientes'"
                                     :percentage="'10%'"
-                                    :icon="'fa-shopping-cart'"
-                                    :quantity="'100'"
+                                    :icon="'fa fa-users'"
+                                    :quantity="users.length"
                                 />
                             </div>
                             <div class="col-12 col-md-3">
                                 <DashboardCards 
-                                    :type="'Produtos'"
+                                    :type="'Vendas'"
                                     :percentage="'10%'"
                                     :icon="'fa-shopping-cart'"
-                                    :quantity="'100'"
+                                    :quantity="orders.length"
                                 />
                             </div>
                         </div>
@@ -55,7 +55,7 @@
 import SidebarComponent from '../../components/admin/SidebarComponent.vue';
 import DashboardCards from '../../components/admin/DashboardCards.vue';
 
-// import { dashboardServices } from '@/services/dashboardServices'
+import { dashboardServices } from '@/services/admin/dashboardServices'
 
 export default {
     name: "DashboardPage",
@@ -71,24 +71,21 @@ export default {
             products: [],
             users: [],
             orders: [],
-            carts: [], //???
         };
     },
 
     async mounted () {
-        // [
-        //     this.categories,
-        //     this.products,
-        //     this.users,
-        //     this.orders,
-        //     this.carts,
-        // ] = await Promise.all([
-        //     dashboardServices.getCategories(),
-        //     dashboardServices.getProducts(),
-        //     dashboardServices.getUsers(),
-        //     dashboardServices.getOrders(),
-        //     dashboardServices.getCarts(),
-        // ]);
+        [
+            this.categories,
+            this.products,
+            this.users,
+            this.orders,
+        ] = await Promise.all([
+            dashboardServices.getCategories(),
+            dashboardServices.getProducts(),
+            dashboardServices.getUsers(),
+            dashboardServices.getOrders(),
+        ]);
     },
 
     methods: {

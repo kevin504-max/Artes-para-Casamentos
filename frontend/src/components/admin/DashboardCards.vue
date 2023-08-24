@@ -40,7 +40,7 @@ export default {
     }
 
     .top {
-        .percetage {
+        .percentage {
             color: #79F287;
         }
     }
@@ -50,7 +50,7 @@ export default {
             font-size: 35px;
         }
 
-        .quabntity {
+        .quantity {
             font-size: 30px;
             margin: 0;
         }
