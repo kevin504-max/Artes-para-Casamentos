@@ -35,6 +35,7 @@ export default {
       'categories',
       'products',
       'orders',
+      'view-order',
       'checkout',
       'my-orders',
       'order',

@@ -19,8 +19,14 @@ class OrderController extends Controller
 
     public function viewOrder($orderId)
     {
+        $order = Order::with('orderItems')->with('user')->find($orderId);
+
+        foreach ($order->orderItems as $orderItem) {
+            $orderItem->thumb = asset('assets/uploads/product/' . $orderItem->product->thumbnail);
+        }
+
         return response()->json([
-            'order' => Order::find($orderId)
+            'order' => $order
         ], 200);
     }
 }

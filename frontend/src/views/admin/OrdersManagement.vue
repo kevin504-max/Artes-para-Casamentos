@@ -50,7 +50,7 @@
                                                     <td style="font-weight: bold; color: #666666">{{ order.total_price.toString().replace('.', ',') }}</td>
                                                     <td style="font-weight: bold; color: #666666">Aguardando Aprovação</td>
                                                     <td>
-                                                        <router-link :to="`/order/${order.tracking_number}`" class="btn btn-primary">
+                                                        <router-link :to="`/view-order/${order.id}`" class="btn btn-primary">
                                                             <i class="fa fa-eye"></i>
                                                         </router-link>
                                                     </td>
@@ -100,7 +100,7 @@
                                                 <h5 class="text-center mt-4 mb-3" style="font-weight: bold;">
                                                     Ações
                                                 </h5>
-                                                <router-link :to="`/order/${order.tracking_number}`" class="btn btn-primary">
+                                                <router-link :to="`/view-order/${order.id}`" class="btn btn-primary">
                                                     <i class="fa fa-eye"></i>
                                                 </router-link>
                                             </div>                                            

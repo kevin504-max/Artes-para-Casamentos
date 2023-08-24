@@ -4,6 +4,7 @@ import DashboardPage from '@/views/admin/DashboardPage.vue'
 import CategoriesManagement from '@/views/admin/CategoriesManagement.vue'
 import ProductsManagement from '@/views/admin/ProductsManagement.vue'
 import OrdersManagement from '@/views/admin/OrdersManagement.vue'
+import ViewOrder from '@/views/admin/ViewOrder.vue'
 
 Vue.use(VueRouter)
 
@@ -62,6 +63,11 @@ const routes = [
         path: '/orders',
         name: 'orders',
         component: OrdersManagement,
+    },
+    {
+        path: '/view-order/:id',
+        name: 'view-order',
+        component: ViewOrder,
     },
     {
         path: '/login',

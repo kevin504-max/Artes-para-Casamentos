@@ -17,7 +17,9 @@ class CheckoutController extends Controller
     {
         $stripe = new \Stripe\StripeClient(env('STRIPE_API_KEY'));
 
-        foreach (Cart::where('user_id', $user_id)->with('product')->get() as $item) {
+        $cartItems = Cart::where('user_id', $user_id)->with('product')->get();
+
+        foreach ($cartItems as $item) {
             $lineItems[] = [
                 'price_data' => [
                     'currency' => 'brl',
@@ -41,17 +43,43 @@ class CheckoutController extends Controller
         $existingOrder = Order::where('user_id', $user_id)->where('status', 0)->first();
 
         if (!$existingOrder) {
-            Order::create([
+            $existingOrder = Order::create([
                 'user_id' => $user_id,
                 'total_price' => $checkout->amount_total / 100,
                 'payment_mode' => 'stripe',
                 'session_id' => $checkout->id,
                 'tracking_number' => 'PAPA' . rand(10000, 99999),
             ]);
+
+            foreach ($cartItems as $item) {
+                OrderItem::create([
+                    'order_id' => $existingOrder->id,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->items,
+                    'price' => $item->product->discount
+                        ? $item->product->price - $item->product->discount
+                        : $item->product->price,
+                    'message' => '',
+                ]);
+            }
         } else {
             $existingOrder->total_price = $checkout->amount_total / 100;
             $existingOrder->session_id = $checkout->id;
             $existingOrder->save();
+
+            OrderItem::where('order_id', $existingOrder->id)->delete();
+
+            foreach ($cartItems as $item) {
+                OrderItem::create([
+                    'order_id' => $existingOrder->id,
+                    'product_id' => $item->product_id,
+                    'quantity' => $item->items,
+                    'price' => $item->product->discount
+                        ? $item->product->price - $item->product->discount
+                        : $item->product->price,
+                    'message' => '',
+                ]);
+            }
         }
 
         return $checkout;
@@ -81,18 +109,6 @@ class CheckoutController extends Controller
             $cartItems = Cart::where(
                 'user_id', User::where('email', $session->customer_details->email)->first()->id
             )->with('product')->get();
-
-            foreach ($cartItems as $item) {
-                OrderItem::create([
-                    'order_id' => $order->id,
-                    'product_id' => $item->product_id,
-                    'quantity' => $item->items,
-                    'price' => $item->product->discount
-                    ? $item->product->price - $item->product->discount
-                    : $item->product->price,
-                    'message' => '',
-                ]);
-            }
 
             Cart::destroy($cartItems);
 
